@@ -17,5 +17,5 @@ before_script:
   - npm install
 
 script:
-  - npm run test-single-run
+  - npm run hrm_edelcert-single-run
   - (npm start > /dev/null &) && (npm run protractor)
