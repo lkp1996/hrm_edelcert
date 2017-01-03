@@ -1,0 +1,23 @@
+<h2 class="sub-header">Liste des employées</h2>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Date de naissance</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="employee in employees">
+            <td style="width: 10px;">
+                <a href="#!/employee/{{employee.id}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+            </td>
+            <td>{{employee.lastName}}</td>
+            <td>{{employee.firstName}}</td>
+            <td>{{employee.birthDate | date : "dd.MM.yyyy"}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
