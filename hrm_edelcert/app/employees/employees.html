@@ -6,7 +6,9 @@
             <th></th>
             <th>Nom</th>
             <th>Prénom</th>
-            <th>Date de naissance</th>
+            <th>Numéro de téléphone</th>
+            <th>Email</th>
+            <th>Poste actuel</th>
         </tr>
         </thead>
         <tbody>
@@ -16,7 +18,9 @@
             </td>
             <td>{{employee.lastName}}</td>
             <td>{{employee.firstName}}</td>
-            <td>{{employee.birthDate | date : "dd.MM.yyyy"}}</td>
+            <td>{{employee.phone}}</td>
+            <td>{{employee.email}}</td>
+            <td>{{employee.currentTitle}}</td>
         </tr>
         </tbody>
     </table>

@@ -16,31 +16,41 @@ angular.module('myApp.employees', ['ngRoute'])
                 "id": 1,
                 "lastName": "Perrottet",
                 "firstName": "Luke",
-                "birthDate": 829000800000
+                "phone": "0787716628",
+                "email": "lukeperrottet@gmail.com",
+                "currentTitle": "Informaticien"
             },
             {
                 "id": 2,
                 "lastName": "Tartampion",
                 "firstName": "Jules",
-                "birthDate": 946681200000
+                "phone": "0787716628",
+                "email": "tartampionj@gmail.com",
+                "currentTitle": "asdf"
             },
             {
                 "id": 3,
                 "lastName": "Test",
                 "firstName": "Test",
-                "birthDate": 338079600000
+                "phone": "0787716628",
+                "email": "test@gmail.com",
+                "currentTitle": "test"
             },
             {
                 "id": 4,
                 "lastName": "Jordan",
                 "firstName": "Michael",
-                "birthDate": 917564400000
+                "phone": "0787716628",
+                "email": "jordanm@gmail.com",
+                "currentTitle": "fdsa"
             },
             {
                 "id": 5,
                 "lastName": "James",
                 "firstName": "LeBron",
-                "birthDate": 817564400000
+                "phone": "0787716628",
+                "email": "james@gmail.com",
+                "currentTitle": "qetrwrew"
             }
         ];
 
