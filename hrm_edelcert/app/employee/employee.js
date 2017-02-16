@@ -38,6 +38,152 @@ angular.module('myApp.employee', ['ngRoute'])
                     "EAScope": 24,
                     "fromDate": 1314223200000,
                     "toDate": 1435183200000
+                },
+                {
+                    "formativeOrganization": "HEIA-FR",
+                    "formationType": 3,
+                    "EAScope": 24,
+                    "fromDate": 1473976800000,
+                    "toDate": 1560117600000
+                }
+            ],
+            "professionnalExperiences": [
+                {
+                    "organizationName": "Hogarth Worldwide",
+                    "organizationActivity": "Advertising",
+                    "fonction": "Junior Python Developer",
+                    "EAScope": 12,
+                    "fromDate": 1408917600000,
+                    "toDate": 1418943600000
+                },
+                {
+                    "organizationName": "HumanTech",
+                    "organizationActivity": "IT",
+                    "fonction": "Web developer",
+                    "EAScope": 12,
+                    "fromDate": 1455058800000,
+                    "toDate": 1469397600000
+                }
+            ],
+            "consultingExperiences": [
+                {
+                    "organizationName": "ASfdsaf",
+                    "organizationActivity": "dsfsa",
+                    "NMSStandard": 1,
+                    "EAScope": 12,
+                    "organisation": "asdfds",
+                    "year": 2017
+                }
+            ],
+            "auditExperiences": [
+                {
+                    "organizationName": "ASfdsaf",
+                    "organizationActivity": "dsfsa",
+                    "NMSStandard": 1,
+                    "EAScope": 12,
+                    "oc": "asdfds",
+                    "year": 2017
+                }
+            ],
+            "internalQualifications": [
+                {
+                    "process": "Les enregistrements, retours d'informations, entretiens, observations, examens sont-ils suffisants ?",
+                    "yesno": true,
+                    "result": "sadf",
+                    "validationDate": 1486681200000
+                },
+                {
+                    "process": "Pour quels scopes le candidat pourra-t-il être qualifié ?",
+                    "yesno": false,
+                    "result": "sadf",
+                    "validationDate": 1486681200000
+                },
+                {
+                    "process": "Le candidat a-t-il démontré un niveau de connaissance  suffisant de l’ISO 9001 : 2015 lors de la réalisation de l’auto-évaluation ?",
+                    "yesno": false,
+                    "result": "sadf",
+                    "validationDate": 1486681200000
+                },
+                {
+                    "process": "Le candidat a-t-il besoin d’un programme de formation/tutorat pour rejoindre l’équipe d’audit ?",
+                    "yesno": true,
+                    "result": "sadf",
+                    "validationDate": 1486681200000
+                },
+                {
+                    "process": "Le candidat auditeur doit-il participer à un (ou plusieurs) audit(s) en tant qu'observateur ? Si non donner une exlication.",
+                    "yesno": true,
+                    "result": "sadf",
+                    "validationDate": 1486681200000
+                },
+                {
+                    "process": "Le candidat auditeur a-t-il déjà participé à un ou plusieurs audits sous la surveillance d'un observateur désigné par la direction et contribue à la rédaction du rapport ?",
+                    "yesno": true,
+                    "result": "sadf",
+                    "validationDate": 1486681200000
+                },
+                {
+                    "process": "L’évaluation de la performance du travail du candidat est-elle suffisante ?",
+                    "yesno": false,
+                    "result": "sadf",
+                    "validationDate": 1486681200000
+                },
+                {
+                    "process": "La validation de la qualification en tant qu’auditeur peut-elle être prononcée ? Et pour quels scopes ?",
+                    "yesno": true,
+                    "result": "sadf",
+                    "validationDate": 1486681200000
+                },
+                {
+                    "process": "La validation de la qualification en tant que responsable d’audit peut-elle être prononcée ? Et pour quels scopes ?",
+                    "yesno": true,
+                    "result": "sadf",
+                    "validationDate": 1486681200000
+                }
+            ],
+            "auditObservations": [
+                {
+                    "organization": "adfasfd",
+                    "observer": "sdfafsad",
+                    "EAScope": 12,
+                    "comment": "sdffsdsdfasdfasdfa",
+                    "date": 1486681200000
+                }
+            ],
+            "objectives": [
+                {
+                    "mediumLongTermObjectives": "sadffsda",
+                    "auditorStrategy": "asdadsfafsd",
+                    "date": 1486681200000,
+                    "validate": true
+                },
+                {
+                    "mediumLongTermObjectives": "sadffsda",
+                    "auditorStrategy": "asdadsfafsd",
+                    "date": 1486681200000,
+                    "validate": true
+                },
+                {
+                    "mediumLongTermObjectives": "sadffsda",
+                    "auditorStrategy": "asdadsfafsd",
+                    "date": 1486681200000,
+                    "validate": false
+                },
+                {
+                    "mediumLongTermObjectives": "sadffsda",
+                    "auditorStrategy": "asdadsfafsd",
+                    "date": 1486681200000,
+                    "validate": true
+                }
+
+            ],
+            "mandateSheets": [
+                {
+                    "organization": "asdfdsf",
+                    "NMSStandard": 1,
+                    "EAScope": 12,
+                    "date": 1486681200000,
+                    "attachement": ""
                 }
             ]
         };
@@ -70,6 +216,33 @@ angular.module('myApp.employee', ['ngRoute'])
             {
                 "id": 7,
                 "formation": "Attestation FC"
+            }
+        ];
+
+        $scope.NMSStandards = [
+            {
+                "id": 1,
+                "name": "ISO 9001"
+            },
+            {
+                "id": 2,
+                "name": "ISO 14001"
+            },
+            {
+                "id": 3,
+                "name": "Entreprise Citoyenne"
+            },
+            {
+                "id": 4,
+                "name": "Swiss School Impulse"
+            },
+            {
+                "id": 5,
+                "name": "PRP Bientraitance"
+            },
+            {
+                "id": 6,
+                "name": "Label Soins Palliatifs ASQP"
             }
         ];
     }]);

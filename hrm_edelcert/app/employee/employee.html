@@ -12,55 +12,55 @@
     <uib-tab index="0" heading="Administratif">
         <div class="input-group input-employee">
             <span class="input-group-addon">Nom</span>
-            <input type="text" class="form-control" placeholder="Nom" value="{{employee.lastName}}">
+            <input type="text" class="form-control" placeholder="Nom" value="{{employee.lastName}}" disabled>
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Prénom</span>
-            <input type="text" class="form-control" placeholder="Prénom" value="{{employee.firstName}}">
+            <input type="text" class="form-control" placeholder="Prénom" value="{{employee.firstName}}" disabled>
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Date de naissance</span>
             <input type="text" class="form-control" placeholder="Date de naissance (dd.MM.yyyy)"
-                   value="{{employee.birthDate | date : 'dd.MM.yyyy'}}">
+                   value="{{employee.birthDate | date : 'dd.MM.yyyy'}}" disabled>
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Adresse</span>
-            <input type="text" class="form-control" placeholder="Adresse" value="{{employee.address}}">
+            <input type="text" class="form-control" placeholder="Adresse" value="{{employee.address}}" disabled>
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">NPA</span>
-            <input type="text" class="form-control" placeholder="NPA" value="{{employee.postCode}}">
+            <input type="text" class="form-control" placeholder="NPA" value="{{employee.postCode}}" disabled>
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Localité</span>
-            <input type="text" class="form-control" placeholder="Localité" value="{{employee.location}}">
+            <input type="text" class="form-control" placeholder="Localité" value="{{employee.location}}" disabled>
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">AVS</span>
-            <input type="text" class="form-control" placeholder="AVS" value="{{employee.avs}}">
+            <input type="text" class="form-control" placeholder="AVS" value="{{employee.avs}}" disabled>
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">N° téléphone</span>
-            <input type="text" class="form-control" placeholder="N° téléphone" value="{{employee.phone}}">
+            <input type="text" class="form-control" placeholder="N° téléphone" value="{{employee.phone}}" disabled>
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Email</span>
-            <input type="text" class="form-control" placeholder="Email" value="{{employee.email}}">
+            <input type="text" class="form-control" placeholder="Email" value="{{employee.email}}" disabled>
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Titre du poste actuel</span>
             <input type="text" class="form-control" placeholder="Titre du poste actuel"
-                   value="{{employee.currentTitle}}">
+                   value="{{employee.currentTitle}}" disabled>
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Date d’entrée en fonction</span>
             <input type="text" class="form-control" placeholder="Date d’entrée en fonction"
-                   value="{{employee.comingToOfficeDate}}">
+                   value="{{employee.comingToOfficeDate | date : 'dd.MM.yyyy'}}" disabled>
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Salaire horaire actuel</span>
             <input type="text" class="form-control" placeholder="Salaire horaire actuel"
-                   value="{{employee.currentHourlyWage}}">
+                   value="{{employee.currentHourlyWage}}" disabled>
         </div>
     </uib-tab>
     <uib-tab index="1" heading="Formations">
@@ -69,6 +69,7 @@
             <tr>
                 <th>Organisation-institution</th>
                 <th>Type de formation</th>
+                <th>Pièce jointe</th>
                 <th>EA Scope</th>
                 <th>Date de</th>
                 <th>Date à</th>
@@ -79,13 +80,12 @@
                 <td>{{formation.formativeOrganization}}</td>
                 <td><select class="form-control"
                             ng-options="formation.id as formation.formation for formation in formations"
-                            ng-model="$parent.employee.formationType"></select>
-                    {{$parent.employee.formationType}}
+                            ng-model="formation.formationType" disabled></select>
                 </td>
+                <td></td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
-                           ng-model="$parent.employee.EAScope">
-                    {{$parent.employee.EAScope}}
+                           ng-model="formation.EAScope" disabled>
                 </td>
                 <td>{{formation.fromDate | date : "dd.MM.yyyy"}}</td>
                 <td>{{formation.toDate | date : "dd.MM.yyyy"}}</td>
@@ -93,11 +93,190 @@
             </tbody>
         </table>
     </uib-tab>
-    <uib-tab index="2" heading="Expériences professionnelles"></uib-tab>
-    <uib-tab index="3" heading="Administratif"></uib-tab>
-    <uib-tab index="4" heading="Expérience en audit"></uib-tab>
-    <uib-tab index="5" heading="Qualifications internes"></uib-tab>
-    <uib-tab index="6" heading="Evaluation en audit"></uib-tab>
-    <uib-tab index="7" heading="Objectifs"></uib-tab>
-    <uib-tab index="8" heading="Fiches mandat"></uib-tab>
+    <uib-tab index="2" heading="Expériences professionnelles">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Nom de l'organisation</th>
+                <th>Activité de l'organisation</th>
+                <th>Fonction</th>
+                <th>Pièce jointe</th>
+                <th>EA Scope</th>
+                <th>De</th>
+                <th>À</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="professionnalExperience in employee.professionnalExperiences">
+                <td>{{professionnalExperience.organizationName}}</td>
+                <td>{{professionnalExperience.organizationActivity}}</td>
+                <td>{{professionnalExperience.fonction}}</td>
+                <td></td>
+                <td>
+                    <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
+                           ng-model="professionnalExperience.EAScope" disabled>
+                </td>
+                <td>{{professionnalExperience.fromDate | date : "dd.MM.yyyy"}}</td>
+                <td>{{professionnalExperience.toDate | date : "dd.MM.yyyy"}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </uib-tab>
+    <uib-tab index="3" heading="Expériences en conseil">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Nom de l'organisation</th>
+                <th>Activité de l'organisation</th>
+                <th>NMS Standard</th>
+                <th>EA Scope</th>
+                <th>Orgarnisation</th>
+                <th>Année</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="consultingExperience in employee.consultingExperiences">
+                <td>{{consultingExperience.organizationName}}</td>
+                <td>{{consultingExperience.organizationActivity}}</td>
+                <td><select class="form-control"
+                            ng-options="NMSStandard.id as NMSStandard.name for NMSStandard in NMSStandards"
+                            ng-model="consultingExperience.NMSStandard" disabled></select>
+                </td>
+                <td>
+                    <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
+                           ng-model="consultingExperience.EAScope" disabled>
+                </td>
+                <td>{{consultingExperience.organisation}}</td>
+                <td>{{consultingExperience.year}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </uib-tab>
+    <uib-tab index="4" heading="Expérience en audit">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Nom de l'organisation</th>
+                <th>Activité de l'organisation</th>
+                <th>NMS Standard</th>
+                <th>EA Scope</th>
+                <th>Orgarnisation</th>
+                <th>Année</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="auditExperience in employee.auditExperiences">
+                <td>{{auditExperience.organizationName}}</td>
+                <td>{{auditExperience.organizationActivity}}</td>
+                <td><select class="form-control"
+                            ng-options="NMSStandard.id as NMSStandard.name for NMSStandard in NMSStandards"
+                            ng-model="auditExperience.NMSStandard" disabled></select>
+                </td>
+                <td>
+                    <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
+                           ng-model="auditExperience.EAScope" disabled>
+                </td>
+                <td>{{auditExperience.oc}}</td>
+                <td>{{auditExperience.year}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </uib-tab>
+    <uib-tab index="5" heading="Qualifications internes">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Marche à suivre selon procédure de qualification en cours</th>
+                <th>Oui – Non</th>
+                <th>Résultats ou renvoi à des enregistrements existants</th>
+                <th>Pièces jointes</th>
+                <th>Date de la validation</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="internalQualification in employee.internalQualifications">
+                <td>{{internalQualification.process}}</td>
+                <td><input type="checkbox" ng-checked="internalQualification.yesno"></td>
+                <td>{{internalQualification.result}}</td>
+                <td></td>
+                <td>{{internalQualification.validationDate | date : "dd.MM.yyyy"}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </uib-tab>
+    <uib-tab index="6" heading="Observation en audit">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Organisation-institution</th>
+                <th>Observateur-évaluateur</th>
+                <th>Pièces jointes</th>
+                <th>EA Scope(s)</th>
+                <th>Commentaire</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="auditObservation in employee.auditObservations">
+                <td>{{auditObservation.organization}}</td>
+                <td>{{auditObservation.observer}}</td>
+                <td></td>
+                <td>
+                    <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
+                           ng-model="auditObservation.EAScope" disabled>
+                </td>
+                <td>{{auditObservation.comment}}</td>
+                <td>{{auditObservation.date | date : "dd.MM.yyyy"}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </uib-tab>
+    <uib-tab index="7" heading="Objectifs">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Objectifs à moyen et long terme</th>
+                <th>Stratégie mise en place par l’auditeur</th>
+                <th>Date</th>
+                <th>Validation</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="objective in employee.objectives">
+                <td>{{objective.mediumLongTermObjectives}}</td>
+                <td>{{objective.auditorStrategy}}</td>
+                <td>{{objective.date | date : "dd.MM.yyyy"}}</td>
+                <td><input type="checkbox" ng-checked="objective.validate"></td>
+            </tr>
+            </tbody>
+        </table>
+    </uib-tab>
+    <uib-tab index="8" heading="Fiches mandat">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Organisation-institution</th>
+                <th>NMS Standard</th>
+                <th>EA Scope</th>
+                <th>Date</th>
+                <th>Pièces jointes</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="mandateSheet in employee.mandateSheets">
+                <td>{{mandateSheet.organization}}</td>
+                <td><select class="form-control"
+                            ng-options="NMSStandard.id as NMSStandard.name for NMSStandard in NMSStandards"
+                            ng-model="mandateSheet.NMSStandard" disabled></select>
+                </td>
+                <td>
+                    <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
+                           ng-model="mandateSheet.EAScope" disabled>
+                </td>
+                <td>{{mandateSheet.date | date : "dd.MM.yyyy"}}</td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </uib-tab>
 </uib-tabset>

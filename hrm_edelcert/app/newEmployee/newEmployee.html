@@ -1,0 +1,108 @@
+<h1 class="page-header">Ajouter un nouvel employé</h1>
+<form name="form" ng-submit="" role="form">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="input-group input-employee">
+                <span class="input-group-addon">Nom</span>
+                <input type="text" class="form-control" placeholder="Nom" ng-model="employee.lastName">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="input-group input-employee">
+                <span class="input-group-addon">Prénom</span>
+                <input type="text" class="form-control" placeholder="Prénom" ng-model="employee.firstName">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="input-group input-employee">
+                <span class="input-group-addon">Date de naissance</span>
+                <input type="date" class="form-control" placeholder="Date de naissance (dd.MM.yyyy)"
+                       ng-model="employee.birthDate">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="input-group input-employee">
+                <span class="input-group-addon">Adresse</span>
+                <input type="text" class="form-control" placeholder="Adresse" ng-model="employee.address">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="input-group input-employee">
+                <span class="input-group-addon">NPA</span>
+                <input type="text" class="form-control" placeholder="NPA" ng-model="employee.postCode">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="input-group input-employee">
+                <span class="input-group-addon">Localité</span>
+                <input type="text" class="form-control" placeholder="Localité" ng-model="employee.location">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="input-group input-employee">
+                <span class="input-group-addon">AVS</span>
+                <input type="text" class="form-control" placeholder="AVS" ng-model="employee.avs">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="input-group input-employee">
+                <span class="input-group-addon">N° téléphone</span>
+                <input type="text" class="form-control" placeholder="N° téléphone" ng-model="employee.phone">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="input-group input-employee">
+                <span class="input-group-addon">Email</span>
+                <input type="email" class="form-control" placeholder="Email" ng-model="employee.email">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="input-group input-employee">
+                <span class="input-group-addon">Titre du poste actuel</span>
+                <input type="text" class="form-control" placeholder="Titre du poste actuel"
+                       ng-model="employee.currentTitle">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="input-group input-employee">
+                <span class="input-group-addon">Date d’entrée en fonction</span>
+                <input type="date" class="form-control" placeholder="Date d’entrée en fonction"
+                       ng-model="employee.comingToOfficeDate">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="input-group input-employee">
+                <span class="input-group-addon">Salaire horaire actuel</span>
+                <input type="text" class="form-control" placeholder="Salaire horaire actuel"
+                       ng-model="employee.currentHourlyWage">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="input-group input-employee">
+                <span class="input-group-addon">Photo</span>
+                <input type="file" class="form-control" placeholder="Photo">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="input-group input-employee">
+                <span class="input-group-addon">CV</span>
+                <input type="file" class="form-control" placeholder="CV">
+            </div>
+        </div>
+    </div>
+    <div class="input-group input-employee">
+        <input type="button" class="btn btn-success" value="Ajouter">
+    </div>
+</form>
