@@ -12,68 +12,81 @@ angular.module('myApp.employee', ['ngRoute'])
     .controller('EmployeeCtrl', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
 
         $scope.employee = {};
+        $scope.formationTypes = [];
+        $scope.formations = [];
+        $scope.professionnalExperiences = [];
+        $scope.consultingExperiences = [];
+        $scope.NMSStandards = [];
+        $scope.auditExperiences = [];
+        $scope.internalQualifications = [];
+        $scope.auditObservations = [];
+        $scope.objectives = [];
+        $scope.mandateSheets = [];
 
-        $http.get("http://localhost/hrm_edelcert_server/ctrl/ctrl.php?employee_administration=" + $routeParams.employeeId).then(
+        $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_administration=" + $routeParams.employeeId).then(
             function (data) {
                 $scope.employee = data.data;
             }
         );
 
-        $scope.formations = [
-            {
-                "id": 1,
-                "formation": "CFC"
-            },
-            {
-                "id": 2,
-                "formation": "ES"
-            },
-            {
-                "id": 3,
-                "formation": "HES"
-            },
-            {
-                "id": 4,
-                "formation": "CAS"
-            },
-            {
-                "id": 5,
-                "formation": "DAS"
-            },
-            {
-                "id": 6,
-                "formation": "MAS"
-            },
-            {
-                "id": 7,
-                "formation": "Attestation FC"
+        $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?formation_types").then(
+            function (data) {
+                $scope.formationTypes = data.data;
             }
-        ];
+        );
 
-        $scope.NMSStandards = [
-            {
-                "id": 1,
-                "name": "ISO 9001"
-            },
-            {
-                "id": 2,
-                "name": "ISO 14001"
-            },
-            {
-                "id": 3,
-                "name": "Entreprise Citoyenne"
-            },
-            {
-                "id": 4,
-                "name": "Swiss School Impulse"
-            },
-            {
-                "id": 5,
-                "name": "PRP Bientraitance"
-            },
-            {
-                "id": 6,
-                "name": "Label Soins Palliatifs ASQP"
+        $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_formation=" + $routeParams.employeeId).then(
+            function (data) {
+                $scope.formations = data.data;
             }
-        ];
+        );
+
+        $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_professionnalexperience=" + $routeParams.employeeId).then(
+            function (data) {
+                $scope.professionnalExperiences = data.data;
+            }
+        );
+
+        $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_consultingexperience=" + $routeParams.employeeId).then(
+            function (data) {
+                $scope.consultingExperiences = data.data;
+            }
+        );
+
+        $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?nmsstandards").then(
+            function (data) {
+                $scope.NMSStandards = data.data;
+            }
+        );
+
+        $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_auditexperience=" + $routeParams.employeeId).then(
+            function (data) {
+                $scope.auditExperiences = data.data;
+            }
+        );
+
+        //TODO
+        $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_internalqualification=" + $routeParams.employeeId).then(
+            function (data) {
+                $scope.internalQualifications = data.data;
+            }
+        );
+
+        $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_auditobservation=" + $routeParams.employeeId).then(
+            function (data) {
+                $scope.auditObservations = data.data;
+            }
+        );
+
+        $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_objective=" + $routeParams.employeeId).then(
+            function (data) {
+                $scope.objectives = data.data;
+            }
+        );
+
+        $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_mandatesheet=" + $routeParams.employeeId).then(
+            function (data) {
+                $scope.mandateSheets = data.data;
+            }
+        );
     }]);

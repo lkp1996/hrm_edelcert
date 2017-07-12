@@ -13,7 +13,7 @@ angular.module('myApp.employees', ['ngRoute'])
 
         $scope.employees = [];
 
-        $http.get("http://localhost/hrm_edelcert_server/ctrl/ctrl.php?employees_list").then(
+        $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employees_list").then(
             function (data) {
                 $scope.employees = data.data;
             }

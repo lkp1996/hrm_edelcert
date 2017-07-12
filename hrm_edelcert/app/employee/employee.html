@@ -76,16 +76,16 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="formation in employee.formations">
+            <tr ng-repeat="formation in formations">
                 <td>{{formation.formativeOrganization}}</td>
                 <td><select class="form-control"
-                            ng-options="formation.id as formation.formation for formation in formations"
-                            ng-model="formation.formationType" disabled></select>
+                            ng-options="formationType.pk_formationType as formationType.formation for formationType in formationTypes"
+                            ng-model="formation.fk_formationType" disabled></select>
                 </td>
                 <td></td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
-                           ng-model="formation.EAScope" disabled>
+                           ng-value="formation.EAScope" disabled>
                 </td>
                 <td>{{formation.fromDate | date : "dd.MM.yyyy"}}</td>
                 <td>{{formation.toDate | date : "dd.MM.yyyy"}}</td>
@@ -107,14 +107,14 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="professionnalExperience in employee.professionnalExperiences">
+            <tr ng-repeat="professionnalExperience in professionnalExperiences">
                 <td>{{professionnalExperience.organizationName}}</td>
                 <td>{{professionnalExperience.organizationActivity}}</td>
                 <td>{{professionnalExperience.fonction}}</td>
                 <td></td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
-                           ng-model="professionnalExperience.EAScope" disabled>
+                           ng-value="professionnalExperience.EAScope" disabled>
                 </td>
                 <td>{{professionnalExperience.fromDate | date : "dd.MM.yyyy"}}</td>
                 <td>{{professionnalExperience.toDate | date : "dd.MM.yyyy"}}</td>
@@ -135,18 +135,18 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="consultingExperience in employee.consultingExperiences">
+            <tr ng-repeat="consultingExperience in consultingExperiences">
                 <td>{{consultingExperience.organizationName}}</td>
                 <td>{{consultingExperience.organizationActivity}}</td>
                 <td><select class="form-control"
-                            ng-options="NMSStandard.id as NMSStandard.name for NMSStandard in NMSStandards"
-                            ng-model="consultingExperience.NMSStandard" disabled></select>
+                            ng-options="NMSStandard.pk_NMSStandard as NMSStandard.name for NMSStandard in NMSStandards"
+                            ng-model="consultingExperience.fk_NMSStandard" disabled></select>
                 </td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
-                           ng-model="consultingExperience.EAScope" disabled>
+                           ng-value="consultingExperience.EAScope" disabled>
                 </td>
-                <td>{{consultingExperience.organisation}}</td>
+                <td>{{consultingExperience.organization}}</td>
                 <td>{{consultingExperience.year}}</td>
             </tr>
             </tbody>
@@ -165,16 +165,16 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="auditExperience in employee.auditExperiences">
+            <tr ng-repeat="auditExperience in auditExperiences">
                 <td>{{auditExperience.organizationName}}</td>
                 <td>{{auditExperience.organizationActivity}}</td>
                 <td><select class="form-control"
-                            ng-options="NMSStandard.id as NMSStandard.name for NMSStandard in NMSStandards"
-                            ng-model="auditExperience.NMSStandard" disabled></select>
+                            ng-options="NMSStandard.pk_NMSStandard as NMSStandard.name for NMSStandard in NMSStandards"
+                            ng-model="auditExperience.fk_NMSStandard" disabled></select>
                 </td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
-                           ng-model="auditExperience.EAScope" disabled>
+                           ng-value="auditExperience.EAScope" disabled>
                 </td>
                 <td>{{auditExperience.oc}}</td>
                 <td>{{auditExperience.year}}</td>
@@ -194,7 +194,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="internalQualification in employee.internalQualifications">
+            <tr ng-repeat="internalQualification in internalQualifications">
                 <td>{{internalQualification.process}}</td>
                 <td><input type="checkbox" ng-checked="internalQualification.yesno"></td>
                 <td>{{internalQualification.result}}</td>
@@ -217,15 +217,15 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="auditObservation in employee.auditObservations">
+            <tr ng-repeat="auditObservation in auditObservations">
                 <td>{{auditObservation.organization}}</td>
                 <td>{{auditObservation.observer}}</td>
                 <td></td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
-                           ng-model="auditObservation.EAScope" disabled>
+                           ng-value="auditObservation.EAScope" disabled>
                 </td>
-                <td>{{auditObservation.comment}}</td>
+                <td><textarea class="form-control" disabled>{{auditObservation.comment}}</textarea></td>
                 <td>{{auditObservation.date | date : "dd.MM.yyyy"}}</td>
             </tr>
             </tbody>
@@ -242,11 +242,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="objective in employee.objectives">
+            <tr ng-repeat="objective in objectives">
                 <td>{{objective.mediumLongTermObjectives}}</td>
                 <td>{{objective.auditorStrategy}}</td>
                 <td>{{objective.date | date : "dd.MM.yyyy"}}</td>
-                <td><input type="checkbox" ng-checked="objective.validate"></td>
+                <td><input type="checkbox" ng-checked="objective.validate" disabled></td>
             </tr>
             </tbody>
         </table>
@@ -259,11 +259,12 @@
                 <th>NMS Standard</th>
                 <th>EA Scope</th>
                 <th>Date</th>
+                <th>Honoraires</th>
                 <th>Pièces jointes</th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="mandateSheet in employee.mandateSheets">
+            <tr ng-repeat="mandateSheet in mandateSheets">
                 <td>{{mandateSheet.organization}}</td>
                 <td><select class="form-control"
                             ng-options="NMSStandard.id as NMSStandard.name for NMSStandard in NMSStandards"
@@ -271,9 +272,10 @@
                 </td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
-                           ng-model="mandateSheet.EAScope" disabled>
+                           ng-value="mandateSheet.EAScope" disabled>
                 </td>
                 <td>{{mandateSheet.date | date : "dd.MM.yyyy"}}</td>
+                <td>{{mandateSheet.fees}}</td>
                 <td></td>
             </tr>
             </tbody>
