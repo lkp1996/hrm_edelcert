@@ -5,10 +5,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hrm_edelcert/app/employee/employee.html" afterPath="$PROJECT_DIR$/hrm_edelcert/app/employee/employee.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hrm_edelcert/app/employee/employee.js" afterPath="$PROJECT_DIR$/hrm_edelcert/app/employee/employee.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hrm_edelcert/app/employees/employees.html" afterPath="$PROJECT_DIR$/hrm_edelcert/app/employees/employees.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hrm_edelcert/app/employees/employees.js" afterPath="$PROJECT_DIR$/hrm_edelcert/app/employees/employees.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hrm_edelcert/app/newEmployee/newEmployee.html" afterPath="$PROJECT_DIR$/hrm_edelcert/app/newEmployee/newEmployee.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hrm_edelcert/app/newEmployee/newEmployee.js" afterPath="$PROJECT_DIR$/hrm_edelcert/app/newEmployee/newEmployee.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hrm_edelcert/app/index.html" afterPath="$PROJECT_DIR$/hrm_edelcert/app/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -28,17 +25,17 @@
     <favorites_list name="hrm_edelcert" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.4295816">
+    <splitter split-orientation="horizontal" split-proportion="0.4775641">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+          <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/hrm_edelcert/app/index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="95">
-                  <caret line="5" column="14" lean-forward="true" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+                <state relative-caret-position="1159">
+                  <caret line="61" column="12" lean-forward="false" selection-start-line="61" selection-start-column="12" selection-end-line="61" selection-end-column="12" />
                   <folding>
-                    <marker date="1487247297000" expanded="true" signature="2630:2783" ph="..." />
-                    <marker date="1487247297000" expanded="true" signature="2723:2751" ph="..." />
+                    <marker date="1499945908000" expanded="true" signature="2493:2646" ph="..." />
+                    <marker date="1499945908000" expanded="true" signature="2586:2614" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -56,11 +53,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="employee.html" pinned="false" current-in-tab="true">
+          <file leaf-file-name="employee.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/hrm_edelcert/app/employee/employee.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="633">
-                  <caret line="275" column="21" lean-forward="true" selection-start-line="275" selection-start-column="21" selection-end-line="275" selection-end-column="21" />
+                <state relative-caret-position="412">
+                  <caret line="273" column="123" lean-forward="false" selection-start-line="273" selection-start-column="123" selection-end-line="273" selection-end-column="123" />
                   <folding />
                 </state>
               </provider>
@@ -69,7 +66,7 @@
           <file leaf-file-name="newEmployee.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/hrm_edelcert/app/newEmployee/newEmployee.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="545">
+                <state relative-caret-position="1710">
                   <caret line="90" column="0" lean-forward="false" selection-start-line="88" selection-start-column="14" selection-end-line="90" selection-end-column="0" />
                   <folding />
                 </state>
@@ -123,8 +120,8 @@
           <file leaf-file-name="newEmployee.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/hrm_edelcert/app/newEmployee/newEmployee.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="456">
-                  <caret line="24" column="8" lean-forward="true" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
+                <state relative-caret-position="285">
+                  <caret line="15" column="12" lean-forward="false" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
                   <folding />
                 </state>
               </provider>
@@ -133,8 +130,8 @@
           <file leaf-file-name="employee.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/hrm_edelcert/app/employee/employee.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="463">
-                  <caret line="41" column="10" lean-forward="true" selection-start-line="41" selection-start-column="10" selection-end-line="41" selection-end-column="10" />
+                <state relative-caret-position="391">
+                  <caret line="67" column="0" lean-forward="true" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -153,6 +150,7 @@
       <find>employees/newEmployee</find>
       <find>newEmployee</find>
       <find>date</find>
+      <find>checkbox</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -164,12 +162,12 @@
         <option value="$PROJECT_DIR$/hrm_edelcert/bower.json" />
         <option value="$PROJECT_DIR$/hrm_edelcert/app/app.css" />
         <option value="$PROJECT_DIR$/hrm_edelcert/app/app.js" />
-        <option value="$PROJECT_DIR$/hrm_edelcert/app/index.html" />
         <option value="$PROJECT_DIR$/hrm_edelcert/app/employee/info_example.txt" />
         <option value="$PROJECT_DIR$/hrm_edelcert/app/employees/employees.html" />
         <option value="$PROJECT_DIR$/hrm_edelcert/app/employees/employees.js" />
         <option value="$PROJECT_DIR$/hrm_edelcert/app/newEmployee/newEmployee.html" />
         <option value="$PROJECT_DIR$/hrm_edelcert/app/newEmployee/newEmployee.js" />
+        <option value="$PROJECT_DIR$/hrm_edelcert/app/index.html" />
         <option value="$PROJECT_DIR$/hrm_edelcert/app/employee/employee.js" />
         <option value="$PROJECT_DIR$/hrm_edelcert/app/employee/employee.html" />
       </list>
@@ -182,10 +180,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1920" />
     <option name="y" value="22" />
-    <option name="width" value="1920" />
-    <option name="height" value="1058" />
+    <option name="width" value="1440" />
+    <option name="height" value="828" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -202,7 +199,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -316,6 +312,7 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -352,6 +349,13 @@
       <method />
     </configuration>
     <configuration default="true" type="DartTestRunConfigurationType" factoryName="Dart Test">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
+      <node-interpreter value="project" />
+      <working-dir value="" />
+      <envs />
+      <scope-kind value="ALL" />
       <method />
     </configuration>
     <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma">
@@ -435,7 +439,8 @@
       <workItem from="1496735250381" duration="26000" />
       <workItem from="1499674449925" duration="102000" />
       <workItem from="1499674638892" duration="4239000" />
-      <workItem from="1499852369186" duration="5947000" />
+      <workItem from="1499852369186" duration="13163000" />
+      <workItem from="1499953792583" duration="1332000" />
     </task>
     <task id="LOCAL-00001" summary="Employees and employee details pages">
       <created>1483477282335</created>
@@ -455,7 +460,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46425000" />
+    <option name="totallyTimeSpent" value="54973000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -467,18 +472,18 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1920" y="22" width="1920" height="1058" extended-state="6" />
+    <frame x="0" y="22" width="1440" height="828" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0900474" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1205074" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329235" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329235" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919255" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -583,8 +588,8 @@
         <state relative-caret-position="1290">
           <caret line="86" column="72" lean-forward="false" selection-start-line="86" selection-start-column="72" selection-end-line="86" selection-end-column="72" />
           <folding>
-            <marker date="1487247297000" expanded="true" signature="2630:2783" ph="..." />
-            <marker date="1487247297000" expanded="true" signature="2723:2751" ph="..." />
+            <marker date="1499945908000" expanded="true" signature="2493:2646" ph="..." />
+            <marker date="1499945908000" expanded="true" signature="2586:2614" ph="..." />
           </folding>
         </state>
       </provider>
@@ -652,8 +657,8 @@
         <state relative-caret-position="1290">
           <caret line="86" column="72" lean-forward="false" selection-start-line="86" selection-start-column="72" selection-end-line="86" selection-end-column="72" />
           <folding>
-            <marker date="1487247297000" expanded="true" signature="2630:2783" ph="..." />
-            <marker date="1487247297000" expanded="true" signature="2723:2751" ph="..." />
+            <marker date="1499945908000" expanded="true" signature="2493:2646" ph="..." />
+            <marker date="1499945908000" expanded="true" signature="2586:2614" ph="..." />
           </folding>
         </state>
       </provider>
@@ -721,8 +726,8 @@
         <state relative-caret-position="1290">
           <caret line="86" column="72" lean-forward="false" selection-start-line="86" selection-start-column="72" selection-end-line="86" selection-end-column="72" />
           <folding>
-            <marker date="1487247297000" expanded="true" signature="2630:2783" ph="..." />
-            <marker date="1487247297000" expanded="true" signature="2723:2751" ph="..." />
+            <marker date="1499945908000" expanded="true" signature="2493:2646" ph="..." />
+            <marker date="1499945908000" expanded="true" signature="2586:2614" ph="..." />
           </folding>
         </state>
       </provider>
@@ -790,8 +795,8 @@
         <state relative-caret-position="720">
           <caret line="48" column="41" lean-forward="true" selection-start-line="48" selection-start-column="29" selection-end-line="48" selection-end-column="41" />
           <folding>
-            <marker date="1487247297000" expanded="true" signature="2630:2783" ph="..." />
-            <marker date="1487247297000" expanded="true" signature="2723:2751" ph="..." />
+            <marker date="1499945908000" expanded="true" signature="2493:2646" ph="..." />
+            <marker date="1499945908000" expanded="true" signature="2586:2614" ph="..." />
           </folding>
         </state>
       </provider>
@@ -871,18 +876,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/hrm_edelcert/app/employee/info_example.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="53" lean-forward="false" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hrm_edelcert/app/newEmployee/newEmployee.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1710">
+          <caret line="90" column="0" lean-forward="false" selection-start-line="88" selection-start-column="14" selection-end-line="90" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/hrm_edelcert/app/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
           <caret line="7" column="5" lean-forward="false" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hrm_edelcert/app/employee/info_example.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="53" lean-forward="false" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="53" />
         </state>
       </provider>
     </entry>
@@ -894,46 +907,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hrm_edelcert/app/newEmployee/newEmployee.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="545">
-          <caret line="90" column="0" lean-forward="false" selection-start-line="88" selection-start-column="14" selection-end-line="90" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hrm_edelcert/app/newEmployee/newEmployee.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="24" column="8" lean-forward="true" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
+        <state relative-caret-position="285">
+          <caret line="15" column="12" lean-forward="false" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hrm_edelcert/app/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="14" lean-forward="true" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
-          <folding>
-            <marker date="1487247297000" expanded="true" signature="2630:2783" ph="..." />
-            <marker date="1487247297000" expanded="true" signature="2723:2751" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hrm_edelcert/app/employee/employee.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="41" column="10" lean-forward="true" selection-start-line="41" selection-start-column="10" selection-end-line="41" selection-end-column="10" />
+        <state relative-caret-position="391">
+          <caret line="67" column="0" lean-forward="true" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hrm_edelcert/app/employee/employee.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="633">
-          <caret line="275" column="21" lean-forward="true" selection-start-line="275" selection-start-column="21" selection-end-line="275" selection-end-column="21" />
+        <state relative-caret-position="412">
+          <caret line="273" column="123" lean-forward="false" selection-start-line="273" selection-start-column="123" selection-end-line="273" selection-end-column="123" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hrm_edelcert/app/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1159">
+          <caret line="61" column="12" lean-forward="false" selection-start-line="61" selection-start-column="12" selection-end-line="61" selection-end-column="12" />
+          <folding>
+            <marker date="1499945908000" expanded="true" signature="2493:2646" ph="..." />
+            <marker date="1499945908000" expanded="true" signature="2586:2614" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -2,7 +2,7 @@
 
 <div class="row placeholders">
     <div class="col-xs-12 col-sm-12 placeholder">
-        <img src="{{employee.picture}}" width="150"
+        <img src="../images/{{employee.picture}}" width="150"
              height="150" class="img-responsive" alt="Generic placeholder thumbnail">
         <h4>{{employee.firstName}} {{employee.lastName}}</h4>
         <span class="text-muted">{{employee.currentTitle}}</span>
@@ -12,56 +12,74 @@
     <uib-tab index="0" heading="Administratif">
         <div class="input-group input-employee">
             <span class="input-group-addon">Nom</span>
-            <input type="text" class="form-control" placeholder="Nom" value="{{employee.lastName}}" disabled>
+            <input type="text" class="form-control" placeholder="Nom" value="{{employee.lastName}}" disabled ng-if="!modified">
+            <input type="text" class="form-control" placeholder="Nom" value="{{employee.lastName}}" ng-if="modified">
+
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Prénom</span>
-            <input type="text" class="form-control" placeholder="Prénom" value="{{employee.firstName}}" disabled>
+            <input type="text" class="form-control" placeholder="Prénom" value="{{employee.firstName}}" disabled ng-if="!modified">
+            <input type="text" class="form-control" placeholder="Prénom" value="{{employee.firstName}}" ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Date de naissance</span>
             <input type="text" class="form-control" placeholder="Date de naissance (dd.MM.yyyy)"
-                   value="{{employee.birthDate | date : 'dd.MM.yyyy'}}" disabled>
+                   value="{{employee.birthDate | date : 'dd.MM.yyyy'}}" disabled ng-if="!modified">
+            <input type="text" class="form-control" placeholder="Date de naissance (dd.MM.yyyy)"
+                   value="{{employee.birthDate | date : 'dd.MM.yyyy'}}" ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Adresse</span>
-            <input type="text" class="form-control" placeholder="Adresse" value="{{employee.address}}" disabled>
+            <input type="text" class="form-control" placeholder="Adresse" value="{{employee.address}}" disabled ng-if="!modified">
+            <input type="text" class="form-control" placeholder="Adresse" value="{{employee.address}}" ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">NPA</span>
-            <input type="text" class="form-control" placeholder="NPA" value="{{employee.postCode}}" disabled>
+            <input type="text" class="form-control" placeholder="NPA" value="{{employee.postCode}}" disabled ng-if="!modified">
+            <input type="text" class="form-control" placeholder="NPA" value="{{employee.postCode}}" ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Localité</span>
-            <input type="text" class="form-control" placeholder="Localité" value="{{employee.location}}" disabled>
+            <input type="text" class="form-control" placeholder="Localité" value="{{employee.location}}" disabled ng-if="!modified">
+            <input type="text" class="form-control" placeholder="Localité" value="{{employee.location}}" ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">AVS</span>
-            <input type="text" class="form-control" placeholder="AVS" value="{{employee.avs}}" disabled>
+            <input type="text" class="form-control" placeholder="AVS" value="{{employee.avs}}" disabled ng-if="!modified">
+            <input type="text" class="form-control" placeholder="AVS" value="{{employee.avs}}" ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">N° téléphone</span>
-            <input type="text" class="form-control" placeholder="N° téléphone" value="{{employee.phone}}" disabled>
+            <input type="text" class="form-control" placeholder="N° téléphone" value="{{employee.phone}}" disabled ng-if="!modified">
+            <input type="text" class="form-control" placeholder="N° téléphone" value="{{employee.phone}}" ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Email</span>
-            <input type="text" class="form-control" placeholder="Email" value="{{employee.email}}" disabled>
+            <input type="text" class="form-control" placeholder="Email" value="{{employee.email}}" disabled ng-if="!modified">
+            <input type="text" class="form-control" placeholder="Email" value="{{employee.email}}" ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Titre du poste actuel</span>
             <input type="text" class="form-control" placeholder="Titre du poste actuel"
-                   value="{{employee.currentTitle}}" disabled>
+                   value="{{employee.currentTitle}}" disabled ng-if="!modified">
+            <input type="text" class="form-control" placeholder="Titre du poste actuel"
+                   value="{{employee.currentTitle}}" ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Date d’entrée en fonction</span>
             <input type="text" class="form-control" placeholder="Date d’entrée en fonction"
-                   value="{{employee.comingToOfficeDate | date : 'dd.MM.yyyy'}}" disabled>
+                   value="{{employee.comingToOfficeDate | date : 'dd.MM.yyyy'}}" disabled ng-if="!modified">
+            <input type="text" class="form-control" placeholder="Date d’entrée en fonction"
+                   value="{{employee.comingToOfficeDate | date : 'dd.MM.yyyy'}}" ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Salaire horaire actuel</span>
             <input type="text" class="form-control" placeholder="Salaire horaire actuel"
-                   value="{{employee.currentHourlyWage}}" disabled>
+                   value="{{employee.currentHourlyWage}}" disabled ng-if="!modified">
+            <input type="text" class="form-control" placeholder="Salaire horaire actuel"
+                   value="{{employee.currentHourlyWage}}" ng-if="modified">
         </div>
+        <br>
     </uib-tab>
     <uib-tab index="1" heading="Formations">
         <table class="table table-striped">
@@ -76,7 +94,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="formation in formations">
+            <tr ng-repeat="formation in formations" ng-if="!modified">
                 <td>{{formation.formativeOrganization}}</td>
                 <td><select class="form-control"
                             ng-options="formationType.pk_formationType as formationType.formation for formationType in formationTypes"
@@ -89,6 +107,20 @@
                 </td>
                 <td>{{formation.fromDate | date : "dd.MM.yyyy"}}</td>
                 <td>{{formation.toDate | date : "dd.MM.yyyy"}}</td>
+            </tr>
+            <tr ng-repeat="formation in formations"  ng-if="modified">
+                <td><input type="text" class="form-control" value="{{formation.formativeOrganization}}"></td>
+                <td><select class="form-control"
+                            ng-options="formationType.pk_formationType as formationType.formation for formationType in formationTypes"
+                            ng-model="formation.fk_formationType"></select>
+                </td>
+                <td></td>
+                <td>
+                    <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
+                           ng-value="formation.EAScope">
+                </td>
+                <td><input type="text" class="form-control" value="{{formation.fromDate | date : 'dd.MM.yyyy'}}"></td>
+                <td><input type="text" class="form-control" value="{{formation.toDate | date : 'dd.MM.yyyy'}}"></td>
             </tr>
             </tbody>
         </table>
@@ -107,7 +139,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="professionnalExperience in professionnalExperiences">
+            <tr ng-repeat="professionnalExperience in professionnalExperiences" ng-if="!modified">
                 <td>{{professionnalExperience.organizationName}}</td>
                 <td>{{professionnalExperience.organizationActivity}}</td>
                 <td>{{professionnalExperience.fonction}}</td>
@@ -118,6 +150,18 @@
                 </td>
                 <td>{{professionnalExperience.fromDate | date : "dd.MM.yyyy"}}</td>
                 <td>{{professionnalExperience.toDate | date : "dd.MM.yyyy"}}</td>
+            </tr>
+            <tr ng-repeat="professionnalExperience in professionnalExperiences"  ng-if="modified">
+                <td><input type="text" class="form-control" value="{{professionnalExperience.organizationName}}"></td>
+                <td><input type="text" class="form-control" value="{{professionnalExperience.organizationActivity}}"></td>
+                <td><input type="text" class="form-control" value="{{professionnalExperience.fonction}}"></td>
+                <td></td>
+                <td>
+                    <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
+                           ng-value="professionnalExperience.EAScope">
+                </td>
+                <td><input type="text" class="form-control" value="{{professionnalExperience.fromDate | date : 'dd.MM.yyyy'}}"></td>
+                <td><input type="text" class="form-control" value="{{professionnalExperience.toDate | date : 'dd.MM.yyyy'}}"></td>
             </tr>
             </tbody>
         </table>
@@ -135,7 +179,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="consultingExperience in consultingExperiences">
+            <tr ng-repeat="consultingExperience in consultingExperiences" ng-if="!modified">
                 <td>{{consultingExperience.organizationName}}</td>
                 <td>{{consultingExperience.organizationActivity}}</td>
                 <td><select class="form-control"
@@ -148,6 +192,20 @@
                 </td>
                 <td>{{consultingExperience.organization}}</td>
                 <td>{{consultingExperience.year}}</td>
+            </tr>
+            <tr ng-repeat="consultingExperience in consultingExperiences" ng-if="modified">
+                <td><input type="text" class="form-control" value="{{consultingExperience.organizationName}}"></td>
+                <td><input type="text" class="form-control" value="{{consultingExperience.organizationActivity}}"></td>
+                <td><select class="form-control"
+                            ng-options="NMSStandard.pk_NMSStandard as NMSStandard.name for NMSStandard in NMSStandards"
+                            ng-model="consultingExperience.fk_NMSStandard" disabled></select>
+                </td>
+                <td>
+                    <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
+                           ng-value="consultingExperience.EAScope">
+                </td>
+                <td><input type="text" class="form-control" value="{{consultingExperience.organization}}"></td>
+                <td><input type="text" class="form-control" value="{{consultingExperience.year}}"></td>
             </tr>
             </tbody>
         </table>
@@ -165,7 +223,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="auditExperience in auditExperiences">
+            <tr ng-repeat="auditExperience in auditExperiences" ng-if="!modified">
                 <td>{{auditExperience.organizationName}}</td>
                 <td>{{auditExperience.organizationActivity}}</td>
                 <td><select class="form-control"
@@ -178,6 +236,20 @@
                 </td>
                 <td>{{auditExperience.oc}}</td>
                 <td>{{auditExperience.year}}</td>
+            </tr>
+            <tr ng-repeat="auditExperience in auditExperiences" ng-if="modified">
+                <td><input type="text" class="form-control" value="{{auditExperience.organizationName}}"></td>
+                <td><input type="text" class="form-control" value="{{auditExperience.organizationActivity}}"></td>
+                <td><select class="form-control"
+                            ng-options="NMSStandard.pk_NMSStandard as NMSStandard.name for NMSStandard in NMSStandards"
+                            ng-model="auditExperience.fk_NMSStandard"></select>
+                </td>
+                <td>
+                    <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
+                           ng-value="auditExperience.EAScope">
+                </td>
+                <td><input type="text" class="form-control" value="{{auditExperience.oc}}"></td>
+                <td><input type="text" class="form-control" value="{{auditExperience.year}}"></td>
             </tr>
             </tbody>
         </table>
@@ -196,10 +268,12 @@
             <tbody>
             <tr ng-repeat="internalQualification in internalQualifications">
                 <td>{{internalQualification.process}}</td>
-                <td><input type="checkbox" ng-checked="internalQualification.yesno"></td>
-                <td>{{internalQualification.result}}</td>
-                <td></td>
-                <td>{{internalQualification.validationDate | date : "dd.MM.yyyy"}}</td>
+                <td><input type="checkbox" ng-checked="internalQualification.yesno" disabled  ng-if="!modified"></td>
+                <td><input type="checkbox" ng-checked="internalQualification.yesno" ng-if="modified"></td>
+                <td ng-if="!modified">{{internalQualification.result}}</td>
+                <td ng-if="modified"><input type="text" class="form-control" value="{{internalQualification.result}}"></td>
+                <td ng-if="!modified">{{internalQualification.validationDate | date : "dd.MM.yyyy"}}</td>
+                <td ng-if="modified"><input type="text" class="form-control" value="{{internalQualification.validationDate | date : 'dd.MM.yyyy'}}"></td>
             </tr>
             </tbody>
         </table>
@@ -217,7 +291,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="auditObservation in auditObservations">
+            <tr ng-repeat="auditObservation in auditObservations" ng-if="!modified">
                 <td>{{auditObservation.organization}}</td>
                 <td>{{auditObservation.observer}}</td>
                 <td></td>
@@ -227,6 +301,17 @@
                 </td>
                 <td><textarea class="form-control" disabled>{{auditObservation.comment}}</textarea></td>
                 <td>{{auditObservation.date | date : "dd.MM.yyyy"}}</td>
+            </tr>
+            <tr ng-repeat="auditObservation in auditObservations" ng-if="modified">
+                <td><input type="text" class="form-control" value="{{auditObservation.organization}}"></td>
+                <td><input type="text" class="form-control" value="{{auditObservation.observer}}"></td>
+                <td></td>
+                <td>
+                    <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
+                           ng-value="auditObservation.EAScope">
+                </td>
+                <td><textarea class="form-control">{{auditObservation.comment}}</textarea></td>
+                <td><input type="text" class="form-control" value="{{auditObservation.date | date : 'dd.MM.yyyy'}}"></td>
             </tr>
             </tbody>
         </table>
@@ -242,11 +327,17 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="objective in objectives">
+            <tr ng-repeat="objective in objectives" ng-if="!modified">
                 <td>{{objective.mediumLongTermObjectives}}</td>
                 <td>{{objective.auditorStrategy}}</td>
                 <td>{{objective.date | date : "dd.MM.yyyy"}}</td>
                 <td><input type="checkbox" ng-checked="objective.validate" disabled></td>
+            </tr>
+            <tr ng-repeat="objective in objectives" ng-if="modified">
+                <td><input type="text" class="form-control" value="{{objective.mediumLongTermObjectives}}"></td>
+                <td><input type="text" class="form-control" value="{{objective.auditorStrategy}}"></td>
+                <td><input type="text" class="form-control" value="{{objective.date | date : 'dd.MM.yyyy'}}"></td>
+                <td><input type="checkbox" ng-checked="objective.validate"></td>
             </tr>
             </tbody>
         </table>
@@ -256,7 +347,6 @@
             <thead>
             <tr>
                 <th>Organisation-institution</th>
-                <th>NMS Standard</th>
                 <th>EA Scope</th>
                 <th>Date</th>
                 <th>Honoraires</th>
@@ -264,12 +354,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="mandateSheet in mandateSheets">
+            <tr ng-repeat="mandateSheet in mandateSheets" ng-if="!modified">
                 <td>{{mandateSheet.organization}}</td>
-                <td><select class="form-control"
-                            ng-options="NMSStandard.id as NMSStandard.name for NMSStandard in NMSStandards"
-                            ng-model="mandateSheet.NMSStandard" disabled></select>
-                </td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
                            ng-value="mandateSheet.EAScope" disabled>
@@ -278,7 +364,26 @@
                 <td>{{mandateSheet.fees}}</td>
                 <td></td>
             </tr>
+            <tr ng-repeat="mandateSheet in mandateSheets" ng-if="modified">
+                <td><input type="text" class="form-control" value="{{mandateSheet.organization}}"></td>
+                <td>
+                    <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
+                           ng-value="mandateSheet.EAScope">
+                </td>
+                <td><input type="text" class="form-control" value="{{mandateSheet.date | date : 'dd.MM.yyyy'}}"></td>
+                <td><input type="text" class="form-control" value="{{mandateSheet.fees}}"></td>
+                <td></td>
+            </tr>
             </tbody>
         </table>
     </uib-tab>
 </uib-tabset>
+
+<div class="row placeholders">
+    <div class="col-xs-12 col-sm-12 placeholder">
+        <input type="button" value="Modifier" class="btn btn-default" ng-click="modif()" ng-if="!modified">
+        <button class="btn btn-success" ng-click="" ng-if="modified">Sauvegarder</button>
+        <button class="btn btn-danger" ng-click="modif()" ng-if="modified">Annuler</button>
+    </div>
+
+</div>

@@ -22,6 +22,7 @@ angular.module('myApp.employee', ['ngRoute'])
         $scope.auditObservations = [];
         $scope.objectives = [];
         $scope.mandateSheets = [];
+        $scope.modified = false;
 
         $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_administration=" + $routeParams.employeeId).then(
             function (data) {
@@ -65,8 +66,7 @@ angular.module('myApp.employee', ['ngRoute'])
             }
         );
 
-        //TODO
-        $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_internalqualification=" + $routeParams.employeeId).then(
+        $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_internalqualifications=" + $routeParams.employeeId).then(
             function (data) {
                 $scope.internalQualifications = data.data;
             }
@@ -89,4 +89,9 @@ angular.module('myApp.employee', ['ngRoute'])
                 $scope.mandateSheets = data.data;
             }
         );
+
+        $scope.modif = function () {
+            $scope.modified = !$scope.modified;
+        };
+
     }]);
