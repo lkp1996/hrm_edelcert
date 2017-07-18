@@ -24,6 +24,18 @@ angular.module('myApp.employee', ['ngRoute'])
         $scope.mandateSheets = [];
         $scope.modified = false;
 
+        $scope.employeeTemp = {};
+        $scope.formationTypesTemp = [];
+        $scope.formationsTemp = [];
+        $scope.professionnalExperiencesTemp = [];
+        $scope.consultingExperiencesTemp = [];
+        $scope.NMSStandardsTemp = [];
+        $scope.auditExperiencesTemp = [];
+        $scope.internalQualificationsTemp = [];
+        $scope.auditObservationsTemp = [];
+        $scope.objectivesTemp = [];
+        $scope.mandateSheetsTemp = [];
+
         $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_administration=" + $routeParams.employeeId).then(
             function (data) {
                 $scope.employee = data.data;
@@ -91,7 +103,45 @@ angular.module('myApp.employee', ['ngRoute'])
         );
 
         $scope.modif = function () {
-            $scope.modified = !$scope.modified;
+            $scope.modified = true;
+
+            $scope.employeeTemp = $scope.employee;
+            $scope.formationTypesTemp = $scope.formationTypes;
+            $scope.formationsTemp = $scope.formations;
+            $scope.professionnalExperiencesTemp = $scope.professionnalExperiences;
+            $scope.consultingExperiencesTemp = $scope.consultingExperiences;
+            $scope.NMSStandardsTemp = $scope.NMSStandards;
+            $scope.auditExperiencesTemp = $scope.auditExperiences;
+            $scope.internalQualificationsTemp = $scope.internalQualifications;
+            $scope.auditObservationsTemp = $scope.auditObservations;
+            $scope.objectivesTemp = $scope.objectives;
+            $scope.mandateSheetsTemp = $scope.mandateSheets;
+        };
+
+        $scope.cancel = function () {
+            $scope.modified = false;
+
+            $scope.employee = $scope.employeeTemp;
+            $scope.formationTypes = $scope.formationTypesTemp;
+            $scope.formations = $scope.formationsTemp;
+            $scope.professionnalExperiences = $scope.professionnalExperiencesTemp;
+            $scope.consultingExperiences = $scope.consultingExperiencesTemp;
+            $scope.NMSStandards = $scope.NMSStandardsTemp;
+            $scope.auditExperiences = $scope.auditExperiencesTemp;
+            $scope.internalQualifications = $scope.internalQualificationsTemp;
+            $scope.auditObservations = $scope.auditObservationsTemp;
+            $scope.objectives = $scope.objectivesTemp;
+            $scope.mandateSheets = $scope.mandateSheetsTemp;
+        };
+
+        $scope.addRow = function (element) {
+            element.push({});
+        };
+
+        $scope.delRow = function (element, index) {
+            if (confirm("Voulez-vous vraiment supprimer cet élément ?")) {
+                element.splice(index, 1);
+            }
         };
 
     }]);

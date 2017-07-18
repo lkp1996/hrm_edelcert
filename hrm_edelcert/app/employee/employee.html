@@ -11,15 +11,17 @@
 <uib-tabset active="active">
     <uib-tab index="0" heading="Administratif">
         <div class="input-group input-employee">
-            <span class="input-group-addon">Nom</span>
-            <input type="text" class="form-control" placeholder="Nom" value="{{employee.lastName}}" disabled ng-if="!modified">
+            <span class="input-group-addon" id="input-group-addon-employee">Nom</span>
+            <input type="text" class="form-control" placeholder="Nom" value="{{employee.lastName}}" disabled
+                   ng-if="!modified">
             <input type="text" class="form-control" placeholder="Nom" value="{{employee.lastName}}" ng-if="modified">
-
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Prénom</span>
-            <input type="text" class="form-control" placeholder="Prénom" value="{{employee.firstName}}" disabled ng-if="!modified">
-            <input type="text" class="form-control" placeholder="Prénom" value="{{employee.firstName}}" ng-if="modified">
+            <input type="text" class="form-control" placeholder="Prénom" value="{{employee.firstName}}" disabled
+                   ng-if="!modified">
+            <input type="text" class="form-control" placeholder="Prénom" value="{{employee.firstName}}"
+                   ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Date de naissance</span>
@@ -30,32 +32,40 @@
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Adresse</span>
-            <input type="text" class="form-control" placeholder="Adresse" value="{{employee.address}}" disabled ng-if="!modified">
+            <input type="text" class="form-control" placeholder="Adresse" value="{{employee.address}}" disabled
+                   ng-if="!modified">
             <input type="text" class="form-control" placeholder="Adresse" value="{{employee.address}}" ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">NPA</span>
-            <input type="text" class="form-control" placeholder="NPA" value="{{employee.postCode}}" disabled ng-if="!modified">
+            <input type="text" class="form-control" placeholder="NPA" value="{{employee.postCode}}" disabled
+                   ng-if="!modified">
             <input type="text" class="form-control" placeholder="NPA" value="{{employee.postCode}}" ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Localité</span>
-            <input type="text" class="form-control" placeholder="Localité" value="{{employee.location}}" disabled ng-if="!modified">
-            <input type="text" class="form-control" placeholder="Localité" value="{{employee.location}}" ng-if="modified">
+            <input type="text" class="form-control" placeholder="Localité" value="{{employee.location}}" disabled
+                   ng-if="!modified">
+            <input type="text" class="form-control" placeholder="Localité" value="{{employee.location}}"
+                   ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">AVS</span>
-            <input type="text" class="form-control" placeholder="AVS" value="{{employee.avs}}" disabled ng-if="!modified">
+            <input type="text" class="form-control" placeholder="AVS" value="{{employee.avs}}" disabled
+                   ng-if="!modified">
             <input type="text" class="form-control" placeholder="AVS" value="{{employee.avs}}" ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">N° téléphone</span>
-            <input type="text" class="form-control" placeholder="N° téléphone" value="{{employee.phone}}" disabled ng-if="!modified">
-            <input type="text" class="form-control" placeholder="N° téléphone" value="{{employee.phone}}" ng-if="modified">
+            <input type="text" class="form-control" placeholder="N° téléphone" value="{{employee.phone}}" disabled
+                   ng-if="!modified">
+            <input type="text" class="form-control" placeholder="N° téléphone" value="{{employee.phone}}"
+                   ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Email</span>
-            <input type="text" class="form-control" placeholder="Email" value="{{employee.email}}" disabled ng-if="!modified">
+            <input type="text" class="form-control" placeholder="Email" value="{{employee.email}}" disabled
+                   ng-if="!modified">
             <input type="text" class="form-control" placeholder="Email" value="{{employee.email}}" ng-if="modified">
         </div>
         <div class="input-group input-employee">
@@ -79,12 +89,31 @@
             <input type="text" class="form-control" placeholder="Salaire horaire actuel"
                    value="{{employee.currentHourlyWage}}" ng-if="modified">
         </div>
+        <div class="input-group input-employee">
+            <span class="input-group-addon">CV</span>
+            <a href="../attachements/cv/{{employee.cv}}" target="_blank" ng-if="!modified"> <span
+                    class="glyphicon glyphicon-file"
+                    aria-hidden="true"></span>
+                {{employee.cv}}</a>
+            <input type="file" class="form-control" ng-if="modified" value="../attachements/cv/{{employee.cv}}">
+        </div>
+        <div class="input-group input-employee">
+            <span class="input-group-addon">Casier judiciaire</span>
+            <a href="../attachements/criminalrecord/{{employee.criminalRecord}}" target="_blank"
+               ng-if="!modified"> <span
+                    class="glyphicon glyphicon-file"
+                    aria-hidden="true"></span>
+                {{employee.criminalRecord}}</a>
+            <input type="file" class="form-control" ng-if="modified"
+                   value="../attachements/criminalrecord/{{employee.criminalRecord}}">
+        </div>
         <br>
     </uib-tab>
     <uib-tab index="1" heading="Formations">
         <table class="table table-striped">
             <thead>
             <tr>
+                <th ng-if="modified"></th>
                 <th>Organisation-institution</th>
                 <th>Type de formation</th>
                 <th>Pièce jointe</th>
@@ -100,7 +129,9 @@
                             ng-options="formationType.pk_formationType as formationType.formation for formationType in formationTypes"
                             ng-model="formation.fk_formationType" disabled></select>
                 </td>
-                <td></td>
+                <td><a href="../attachements/formation/{{formation.attachement}}" target="_blank"><span
+                        class="glyphicon glyphicon-file" aria-hidden="true"
+                        ng-if="formation.attachement != null"></span> {{formation.attachement}}</a></td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
                            ng-value="formation.EAScope" disabled>
@@ -108,19 +139,36 @@
                 <td>{{formation.fromDate | date : "dd.MM.yyyy"}}</td>
                 <td>{{formation.toDate | date : "dd.MM.yyyy"}}</td>
             </tr>
-            <tr ng-repeat="formation in formations"  ng-if="modified">
-                <td><input type="text" class="form-control" value="{{formation.formativeOrganization}}"></td>
+            <tr ng-repeat="formation in formations" ng-if="modified">
+                <td>
+                    <a class="a-remove" ng-click="delRow(formations, $index)"><span class="glyphicon glyphicon-minus"
+                                                                                    aria-hidden="true"></span></a>
+                </td>
+                <td><input type="text"
+                           class="form-control"
+                           value="{{formation.formativeOrganization}}">
+                </td>
                 <td><select class="form-control"
                             ng-options="formationType.pk_formationType as formationType.formation for formationType in formationTypes"
                             ng-model="formation.fk_formationType"></select>
                 </td>
-                <td></td>
+                <td><input type="file" class="form-control"></td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
                            ng-value="formation.EAScope">
                 </td>
                 <td><input type="text" class="form-control" value="{{formation.fromDate | date : 'dd.MM.yyyy'}}"></td>
                 <td><input type="text" class="form-control" value="{{formation.toDate | date : 'dd.MM.yyyy'}}"></td>
+            </tr>
+            <tr ng-if="modified">
+                <td><a ng-click="addRow(formations)"><span class="glyphicon glyphicon-plus"
+                                                           aria-hidden="true"></span></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
             </tbody>
         </table>
@@ -129,6 +177,7 @@
         <table class="table table-striped">
             <thead>
             <tr>
+                <th ng-if="modified"></th>
                 <th>Nom de l'organisation</th>
                 <th>Activité de l'organisation</th>
                 <th>Fonction</th>
@@ -143,7 +192,10 @@
                 <td>{{professionnalExperience.organizationName}}</td>
                 <td>{{professionnalExperience.organizationActivity}}</td>
                 <td>{{professionnalExperience.fonction}}</td>
-                <td></td>
+                <td><a href="../attachements/professionnalexperience/{{professionnalExperience.attachement}}"
+                       target="_blank"><span class="glyphicon glyphicon-file" aria-hidden="true"
+                                             ng-if="professionnalExperience.attachement != null"></span>
+                    {{professionnalExperience.attachement}}</a></td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
                            ng-value="professionnalExperience.EAScope" disabled>
@@ -151,17 +203,35 @@
                 <td>{{professionnalExperience.fromDate | date : "dd.MM.yyyy"}}</td>
                 <td>{{professionnalExperience.toDate | date : "dd.MM.yyyy"}}</td>
             </tr>
-            <tr ng-repeat="professionnalExperience in professionnalExperiences"  ng-if="modified">
+            <tr ng-repeat="professionnalExperience in professionnalExperiences" ng-if="modified">
+                <td>
+                    <a class="a-remove" ng-click="delRow(professionnalExperiences, $index)"><span
+                            class="glyphicon glyphicon-minus"
+                            aria-hidden="true"></span></a>
+                </td>
                 <td><input type="text" class="form-control" value="{{professionnalExperience.organizationName}}"></td>
-                <td><input type="text" class="form-control" value="{{professionnalExperience.organizationActivity}}"></td>
+                <td><input type="text" class="form-control" value="{{professionnalExperience.organizationActivity}}">
+                </td>
                 <td><input type="text" class="form-control" value="{{professionnalExperience.fonction}}"></td>
-                <td></td>
+                <td><input type="file" class="form-control"></td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
                            ng-value="professionnalExperience.EAScope">
                 </td>
-                <td><input type="text" class="form-control" value="{{professionnalExperience.fromDate | date : 'dd.MM.yyyy'}}"></td>
-                <td><input type="text" class="form-control" value="{{professionnalExperience.toDate | date : 'dd.MM.yyyy'}}"></td>
+                <td><input type="text" class="form-control"
+                           value="{{professionnalExperience.fromDate | date : 'dd.MM.yyyy'}}"></td>
+                <td><input type="text" class="form-control"
+                           value="{{professionnalExperience.toDate | date : 'dd.MM.yyyy'}}"></td>
+            </tr>
+            <tr ng-if="modified">
+                <td><a ng-click="addRow(professionnalExperiences)"><span class="glyphicon glyphicon-plus"
+                                                                         aria-hidden="true"></span></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
             </tbody>
         </table>
@@ -170,6 +240,7 @@
         <table class="table table-striped">
             <thead>
             <tr>
+                <th ng-if="modified"></th>
                 <th>Nom de l'organisation</th>
                 <th>Activité de l'organisation</th>
                 <th>NMS Standard</th>
@@ -194,11 +265,16 @@
                 <td>{{consultingExperience.year}}</td>
             </tr>
             <tr ng-repeat="consultingExperience in consultingExperiences" ng-if="modified">
+                <td>
+                    <a class="a-remove" ng-click="delRow(consultingExperiences, $index)"><span
+                            class="glyphicon glyphicon-minus"
+                            aria-hidden="true"></span></a>
+                </td>
                 <td><input type="text" class="form-control" value="{{consultingExperience.organizationName}}"></td>
                 <td><input type="text" class="form-control" value="{{consultingExperience.organizationActivity}}"></td>
                 <td><select class="form-control"
                             ng-options="NMSStandard.pk_NMSStandard as NMSStandard.name for NMSStandard in NMSStandards"
-                            ng-model="consultingExperience.fk_NMSStandard" disabled></select>
+                            ng-model="consultingExperience.fk_NMSStandard"></select>
                 </td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
@@ -207,6 +283,16 @@
                 <td><input type="text" class="form-control" value="{{consultingExperience.organization}}"></td>
                 <td><input type="text" class="form-control" value="{{consultingExperience.year}}"></td>
             </tr>
+            <tr ng-if="modified">
+                <td><a ng-click="addRow(consultingExperiences)"><span class="glyphicon glyphicon-plus"
+                                                                      aria-hidden="true"></span></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
             </tbody>
         </table>
     </uib-tab>
@@ -214,6 +300,7 @@
         <table class="table table-striped">
             <thead>
             <tr>
+                <th ng-if="modified"></th>
                 <th>Nom de l'organisation</th>
                 <th>Activité de l'organisation</th>
                 <th>NMS Standard</th>
@@ -238,6 +325,11 @@
                 <td>{{auditExperience.year}}</td>
             </tr>
             <tr ng-repeat="auditExperience in auditExperiences" ng-if="modified">
+                <td>
+                    <a class="a-remove" ng-click="delRow(auditExperiences, $index)"><span
+                            class="glyphicon glyphicon-minus"
+                            aria-hidden="true"></span></a>
+                </td>
                 <td><input type="text" class="form-control" value="{{auditExperience.organizationName}}"></td>
                 <td><input type="text" class="form-control" value="{{auditExperience.organizationActivity}}"></td>
                 <td><select class="form-control"
@@ -250,6 +342,16 @@
                 </td>
                 <td><input type="text" class="form-control" value="{{auditExperience.oc}}"></td>
                 <td><input type="text" class="form-control" value="{{auditExperience.year}}"></td>
+            </tr>
+            <tr ng-if="modified">
+                <td><a ng-click="addRow(auditExperiences)"><span class="glyphicon glyphicon-plus"
+                                                                 aria-hidden="true"></span></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
             </tbody>
         </table>
@@ -266,14 +368,23 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="internalQualification in internalQualifications">
+            <tr ng-repeat="internalQualification in internalQualifications" ng-if="!modified">
                 <td>{{internalQualification.process}}</td>
-                <td><input type="checkbox" ng-checked="internalQualification.yesno" disabled  ng-if="!modified"></td>
-                <td><input type="checkbox" ng-checked="internalQualification.yesno" ng-if="modified"></td>
-                <td ng-if="!modified">{{internalQualification.result}}</td>
-                <td ng-if="modified"><input type="text" class="form-control" value="{{internalQualification.result}}"></td>
-                <td ng-if="!modified">{{internalQualification.validationDate | date : "dd.MM.yyyy"}}</td>
-                <td ng-if="modified"><input type="text" class="form-control" value="{{internalQualification.validationDate | date : 'dd.MM.yyyy'}}"></td>
+                <td><input type="checkbox" ng-checked="internalQualification.yesno" disabled></td>
+                <td>{{internalQualification.result}}</td>
+                <td><a href="../attachements/internalqualification/{{internalQualification.attachement}}"
+                       target="_blank"><span class="glyphicon glyphicon-file" aria-hidden="true"
+                                             ng-if="internalQualification.attachement != null"></span>
+                    {{internalQualification.attachement}}</a></td>
+                <td>{{internalQualification.validationDate | date : "dd.MM.yyyy"}}</td>
+            </tr>
+            <tr ng-repeat="internalQualification in internalQualifications" ng-if="modified">
+                <td>{{internalQualification.process}}</td>
+                <td><input type="checkbox" ng-checked="internalQualification.yesno"></td>
+                <td><input type="text" class="form-control" value="{{internalQualification.result}}"></td>
+                <td><input type="file" class="form-control"></td>
+                <td><input type="text" class="form-control"
+                           value="{{internalQualification.validationDate | date : 'dd.MM.yyyy'}}"></td>
             </tr>
             </tbody>
         </table>
@@ -282,6 +393,7 @@
         <table class="table table-striped">
             <thead>
             <tr>
+                <th ng-if="modified"></th>
                 <th>Organisation-institution</th>
                 <th>Observateur-évaluateur</th>
                 <th>Pièces jointes</th>
@@ -294,7 +406,10 @@
             <tr ng-repeat="auditObservation in auditObservations" ng-if="!modified">
                 <td>{{auditObservation.organization}}</td>
                 <td>{{auditObservation.observer}}</td>
-                <td></td>
+                <td><a href="../attachements/auditobservation/{{auditObservation.attachement}}"
+                       target="_blank"><span class="glyphicon glyphicon-file" aria-hidden="true"
+                                             ng-if="auditObservation.attachement != null"></span>
+                    {{auditObservation.attachement}}</a></td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
                            ng-value="auditObservation.EAScope" disabled>
@@ -303,49 +418,40 @@
                 <td>{{auditObservation.date | date : "dd.MM.yyyy"}}</td>
             </tr>
             <tr ng-repeat="auditObservation in auditObservations" ng-if="modified">
+                <td>
+                    <a class="a-remove" ng-click="delRow(auditObservations, $index)"><span
+                            class="glyphicon glyphicon-minus"
+                            aria-hidden="true"></span></a>
+                </td>
                 <td><input type="text" class="form-control" value="{{auditObservation.organization}}"></td>
                 <td><input type="text" class="form-control" value="{{auditObservation.observer}}"></td>
-                <td></td>
+                <td><input type="file" class="form-control"></td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
                            ng-value="auditObservation.EAScope">
                 </td>
                 <td><textarea class="form-control">{{auditObservation.comment}}</textarea></td>
-                <td><input type="text" class="form-control" value="{{auditObservation.date | date : 'dd.MM.yyyy'}}"></td>
+                <td><input type="text" class="form-control" value="{{auditObservation.date | date : 'dd.MM.yyyy'}}">
+                </td>
+            </tr>
+            <tr ng-if="modified">
+                <td><a ng-click="addRow(auditObservations)"><span class="glyphicon glyphicon-plus"
+                                                                  aria-hidden="true"></span></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
             </tbody>
         </table>
     </uib-tab>
-    <uib-tab index="7" heading="Objectifs">
+    <uib-tab index="7" heading="Fiches mandat">
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Objectifs à moyen et long terme</th>
-                <th>Stratégie mise en place par l’auditeur</th>
-                <th>Date</th>
-                <th>Validation</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="objective in objectives" ng-if="!modified">
-                <td>{{objective.mediumLongTermObjectives}}</td>
-                <td>{{objective.auditorStrategy}}</td>
-                <td>{{objective.date | date : "dd.MM.yyyy"}}</td>
-                <td><input type="checkbox" ng-checked="objective.validate" disabled></td>
-            </tr>
-            <tr ng-repeat="objective in objectives" ng-if="modified">
-                <td><input type="text" class="form-control" value="{{objective.mediumLongTermObjectives}}"></td>
-                <td><input type="text" class="form-control" value="{{objective.auditorStrategy}}"></td>
-                <td><input type="text" class="form-control" value="{{objective.date | date : 'dd.MM.yyyy'}}"></td>
-                <td><input type="checkbox" ng-checked="objective.validate"></td>
-            </tr>
-            </tbody>
-        </table>
-    </uib-tab>
-    <uib-tab index="8" heading="Fiches mandat">
-        <table class="table table-striped">
-            <thead>
-            <tr>
+                <th ng-if="modified"></th>
                 <th>Organisation-institution</th>
                 <th>EA Scope</th>
                 <th>Date</th>
@@ -362,9 +468,16 @@
                 </td>
                 <td>{{mandateSheet.date | date : "dd.MM.yyyy"}}</td>
                 <td>{{mandateSheet.fees}}</td>
-                <td></td>
+                <td><a href="../attachements/mandatesheet/{{mandateSheet.attachement}}"
+                       target="_blank"><span class="glyphicon glyphicon-file" aria-hidden="true"
+                                             ng-if="mandateSheet.attachement != null"></span>
+                    {{mandateSheet.attachement}}</a></td>
             </tr>
             <tr ng-repeat="mandateSheet in mandateSheets" ng-if="modified">
+                <td>
+                    <a class="a-remove" ng-click="delRow(mandateSheets, $index)"><span class="glyphicon glyphicon-minus"
+                                                                                       aria-hidden="true"></span></a>
+                </td>
                 <td><input type="text" class="form-control" value="{{mandateSheet.organization}}"></td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
@@ -372,6 +485,57 @@
                 </td>
                 <td><input type="text" class="form-control" value="{{mandateSheet.date | date : 'dd.MM.yyyy'}}"></td>
                 <td><input type="text" class="form-control" value="{{mandateSheet.fees}}"></td>
+                <td><input type="file" class="form-control"></td>
+            </tr>
+            <tr ng-if="modified">
+                <td><a ng-click="addRow(mandateSheets)"><span class="glyphicon glyphicon-plus"
+                                                              aria-hidden="true"></span></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </uib-tab>
+    <uib-tab index="8" heading="Objectifs">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th ng-if="modified"></th>
+                <th>Objectifs à moyen et long terme</th>
+                <th>Stratégie mise en place par l’auditeur</th>
+                <th>Date</th>
+                <th>Validation</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="objective in objectives" ng-if="!modified">
+                <td>{{objective.mediumLongTermObjectives}}</td>
+                <td>{{objective.auditorStrategy}}</td>
+                <td>{{objective.date | date : "dd.MM.yyyy"}}</td>
+                <td><input type="checkbox" ng-checked="objective.validate" disabled></td>
+            </tr>
+            <tr ng-repeat="objective in objectives" ng-if="modified">
+                <td>
+                    <a class="a-remove" ng-click="delRow(objectives, $index)"><span class="glyphicon glyphicon-minus"
+                                                                                    aria-hidden="true"></span></a>
+                </td>
+                <td><input type="text" class="form-control" value="{{objective.mediumLongTermObjectives}}"></td>
+                <td><input type="text" class="form-control" value="{{objective.auditorStrategy}}"></td>
+                <td><input type="text" class="form-control" value="{{objective.date | date : 'dd.MM.yyyy'}}"></td>
+                <td><input type="checkbox" ng-checked="objective.validate"></td>
+            </tr>
+            <tr ng-if="modified">
+                <td><a ng-click="addRow(objectives)"><span class="glyphicon glyphicon-plus"
+                                                           aria-hidden="true"></span></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td></td>
             </tr>
             </tbody>
@@ -383,7 +547,7 @@
     <div class="col-xs-12 col-sm-12 placeholder">
         <input type="button" value="Modifier" class="btn btn-default" ng-click="modif()" ng-if="!modified">
         <button class="btn btn-success" ng-click="" ng-if="modified">Sauvegarder</button>
-        <button class="btn btn-danger" ng-click="modif()" ng-if="modified">Annuler</button>
+        <button class="btn btn-danger" ng-click="cancel()" ng-if="modified">Annuler</button>
     </div>
 
 </div>

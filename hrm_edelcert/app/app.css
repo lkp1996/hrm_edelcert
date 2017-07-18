@@ -135,5 +135,13 @@ body {
 }
 
 .input-employee {
-    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.a-remove {
+    color: #d01f30;
+}
+
+.a-remove:hover {
+    color: #761c19;
 }

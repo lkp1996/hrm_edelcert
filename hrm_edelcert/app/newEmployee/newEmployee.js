@@ -15,11 +15,14 @@ angular.module('myApp.newEmployee', ['ngRoute'])
         $scope.add = function () {
             $scope.employee.birthDate = new Date($scope.employee.birthDate).getTime();
             $scope.employee.comingToOfficeDate = new Date($scope.employee.comingToOfficeDate).getTime();
-            $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?add_employee", $scope.employee).then(
+            $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/test_post.php", $scope.employee).success(
                 function (data) {
                     console.log(data);
-                    $scope.employee = {};
+                    //$scope.employee = {};
                 }
-            )
-        }
+            ).error(
+                function (data) {
+                    console.log("error");
+                })
+        };
     }]);
