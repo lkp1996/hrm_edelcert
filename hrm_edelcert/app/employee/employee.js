@@ -50,7 +50,9 @@ angular.module('myApp.employee', ['ngRoute'])
 
         $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_formation=" + $routeParams.employeeId).then(
             function (data) {
-                $scope.formations = data.data;
+                if (!angular.isUndefined(data.data)) {
+                    $scope.formations = data.data;
+                }
             }
         );
 
