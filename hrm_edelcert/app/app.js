@@ -28,16 +28,15 @@ angular.module('myApp', [
         }
     };
 }]).service('fileUpload', ['$http', function ($http) {
-    this.uploadFileToUrl = function(file, uploadUrl, name){
+    this.uploadFileToUrl = function(file, uploadUrl, id, type){
         var fd = new FormData();
-        fd.append('file', file);
-        fd.append('name', name);
+        fd.append('id', id);
+        fd.append(type, file);
         $http.post(uploadUrl, fd, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined,'Process-Data': false}
         })
             .success(function(data){
-                console.log(data);
             })
             .error(function(){
                 console.log("Error");

@@ -87,33 +87,29 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-lg-6">
-        <div class="input-group input-employee">
-            <span class="input-group-addon">Photo</span>
-            <input type="file" class="form-control" placeholder="Photo" ng-model="employee.picture">
+<div class="file-upload">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="input-group input-employee">
+                <span class="input-group-addon">Photo</span>
+                <input type="file" class="form-control" placeholder="Photo" file-model="picture"  accept="image/*">
+            </div>
         </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="input-group input-employee">
-            <span class="input-group-addon">CV</span>
-            <input type="file" class="form-control" placeholder="CV" ng-model="employee.cv">
+        <div class="col-lg-6">
+            <div class="input-group input-employee">
+                <span class="input-group-addon">CV</span>
+                <input type="file" class="form-control" placeholder="CV" file-model="cv">
+            </div>
         </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="input-group input-employee">
-            <span class="input-group-addon">Casier judiciaire</span>
-            <input type="file" class="form-control" placeholder="Casier judiciaire" ng-model="employee.criminalRecord">
+        <div class="col-lg-6">
+            <div class="input-group input-employee">
+                <span class="input-group-addon">Casier judiciaire</span>
+                <input type="file" class="form-control" placeholder="Casier judiciaire"
+                       file-model="criminalRecord">
+            </div>
         </div>
     </div>
 </div>
 <div class="input-group input-employee">
     <button class="btn btn-success" ng-click="add()">Ajouter</button>
-</div>
-{{employee}}
-
-<div class="file-upload">
-    <input type="text" ng-model="name">
-    <input type="file" file-model="employee.file"/>
-    <button ng-click="uploadFile()">upload me</button>
 </div>

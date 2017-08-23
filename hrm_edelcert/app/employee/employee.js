@@ -11,6 +11,8 @@ angular.module('myApp.employee', ['ngRoute'])
 
     .controller('EmployeeCtrl', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
 
+        $scope.employeeId = $routeParams.employeeId;
+
         $scope.employee = {};
         $scope.formationTypes = [];
         $scope.formations = [];

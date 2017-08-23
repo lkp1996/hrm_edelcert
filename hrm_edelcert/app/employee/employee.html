@@ -2,7 +2,7 @@
 
 <div class="row placeholders">
     <div class="col-xs-12 col-sm-12 placeholder">
-        <img src="../images/{{employee.picture}}" width="150"
+        <img src="http://localhost:8888/hrm_edelcert_server/attachements/picture/{{employeeId}}/{{employee.picture}}" width="150"
              height="150" class="img-responsive" alt="Generic placeholder thumbnail">
         <h4>{{employee.firstName}} {{employee.lastName}}</h4>
         <span class="text-muted">{{employee.currentTitle}}</span>
@@ -91,15 +91,15 @@
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">CV</span>
-            <a href="../attachements/cv/{{employee.cv}}" target="_blank" ng-if="!modified"> <span
+            <a href="http://localhost:8888/hrm_edelcert_server/attachements/cv/{{employeeId}}/{{employee.cv}}" target="_blank" ng-if="!modified"> <span
                     class="glyphicon glyphicon-file"
                     aria-hidden="true"></span>
                 {{employee.cv}}</a>
-            <input type="file" class="form-control" ng-if="modified" value="../attachements/cv/{{employee.cv}}">
+            <input type="file" class="form-control" ng-if="modified" data-value="http://localhost:8888/hrm_edelcert_server/attachements/cv/{{employeeId}}/{{employee.cv}}">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Casier judiciaire</span>
-            <a href="../attachements/criminalrecord/{{employee.criminalRecord}}" target="_blank"
+            <a href="http://localhost:8888/hrm_edelcert_server/attachements/criminalrecord/{{employeeId}}/{{employee.criminalRecord}}" target="_blank"
                ng-if="!modified"> <span
                     class="glyphicon glyphicon-file"
                     aria-hidden="true"></span>
@@ -129,7 +129,7 @@
                             ng-options="formationType.pk_formationType as formationType.formation for formationType in formationTypes"
                             ng-model="formation.fk_formationType" disabled></select>
                 </td>
-                <td><a href="../attachements/formation/{{formation.attachement}}" target="_blank"><span
+                <td><a href="http://localhost:8888/hrm_edelcert_server/attachements/formation/{{employeeId}}/{{formation.attachement}}" target="_blank"><span
                         class="glyphicon glyphicon-file" aria-hidden="true"
                         ng-if="formation.attachement != null"></span> {{formation.attachement}}</a></td>
                 <td>
@@ -192,7 +192,7 @@
                 <td>{{professionnalExperience.organizationName}}</td>
                 <td>{{professionnalExperience.organizationActivity}}</td>
                 <td>{{professionnalExperience.fonction}}</td>
-                <td><a href="../attachements/professionnalexperience/{{professionnalExperience.attachement}}"
+                <td><a href="http://localhost:8888/hrm_edelcert_server/attachements/professionnalexperience/{{employeeId}}/{{professionnalExperience.attachement}}"
                        target="_blank"><span class="glyphicon glyphicon-file" aria-hidden="true"
                                              ng-if="professionnalExperience.attachement != null"></span>
                     {{professionnalExperience.attachement}}</a></td>
@@ -372,7 +372,7 @@
                 <td>{{internalQualification.process}}</td>
                 <td><input type="checkbox" ng-checked="internalQualification.yesno" disabled></td>
                 <td>{{internalQualification.result}}</td>
-                <td><a href="../attachements/internalqualification/{{internalQualification.attachement}}"
+                <td><a href="http://localhost:8888/hrm_edelcert_server/attachements/internalqualification/{{employeeId}}/{{internalQualification.attachement}}"
                        target="_blank"><span class="glyphicon glyphicon-file" aria-hidden="true"
                                              ng-if="internalQualification.attachement != null"></span>
                     {{internalQualification.attachement}}</a></td>
@@ -406,7 +406,7 @@
             <tr ng-repeat="auditObservation in auditObservations" ng-if="!modified">
                 <td>{{auditObservation.organization}}</td>
                 <td>{{auditObservation.observer}}</td>
-                <td><a href="../attachements/auditobservation/{{auditObservation.attachement}}"
+                <td><a href="http://localhost:8888/hrm_edelcert_server/attachements/auditobservation/{{employeeId}}/{{auditObservation.attachement}}"
                        target="_blank"><span class="glyphicon glyphicon-file" aria-hidden="true"
                                              ng-if="auditObservation.attachement != null"></span>
                     {{auditObservation.attachement}}</a></td>
@@ -468,7 +468,7 @@
                 </td>
                 <td>{{mandateSheet.date | date : "dd.MM.yyyy"}}</td>
                 <td>{{mandateSheet.fees}}</td>
-                <td><a href="../attachements/mandatesheet/{{mandateSheet.attachement}}"
+                <td><a href="http://localhost:8888/hrm_edelcert_server/attachements/mandatesheet/{{employeeId}}/{{mandateSheet.attachement}}"
                        target="_blank"><span class="glyphicon glyphicon-file" aria-hidden="true"
                                              ng-if="mandateSheet.attachement != null"></span>
                     {{mandateSheet.attachement}}</a></td>

@@ -6,9 +6,10 @@
             <th></th>
             <th>Nom</th>
             <th>Prénom</th>
-            <th>Numéro de téléphone</th>
-            <th>Email</th>
-            <th>Poste actuel</th>
+            <th class="hidden-sm hidden-xs">Numéro de téléphone</th>
+            <th class="hidden-sm hidden-xs">Email</th>
+            <th class="hidden-sm hidden-xs">Poste actuel</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -18,9 +19,12 @@
             </td>
             <td>{{employee.lastName}}</td>
             <td>{{employee.firstName}}</td>
-            <td>{{employee.phone}}</td>
-            <td>{{employee.email}}</td>
-            <td>{{employee.currentTitle}}</td>
+            <td class="hidden-sm hidden-xs">{{employee.phone}}</td>
+            <td class="hidden-sm hidden-xs">{{employee.email}}</td>
+            <td class="hidden-sm hidden-xs">{{employee.currentTitle}}</td>
+            <td style="width: 10px;">
+                <a ng-click="delEmployee(employee.pk_employee)"><span class="glyphicon glyphicon-remove a-remove" aria-hidden="true"></span></a>
+            </td>
         </tr>
         </tbody>
     </table>
