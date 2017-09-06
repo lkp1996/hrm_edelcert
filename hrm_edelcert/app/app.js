@@ -37,6 +37,7 @@ angular.module('myApp', [
             headers: {'Content-Type': undefined,'Process-Data': false}
         })
             .success(function(data){
+                console.log(data);
             })
             .error(function(){
                 console.log("Error");

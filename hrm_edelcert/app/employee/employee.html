@@ -2,114 +2,96 @@
 
 <div class="row placeholders">
     <div class="col-xs-12 col-sm-12 placeholder">
-        <img src="http://localhost:8888/hrm_edelcert_server/attachements/picture/{{employeeId}}/{{employee.picture}}" width="150"
+        <img src="http://localhost:8888/hrm_edelcert_server/attachements/picture/{{employeeId}}/{{employee.picture}}"
+             width="150"
              height="150" class="img-responsive" alt="Generic placeholder thumbnail">
         <h4>{{employee.firstName}} {{employee.lastName}}</h4>
         <span class="text-muted">{{employee.currentTitle}}</span>
     </div>
 </div>
 <uib-tabset active="active">
-    <uib-tab index="0" heading="Administratif">
+    <uib-tab index="0" heading="{{tabs[0].name}}" disable="tabs[0].disabled">
         <div class="input-group input-employee">
             <span class="input-group-addon" id="input-group-addon-employee">Nom</span>
-            <input type="text" class="form-control" placeholder="Nom" value="{{employee.lastName}}" disabled
+            <input type="text" class="form-control" placeholder="Nom" ng-model="employee.lastName" disabled
                    ng-if="!modified">
-            <input type="text" class="form-control" placeholder="Nom" value="{{employee.lastName}}" ng-if="modified">
+            <input type="text" class="form-control" placeholder="Nom" ng-model="employee.lastName" ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Prénom</span>
-            <input type="text" class="form-control" placeholder="Prénom" value="{{employee.firstName}}" disabled
+            <input type="text" class="form-control" placeholder="Prénom" ng-model="employee.firstName" disabled
                    ng-if="!modified">
-            <input type="text" class="form-control" placeholder="Prénom" value="{{employee.firstName}}"
+            <input type="text" class="form-control" placeholder="Prénom" ng-model="employee.firstName"
                    ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Date de naissance</span>
-            <input type="text" class="form-control" placeholder="Date de naissance (dd.MM.yyyy)"
-                   value="{{employee.birthDate | date : 'dd.MM.yyyy'}}" disabled ng-if="!modified">
-            <input type="text" class="form-control" placeholder="Date de naissance (dd.MM.yyyy)"
-                   value="{{employee.birthDate | date : 'dd.MM.yyyy'}}" ng-if="modified">
+            <input type="date" class="form-control" placeholder="Date de naissance (dd.MM.yyyy)"
+                   ng-model="employee.birthDate" disabled ng-if="!modified">
+            <input type="date" class="form-control" placeholder="Date de naissance (dd.MM.yyyy)"
+                   ng-model="employee.birthDate" ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Adresse</span>
-            <input type="text" class="form-control" placeholder="Adresse" value="{{employee.address}}" disabled
+            <input type="text" class="form-control" placeholder="Adresse" ng-model="employee.address" disabled
                    ng-if="!modified">
-            <input type="text" class="form-control" placeholder="Adresse" value="{{employee.address}}" ng-if="modified">
+            <input type="text" class="form-control" placeholder="Adresse" ng-model="employee.address" ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">NPA</span>
-            <input type="text" class="form-control" placeholder="NPA" value="{{employee.postCode}}" disabled
+            <input type="text" class="form-control" placeholder="NPA" ng-model="employee.postCode" disabled
                    ng-if="!modified">
-            <input type="text" class="form-control" placeholder="NPA" value="{{employee.postCode}}" ng-if="modified">
+            <input type="text" class="form-control" placeholder="NPA" ng-model="employee.postCode" ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Localité</span>
-            <input type="text" class="form-control" placeholder="Localité" value="{{employee.location}}" disabled
+            <input type="text" class="form-control" placeholder="Localité" ng-model="employee.location" disabled
                    ng-if="!modified">
-            <input type="text" class="form-control" placeholder="Localité" value="{{employee.location}}"
+            <input type="text" class="form-control" placeholder="Localité" ng-model="employee.location"
                    ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">AVS</span>
-            <input type="text" class="form-control" placeholder="AVS" value="{{employee.avs}}" disabled
+            <input type="text" class="form-control" placeholder="AVS" ng-model="employee.avs" disabled
                    ng-if="!modified">
-            <input type="text" class="form-control" placeholder="AVS" value="{{employee.avs}}" ng-if="modified">
+            <input type="text" class="form-control" placeholder="AVS" ng-model="employee.avs" ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">N° téléphone</span>
-            <input type="text" class="form-control" placeholder="N° téléphone" value="{{employee.phone}}" disabled
+            <input type="text" class="form-control" placeholder="N° téléphone" ng-model="employee.phone" disabled
                    ng-if="!modified">
-            <input type="text" class="form-control" placeholder="N° téléphone" value="{{employee.phone}}"
+            <input type="text" class="form-control" placeholder="N° téléphone" ng-model="employee.phone"
                    ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Email</span>
-            <input type="text" class="form-control" placeholder="Email" value="{{employee.email}}" disabled
+            <input type="text" class="form-control" placeholder="Email" ng-model="employee.email" disabled
                    ng-if="!modified">
-            <input type="text" class="form-control" placeholder="Email" value="{{employee.email}}" ng-if="modified">
+            <input type="text" class="form-control" placeholder="Email" ng-model="employee.email" ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Titre du poste actuel</span>
             <input type="text" class="form-control" placeholder="Titre du poste actuel"
-                   value="{{employee.currentTitle}}" disabled ng-if="!modified">
+                   ng-model="employee.currentTitle" disabled ng-if="!modified">
             <input type="text" class="form-control" placeholder="Titre du poste actuel"
-                   value="{{employee.currentTitle}}" ng-if="modified">
+                   ng-model="employee.currentTitle" ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Date d’entrée en fonction</span>
-            <input type="text" class="form-control" placeholder="Date d’entrée en fonction"
-                   value="{{employee.comingToOfficeDate | date : 'dd.MM.yyyy'}}" disabled ng-if="!modified">
-            <input type="text" class="form-control" placeholder="Date d’entrée en fonction"
-                   value="{{employee.comingToOfficeDate | date : 'dd.MM.yyyy'}}" ng-if="modified">
+            <input type="date" class="form-control" placeholder="Date d’entrée en fonction"
+                   ng-model="employee.comingToOfficeDate" disabled ng-if="!modified">
+            <input type="date" class="form-control" placeholder="Date d’entrée en fonction"
+                   ng-model="employee.comingToOfficeDate" ng-if="modified">
         </div>
         <div class="input-group input-employee">
             <span class="input-group-addon">Salaire horaire actuel</span>
             <input type="text" class="form-control" placeholder="Salaire horaire actuel"
-                   value="{{employee.currentHourlyWage}}" disabled ng-if="!modified">
+                   ng-model="employee.currentHourlyWage" disabled ng-if="!modified">
             <input type="text" class="form-control" placeholder="Salaire horaire actuel"
-                   value="{{employee.currentHourlyWage}}" ng-if="modified">
+                   ng-model="employee.currentHourlyWage" ng-if="modified">
         </div>
-        <div class="input-group input-employee">
-            <span class="input-group-addon">CV</span>
-            <a href="http://localhost:8888/hrm_edelcert_server/attachements/cv/{{employeeId}}/{{employee.cv}}" target="_blank" ng-if="!modified"> <span
-                    class="glyphicon glyphicon-file"
-                    aria-hidden="true"></span>
-                {{employee.cv}}</a>
-            <input type="file" class="form-control" ng-if="modified" data-value="http://localhost:8888/hrm_edelcert_server/attachements/cv/{{employeeId}}/{{employee.cv}}">
-        </div>
-        <div class="input-group input-employee">
-            <span class="input-group-addon">Casier judiciaire</span>
-            <a href="http://localhost:8888/hrm_edelcert_server/attachements/criminalrecord/{{employeeId}}/{{employee.criminalRecord}}" target="_blank"
-               ng-if="!modified"> <span
-                    class="glyphicon glyphicon-file"
-                    aria-hidden="true"></span>
-                {{employee.criminalRecord}}</a>
-            <input type="file" class="form-control" ng-if="modified"
-                   value="../attachements/criminalrecord/{{employee.criminalRecord}}">
-        </div>
-        <br>
     </uib-tab>
-    <uib-tab index="1" heading="Formations">
+    <uib-tab index="1" heading="{{tabs[1].name}}" disable="tabs[1].disabled">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -129,9 +111,11 @@
                             ng-options="formationType.pk_formationType as formationType.formation for formationType in formationTypes"
                             ng-model="formation.fk_formationType" disabled></select>
                 </td>
-                <td><a href="http://localhost:8888/hrm_edelcert_server/attachements/formation/{{employeeId}}/{{formation.attachement}}" target="_blank"><span
-                        class="glyphicon glyphicon-file" aria-hidden="true"
-                        ng-if="formation.attachement != null"></span> {{formation.attachement}}</a></td>
+                <td>
+                    <a href="http://localhost:8888/hrm_edelcert_server/attachements/formation/{{employeeId}}/{{formation.attachement}}"
+                       target="_blank"><span
+                            class="glyphicon glyphicon-file" aria-hidden="true"
+                            ng-if="formation.attachement"></span> {{formation.attachement}}</a></td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
                            ng-value="formation.EAScope" disabled>
@@ -146,7 +130,7 @@
                 </td>
                 <td><input type="text"
                            class="form-control"
-                           value="{{formation.formativeOrganization}}">
+                           ng-model="formation.formativeOrganization">
                 </td>
                 <td><select class="form-control"
                             ng-options="formationType.pk_formationType as formationType.formation for formationType in formationTypes"
@@ -155,13 +139,13 @@
                 <td><input type="file" class="form-control"></td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
-                           ng-value="formation.EAScope">
+                           ng-model="formation.EAScope">
                 </td>
-                <td><input type="text" class="form-control" value="{{formation.fromDate | date : 'dd.MM.yyyy'}}"></td>
-                <td><input type="text" class="form-control" value="{{formation.toDate | date : 'dd.MM.yyyy'}}"></td>
+                <td><input type="date" class="form-control" ng-model="formation.fromDate"></td>
+                <td><input type="date" class="form-control" ng-model="formation.toDate"></td>
             </tr>
             <tr ng-if="modified">
-                <td><a ng-click="addRow(formations)"><span class="glyphicon glyphicon-plus"
+                <td><a ng-click="addFormationRow()"><span class="glyphicon glyphicon-plus"
                                                            aria-hidden="true"></span></a></td>
                 <td></td>
                 <td></td>
@@ -172,8 +156,17 @@
             </tr>
             </tbody>
         </table>
+
+        <div class="row placeholders" ng-hide="active!=1">
+            <div class="col-xs-12 col-sm-12 placeholder">
+                <input type="button" value="Modifier" class="btn btn-default" ng-click="modif()"
+                       ng-if="!modified">
+                <button class="btn btn-success" ng-click="updateFormations()" ng-if="modified">Sauvegarder</button>
+                <button class="btn btn-danger" ng-click="cancel()" ng-if="modified">Annuler</button>
+            </div>
+        </div>
     </uib-tab>
-    <uib-tab index="2" heading="Expériences professionnelles">
+    <uib-tab index="2" heading="{{tabs[2].name}}" disable="tabs[2].disabled">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -192,10 +185,11 @@
                 <td>{{professionnalExperience.organizationName}}</td>
                 <td>{{professionnalExperience.organizationActivity}}</td>
                 <td>{{professionnalExperience.fonction}}</td>
-                <td><a href="http://localhost:8888/hrm_edelcert_server/attachements/professionnalexperience/{{employeeId}}/{{professionnalExperience.attachement}}"
+                <td>
+                    <a href="http://localhost:8888/hrm_edelcert_server/attachements/professionnalexperience/{{employeeId}}/{{professionnalExperience.attachement}}"
                        target="_blank"><span class="glyphicon glyphicon-file" aria-hidden="true"
                                              ng-if="professionnalExperience.attachement != null"></span>
-                    {{professionnalExperience.attachement}}</a></td>
+                        {{professionnalExperience.attachement}}</a></td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
                            ng-value="professionnalExperience.EAScope" disabled>
@@ -236,7 +230,7 @@
             </tbody>
         </table>
     </uib-tab>
-    <uib-tab index="3" heading="Expériences en conseil">
+    <uib-tab index="3" heading="{{tabs[3].name}}" disable="tabs[3].disabled">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -296,7 +290,7 @@
             </tbody>
         </table>
     </uib-tab>
-    <uib-tab index="4" heading="Expérience en audit">
+    <uib-tab index="4" heading="{{tabs[4].name}}" disable="tabs[4].disabled">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -356,7 +350,7 @@
             </tbody>
         </table>
     </uib-tab>
-    <uib-tab index="5" heading="Qualifications internes">
+    <uib-tab index="5" heading="{{tabs[5].name}}" disable="tabs[5].disabled">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -372,10 +366,11 @@
                 <td>{{internalQualification.process}}</td>
                 <td><input type="checkbox" ng-checked="internalQualification.yesno" disabled></td>
                 <td>{{internalQualification.result}}</td>
-                <td><a href="http://localhost:8888/hrm_edelcert_server/attachements/internalqualification/{{employeeId}}/{{internalQualification.attachement}}"
+                <td>
+                    <a href="http://localhost:8888/hrm_edelcert_server/attachements/internalqualification/{{employeeId}}/{{internalQualification.attachement}}"
                        target="_blank"><span class="glyphicon glyphicon-file" aria-hidden="true"
                                              ng-if="internalQualification.attachement != null"></span>
-                    {{internalQualification.attachement}}</a></td>
+                        {{internalQualification.attachement}}</a></td>
                 <td>{{internalQualification.validationDate | date : "dd.MM.yyyy"}}</td>
             </tr>
             <tr ng-repeat="internalQualification in internalQualifications" ng-if="modified">
@@ -389,7 +384,7 @@
             </tbody>
         </table>
     </uib-tab>
-    <uib-tab index="6" heading="Observation en audit">
+    <uib-tab index="6" heading="{{tabs[6].name}}" disable="tabs[6].disabled">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -406,10 +401,11 @@
             <tr ng-repeat="auditObservation in auditObservations" ng-if="!modified">
                 <td>{{auditObservation.organization}}</td>
                 <td>{{auditObservation.observer}}</td>
-                <td><a href="http://localhost:8888/hrm_edelcert_server/attachements/auditobservation/{{employeeId}}/{{auditObservation.attachement}}"
+                <td>
+                    <a href="http://localhost:8888/hrm_edelcert_server/attachements/auditobservation/{{employeeId}}/{{auditObservation.attachement}}"
                        target="_blank"><span class="glyphicon glyphicon-file" aria-hidden="true"
                                              ng-if="auditObservation.attachement != null"></span>
-                    {{auditObservation.attachement}}</a></td>
+                        {{auditObservation.attachement}}</a></td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
                            ng-value="auditObservation.EAScope" disabled>
@@ -447,7 +443,7 @@
             </tbody>
         </table>
     </uib-tab>
-    <uib-tab index="7" heading="Fiches mandat">
+    <uib-tab index="7" heading="{{tabs[7].name}}" disable="tabs[7].disabled">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -468,10 +464,11 @@
                 </td>
                 <td>{{mandateSheet.date | date : "dd.MM.yyyy"}}</td>
                 <td>{{mandateSheet.fees}}</td>
-                <td><a href="http://localhost:8888/hrm_edelcert_server/attachements/mandatesheet/{{employeeId}}/{{mandateSheet.attachement}}"
+                <td>
+                    <a href="http://localhost:8888/hrm_edelcert_server/attachements/mandatesheet/{{employeeId}}/{{mandateSheet.attachement}}"
                        target="_blank"><span class="glyphicon glyphicon-file" aria-hidden="true"
                                              ng-if="mandateSheet.attachement != null"></span>
-                    {{mandateSheet.attachement}}</a></td>
+                        {{mandateSheet.attachement}}</a></td>
             </tr>
             <tr ng-repeat="mandateSheet in mandateSheets" ng-if="modified">
                 <td>
@@ -500,7 +497,7 @@
             </tbody>
         </table>
     </uib-tab>
-    <uib-tab index="8" heading="Objectifs">
+    <uib-tab index="8" heading="{{tabs[8].name}}" disable="tabs[8].disabled">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -543,11 +540,34 @@
     </uib-tab>
 </uib-tabset>
 
-<div class="row placeholders">
+<div class="file-upload" ng-hide="active!=0">
+    <div class="input-group input-employee">
+        <span class="input-group-addon">CV</span>
+        <a href="http://localhost:8888/hrm_edelcert_server/attachements/cv/{{employeeId}}/{{employee.cv}}"
+           target="_blank" ng-if="!modified"> <span
+                class="glyphicon glyphicon-file"
+                aria-hidden="true" ng-if="employee.cv"></span>
+            {{employee.cv}}</a>
+        <input type="file" class="form-control" placeholder="CV" file-model="$parent.cv" ng-if="modified">
+    </div>
+    <div class="input-group input-employee">
+        <span class="input-group-addon">Casier judiciaire</span>
+        <a href="http://localhost:8888/hrm_edelcert_server/attachements/criminalrecord/{{employeeId}}/{{employee.criminalRecord}}"
+           target="_blank"
+           ng-if="!modified"> <span
+                class="glyphicon glyphicon-file"
+                aria-hidden="true" ng-if="employee.criminalRecord"></span>
+            {{employee.criminalRecord}}</a>
+        <input type="file" class="form-control" placeholder="Casier judiciaire"
+               file-model="$parent.criminalRecord" ng-if="modified">
+    </div>
+</div>
+<br>
+<div class="row placeholders" ng-hide="active!=0">
     <div class="col-xs-12 col-sm-12 placeholder">
         <input type="button" value="Modifier" class="btn btn-default" ng-click="modif()" ng-if="!modified">
-        <button class="btn btn-success" ng-click="" ng-if="modified">Sauvegarder</button>
+        <button class="btn btn-success" ng-click="updateEmployeeAdmin()" ng-if="modified">Sauvegarder</button>
         <button class="btn btn-danger" ng-click="cancel()" ng-if="modified">Annuler</button>
     </div>
-
 </div>
+{{formations}}
