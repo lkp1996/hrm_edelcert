@@ -31,6 +31,7 @@ angular.module('myApp.employee', ['ngRoute'])
         $scope.criminalRecord = {};
         $scope.formationsAttachements = [];
         $scope.professionnalExperiencesAttachements = [];
+        $scope.consultingExperiencesAttachements = [];
 
         $scope.tabs = [
             {
@@ -126,11 +127,21 @@ angular.module('myApp.employee', ['ngRoute'])
             );
         };
 
-        $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_consultingexperience=" + $routeParams.employeeId).then(
-            function (data) {
-                $scope.consultingExperiences = data.data;
-            }
-        );
+        $scope.getEmployeeConExp = function() {
+            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_consultingexperience=" + $routeParams.employeeId).then(
+                function (data) {
+                    console.log(data);
+                    if (!Array.isArray(data.data)) {
+                        $scope.consultingExperiences = [];
+                    }else {
+                        $scope.consultingExperiences = data.data;
+                        angular.forEach($scope.consultingExperiences, function (consultingExperience, key) {
+                            consultingExperience.EAScope = consultingExperience.EAScope - 0;
+                        });
+                    }
+                }
+            );
+        };
 
         $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?nmsstandards").then(
             function (data) {
@@ -183,6 +194,7 @@ angular.module('myApp.employee', ['ngRoute'])
             $scope.getEmployeeAdmin();
             $scope.getEmployeeFormations();
             $scope.getEmployeeProfExp();
+            $scope.getEmployeeConExp();
 
             angular.forEach($scope.tabs, function (tab, key) {
                 tab.disabled = false;
@@ -207,6 +219,19 @@ angular.module('myApp.employee', ['ngRoute'])
             } else {
                 $scope.professionnalExperiences.push({
                     "pk_professionnalExperience": null,
+                    "fk_employee": $scope.employeeId
+                });
+            }
+        };
+
+        $scope.addConExpRow = function () {
+            if (!Array.isArray($scope.consultingExperiences)) {
+                $scope.consultingExperiences = [
+                    {"pk_consultingExperience": null, "fk_employee": $scope.employeeId}
+                ];
+            } else {
+                $scope.consultingExperiences.push({
+                    "pk_consultingExperience": null,
                     "fk_employee": $scope.employeeId
                 });
             }
@@ -344,7 +369,32 @@ angular.module('myApp.employee', ['ngRoute'])
                     }
                     $scope.cancel();
                 }).error(function (data) {
+                    console.log(data);
+                });
+            }
+        };
 
+        $scope.updateConExp = function(){
+            if ($scope.consultingExperiences.length == 0) {
+                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                    {"conexps": "empty", "fk_employee": $scope.employeeId}
+                ).success(function (data) {
+                    $scope.modified = false;
+                    $scope.cancel();
+                }).error(
+                    function (data) {
+                        console.log(data);
+                    }
+                );
+            } else {
+                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                    $scope.consultingExperiences
+                ).success(function (data) {
+                    console.log(data);
+                    $scope.modified = false;
+                    $scope.cancel();
+                }).error(function (data) {
+                    console.log(data);
                 });
             }
         };
@@ -357,5 +407,6 @@ angular.module('myApp.employee', ['ngRoute'])
         $scope.getEmployeeAdmin();
         $scope.getEmployeeFormations();
         $scope.getEmployeeProfExp();
+        $scope.getEmployeeConExp();
     }])
 ;
