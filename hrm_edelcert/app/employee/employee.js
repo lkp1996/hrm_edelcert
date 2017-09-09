@@ -127,13 +127,12 @@ angular.module('myApp.employee', ['ngRoute'])
             );
         };
 
-        $scope.getEmployeeConExp = function() {
+        $scope.getEmployeeConExp = function () {
             $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_consultingexperience=" + $routeParams.employeeId).then(
                 function (data) {
-                    console.log(data);
                     if (!Array.isArray(data.data)) {
                         $scope.consultingExperiences = [];
-                    }else {
+                    } else {
                         $scope.consultingExperiences = data.data;
                         angular.forEach($scope.consultingExperiences, function (consultingExperience, key) {
                             consultingExperience.EAScope = consultingExperience.EAScope - 0;
@@ -149,11 +148,20 @@ angular.module('myApp.employee', ['ngRoute'])
             }
         );
 
-        $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_auditexperience=" + $routeParams.employeeId).then(
-            function (data) {
-                $scope.auditExperiences = data.data;
-            }
-        );
+        $scope.getEmployeeAuditExp = function () {
+            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_auditexperience=" + $routeParams.employeeId).then(
+                function (data) {
+                    if (!Array.isArray(data.data)) {
+                        $scope.auditExperiences = [];
+                    } else {
+                        $scope.auditExperiences = data.data;
+                        angular.forEach($scope.auditExperiences, function (auditExperience, key) {
+                            auditExperience.EAScope = auditExperience.EAScope - 0;
+                        });
+                    }
+                }
+            );
+        };
 
         $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_internalqualifications=" + $routeParams.employeeId).then(
             function (data) {
@@ -195,6 +203,7 @@ angular.module('myApp.employee', ['ngRoute'])
             $scope.getEmployeeFormations();
             $scope.getEmployeeProfExp();
             $scope.getEmployeeConExp();
+            $scope.getEmployeeAuditExp();
 
             angular.forEach($scope.tabs, function (tab, key) {
                 tab.disabled = false;
@@ -204,21 +213,21 @@ angular.module('myApp.employee', ['ngRoute'])
         $scope.addFormationRow = function () {
             if (!Array.isArray($scope.formations)) {
                 $scope.formations = [
-                    {"pk_formation": null, "fk_employee": $scope.employeeId}
+                    {"pk_formation": 0, "fk_employee": $scope.employeeId}
                 ];
             } else {
-                $scope.formations.push({"pk_formation": null, "fk_employee": $scope.employeeId});
+                $scope.formations.push({"pk_formation": 0, "fk_employee": $scope.employeeId});
             }
         };
 
         $scope.addProfExpRow = function () {
             if (!Array.isArray($scope.professionnalExperiences)) {
                 $scope.professionnalExperiences = [
-                    {"pk_professionnalExperience": null, "fk_employee": $scope.employeeId}
+                    {"pk_professionnalExperience": 0, "fk_employee": $scope.employeeId}
                 ];
             } else {
                 $scope.professionnalExperiences.push({
-                    "pk_professionnalExperience": null,
+                    "pk_professionnalExperience": 0,
                     "fk_employee": $scope.employeeId
                 });
             }
@@ -227,11 +236,24 @@ angular.module('myApp.employee', ['ngRoute'])
         $scope.addConExpRow = function () {
             if (!Array.isArray($scope.consultingExperiences)) {
                 $scope.consultingExperiences = [
-                    {"pk_consultingExperience": null, "fk_employee": $scope.employeeId}
+                    {"pk_consultingExperience": 0, "fk_employee": $scope.employeeId}
                 ];
             } else {
                 $scope.consultingExperiences.push({
-                    "pk_consultingExperience": null,
+                    "pk_consultingExperience": 0,
+                    "fk_employee": $scope.employeeId
+                });
+            }
+        };
+
+        $scope.addAuditExpRow = function () {
+            if (!Array.isArray($scope.auditExperiences)) {
+                $scope.auditExperiences = [
+                    {"pk_auditExperience": 0, "fk_employee": $scope.employeeId}
+                ];
+            } else {
+                $scope.auditExperiences.push({
+                    "pk_auditExperience": 0,
                     "fk_employee": $scope.employeeId
                 });
             }
@@ -374,7 +396,7 @@ angular.module('myApp.employee', ['ngRoute'])
             }
         };
 
-        $scope.updateConExp = function(){
+        $scope.updateConExp = function () {
             if ($scope.consultingExperiences.length == 0) {
                 $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
                     {"conexps": "empty", "fk_employee": $scope.employeeId}
@@ -399,6 +421,31 @@ angular.module('myApp.employee', ['ngRoute'])
             }
         };
 
+        $scope.updateAuditExp = function(){
+            if ($scope.auditExperiences.length == 0) {
+                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                    {"auditexps": "empty", "fk_employee": $scope.employeeId}
+                ).success(function (data) {
+                    $scope.modified = false;
+                    $scope.cancel();
+                }).error(
+                    function (data) {
+                        console.log(data);
+                    }
+                );
+            } else {
+                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                    $scope.auditExperiences
+                ).success(function (data) {
+                    console.log(data);
+                    $scope.modified = false;
+                    $scope.cancel();
+                }).error(function (data) {
+                    console.log(data);
+                });
+            }
+        };
+
         $scope.uploadFile = function (id, file, type) {
             var uploadUrl = "http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php";
             fileUpload.uploadFileToUrl(file, uploadUrl, id, type);
@@ -408,5 +455,6 @@ angular.module('myApp.employee', ['ngRoute'])
         $scope.getEmployeeFormations();
         $scope.getEmployeeProfExp();
         $scope.getEmployeeConExp();
+        $scope.getEmployeeAuditExp();
     }])
 ;
