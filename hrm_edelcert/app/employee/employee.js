@@ -29,6 +29,8 @@ angular.module('myApp.employee', ['ngRoute'])
 
         $scope.cv = {};
         $scope.criminalRecord = {};
+        $scope.formationsAttachements = [];
+        $scope.professionnalExperiencesAttachements = [];
 
         $scope.tabs = [
             {
@@ -88,10 +90,12 @@ angular.module('myApp.employee', ['ngRoute'])
         );
 
         $scope.getEmployeeFormations = function () {
-            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_formation=" + $routeParams.employeeId).then(
+            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_formation=" + $routeParams.employeeId).success(
                 function (data) {
-                    if (!angular.isUndefined(data.data)) {
-                        $scope.formations = data.data;
+                    if (!Array.isArray(data)) {
+                        $scope.formations = [];
+                    } else {
+                        $scope.formations = data;
                         angular.forEach($scope.formations, function (formation, key) {
                             formation.EAScope = formation.EAScope - 0;
                             formation.fromDate = new Date(formation.fromDate - 0);
@@ -99,14 +103,28 @@ angular.module('myApp.employee', ['ngRoute'])
                         });
                     }
                 }
-            );
+            ).error(function (data) {
+                console.log("error");
+                $scope.formations = [];
+            });
         };
 
-        $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_professionnalexperience=" + $routeParams.employeeId).then(
-            function (data) {
-                $scope.professionnalExperiences = data.data;
-            }
-        );
+        $scope.getEmployeeProfExp = function () {
+            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_professionnalexperience=" + $routeParams.employeeId).then(
+                function (data) {
+                    if (!Array.isArray(data.data)) {
+                        $scope.formations = [];
+                    } else {
+                        $scope.professionnalExperiences = data.data;
+                        angular.forEach($scope.professionnalExperiences, function (professionnalExperience, key) {
+                            professionnalExperience.EAScope = professionnalExperience.EAScope - 0;
+                            professionnalExperience.fromDate = new Date(professionnalExperience.fromDate - 0);
+                            professionnalExperience.toDate = new Date(professionnalExperience.toDate - 0);
+                        });
+                    }
+                }
+            );
+        };
 
         $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_consultingexperience=" + $routeParams.employeeId).then(
             function (data) {
@@ -164,6 +182,7 @@ angular.module('myApp.employee', ['ngRoute'])
 
             $scope.getEmployeeAdmin();
             $scope.getEmployeeFormations();
+            $scope.getEmployeeProfExp();
 
             angular.forEach($scope.tabs, function (tab, key) {
                 tab.disabled = false;
@@ -171,7 +190,26 @@ angular.module('myApp.employee', ['ngRoute'])
         };
 
         $scope.addFormationRow = function () {
-            $scope.formations.push({"pk_formation": null, "fk_employee": $scope.employeeId})
+            if (!Array.isArray($scope.formations)) {
+                $scope.formations = [
+                    {"pk_formation": null, "fk_employee": $scope.employeeId}
+                ];
+            } else {
+                $scope.formations.push({"pk_formation": null, "fk_employee": $scope.employeeId});
+            }
+        };
+
+        $scope.addProfExpRow = function () {
+            if (!Array.isArray($scope.professionnalExperiences)) {
+                $scope.professionnalExperiences = [
+                    {"pk_professionnalExperience": null, "fk_employee": $scope.employeeId}
+                ];
+            } else {
+                $scope.professionnalExperiences.push({
+                    "pk_professionnalExperience": null,
+                    "fk_employee": $scope.employeeId
+                });
+            }
         };
 
         $scope.addRow = function (element) {
@@ -198,7 +236,6 @@ angular.module('myApp.employee', ['ngRoute'])
                 $scope.employee
             ).success(
                 function (data) {
-                    console.log(data);
                     $scope.modified = false;
                     $scope.employee.birthDate = new Date($scope.employee.birthDate);
                     $scope.employee.comingToOfficeDate = new Date($scope.employee.comingToOfficeDate);
@@ -219,32 +256,97 @@ angular.module('myApp.employee', ['ngRoute'])
         };
 
         $scope.updateFormations = function () {
-            angular.forEach($scope.formations, function (formation, key) {
-                formation.fromDate = new Date(formation.fromDate).getTime();
-                formation.toDate = new Date(formation.toDate).getTime();
-                if(!formation.attachement){
-                    console.log("empty");
-                    formation.attachement = null;
-                }
-
-            });
-            $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
-                $scope.formations
-            ).success(
-                function (data) {
-                    console.log(data);
+            if ($scope.formations.length == 0) {
+                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                    {"formations": "empty", "fk_employee": $scope.employeeId}
+                ).success(function (data) {
                     $scope.modified = false;
-                    angular.forEach($scope.formations, function (formation, key) {
-                        formation.fromDate = new Date(formation.fromDate);
-                        formation.toDate = new Date(formation.toDate);
-                    });
                     $scope.cancel();
-                }
-            ).error(
-                function (data) {
-                    console.log(data);
-                }
-            )
+                }).error(
+                    function (data) {
+                        console.log(data);
+                    }
+                );
+            } else {
+                angular.forEach($scope.formations, function (formation, key) {
+                    formation.fromDate = new Date(formation.fromDate).getTime();
+                    formation.toDate = new Date(formation.toDate).getTime();
+                    if (!formation.attachement) {
+                        formation.attachement = null;
+                    }
+                    if (angular.isDefined($scope.formationsAttachements[key])) {
+                        formation.attachement = $scope.formationsAttachements[key].name;
+                    }
+
+                });
+                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                    $scope.formations
+                ).success(
+                    function (data) {
+                        $scope.modified = false;
+                        if ($scope.formations) {
+                            angular.forEach($scope.formations, function (formation, key) {
+                                formation.fromDate = new Date(formation.fromDate);
+                                formation.toDate = new Date(formation.toDate);
+                            });
+                            angular.forEach($scope.formations, function (formation, key) {
+                                if (angular.isDefined($scope.formationsAttachements[key])) {
+                                    $scope.uploadFile($scope.employeeId, $scope.formationsAttachements[key], 'formation');
+                                }
+                            });
+                        }
+                        $scope.cancel();
+                    }
+                ).error(
+                    function (data) {
+                        console.log(data);
+                    }
+                );
+            }
+        };
+
+        $scope.updateProfExp = function () {
+            if ($scope.professionnalExperiences.length == 0) {
+                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                    {"profexps": "empty", "fk_employee": $scope.employeeId}
+                ).success(function (data) {
+                    $scope.modified = false;
+                    $scope.cancel();
+                }).error(
+                    function (data) {
+                        console.log(data);
+                    }
+                );
+            } else {
+                angular.forEach($scope.professionnalExperiences, function (professionnalExperience, key) {
+                    professionnalExperience.fromDate = new Date(professionnalExperience.fromDate).getTime();
+                    professionnalExperience.toDate = new Date(professionnalExperience.toDate).getTime();
+                    console.dir($scope.professionnalExperiencesAttachements[key]);
+                    if (angular.isDefined($scope.professionnalExperiencesAttachements[key])) {
+                        professionnalExperience.attachement = $scope.professionnalExperiencesAttachements[key].name;
+                    }
+
+                });
+                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                    $scope.professionnalExperiences
+                ).success(function (data) {
+                    $scope.modified = false;
+                    if ($scope.professionnalExperiences) {
+                        angular.forEach($scope.professionnalExperiences, function (professionnalExperience, key) {
+                            professionnalExperience.fromDate = new Date(professionnalExperience.fromDate);
+                            professionnalExperience.toDate = new Date(professionnalExperience.toDate);
+                        });
+                        angular.forEach($scope.professionnalExperiences, function (professionnalExperience, key) {
+                            if (angular.isDefined($scope.professionnalExperiencesAttachements[key])) {
+                                $scope.uploadFile($scope.employeeId, $scope.professionnalExperiencesAttachements[key], 'profexp');
+                            }
+                        });
+                    }
+                    $scope.cancel();
+                }).error(function (data) {
+
+                });
+            }
         };
 
         $scope.uploadFile = function (id, file, type) {
@@ -254,5 +356,6 @@ angular.module('myApp.employee', ['ngRoute'])
 
         $scope.getEmployeeAdmin();
         $scope.getEmployeeFormations();
+        $scope.getEmployeeProfExp();
     }])
 ;

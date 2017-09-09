@@ -29,6 +29,7 @@ angular.module('myApp.newEmployee', ['ngRoute'])
             $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php", $scope.employee
             ).success(
                 function (data) {
+                    console.log(data);
                     id = data;
                     $scope.uploadFile(id, $scope.picture, 'picture');
                     $scope.uploadFile(id, $scope.cv, 'cv');

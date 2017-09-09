@@ -117,7 +117,7 @@
                             class="glyphicon glyphicon-file" aria-hidden="true"
                             ng-if="formation.attachement"></span> {{formation.attachement}}</a></td>
                 <td>
-                    <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
+                    <input type="number" min="1" max="39" class="form-control"
                            ng-value="formation.EAScope" disabled>
                 </td>
                 <td>{{formation.fromDate | date : "dd.MM.yyyy"}}</td>
@@ -136,9 +136,10 @@
                             ng-options="formationType.pk_formationType as formationType.formation for formationType in formationTypes"
                             ng-model="formation.fk_formationType"></select>
                 </td>
-                <td><input type="file" class="form-control"></td>
+                <td><input type="file" class="form-control" placeholder="CV"
+                           file-model="formationsAttachements[{{$index}}]"></td>
                 <td>
-                    <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
+                    <input type="number" min="1" max="39" class="form-control"
                            ng-model="formation.EAScope">
                 </td>
                 <td><input type="date" class="form-control" ng-model="formation.fromDate"></td>
@@ -146,7 +147,7 @@
             </tr>
             <tr ng-if="modified">
                 <td><a ng-click="addFormationRow()"><span class="glyphicon glyphicon-plus"
-                                                           aria-hidden="true"></span></a></td>
+                                                          aria-hidden="true"></span></a></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -191,7 +192,7 @@
                                              ng-if="professionnalExperience.attachement != null"></span>
                         {{professionnalExperience.attachement}}</a></td>
                 <td>
-                    <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
+                    <input type="number" min="1" max="39" class="form-control"
                            ng-value="professionnalExperience.EAScope" disabled>
                 </td>
                 <td>{{professionnalExperience.fromDate | date : "dd.MM.yyyy"}}</td>
@@ -203,23 +204,25 @@
                             class="glyphicon glyphicon-minus"
                             aria-hidden="true"></span></a>
                 </td>
-                <td><input type="text" class="form-control" value="{{professionnalExperience.organizationName}}"></td>
-                <td><input type="text" class="form-control" value="{{professionnalExperience.organizationActivity}}">
+                <td><input type="text" class="form-control" ng-model="professionnalExperience.organizationName"></td>
+                <td><input type="text" class="form-control" ng-model="professionnalExperience.organizationActivity">
                 </td>
-                <td><input type="text" class="form-control" value="{{professionnalExperience.fonction}}"></td>
-                <td><input type="file" class="form-control"></td>
+                <td><input type="text" class="form-control" ng-model="professionnalExperience.fonction"></td>
+                <td><input type="file" class="form-control" placeholder="CV"
+                           file-model="professionnalExperiencesAttachements[{{$index}}]"></td>
                 <td>
-                    <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
-                           ng-value="professionnalExperience.EAScope">
+                    <input type="number" min="1" max="39" class="form-control"
+                           ng-model="professionnalExperience.EAScope">
                 </td>
-                <td><input type="text" class="form-control"
-                           value="{{professionnalExperience.fromDate | date : 'dd.MM.yyyy'}}"></td>
-                <td><input type="text" class="form-control"
-                           value="{{professionnalExperience.toDate | date : 'dd.MM.yyyy'}}"></td>
+                <td><input type="date" class="form-control"
+                           ng-model="professionnalExperience.fromDate"></td>
+                <td><input type="date" class="form-control"
+                           ng-model="professionnalExperience.toDate"></td>
             </tr>
             <tr ng-if="modified">
-                <td><a ng-click="addRow(professionnalExperiences)"><span class="glyphicon glyphicon-plus"
-                                                                         aria-hidden="true"></span></a></td>
+                <td><a ng-click="addProfExpRow()"><span class="glyphicon glyphicon-plus"
+                                                        aria-hidden="true"></span></a></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -229,6 +232,14 @@
             </tr>
             </tbody>
         </table>
+        <div class="row placeholders" ng-hide="active!=2">
+            <div class="col-xs-12 col-sm-12 placeholder">
+                <input type="button" value="Modifier" class="btn btn-default" ng-click="modif()"
+                       ng-if="!modified">
+                <button class="btn btn-success" ng-click="updateProfExp()" ng-if="modified">Sauvegarder</button>
+                <button class="btn btn-danger" ng-click="cancel()" ng-if="modified">Annuler</button>
+            </div>
+        </div>
     </uib-tab>
     <uib-tab index="3" heading="{{tabs[3].name}}" disable="tabs[3].disabled">
         <table class="table table-striped">
@@ -252,7 +263,7 @@
                             ng-model="consultingExperience.fk_NMSStandard" disabled></select>
                 </td>
                 <td>
-                    <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
+                    <input type="number" min="1" max="39" class="form-control"
                            ng-value="consultingExperience.EAScope" disabled>
                 </td>
                 <td>{{consultingExperience.organization}}</td>
@@ -271,7 +282,7 @@
                             ng-model="consultingExperience.fk_NMSStandard"></select>
                 </td>
                 <td>
-                    <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
+                    <input type="number" min="1" max="39" class="form-control"
                            ng-value="consultingExperience.EAScope">
                 </td>
                 <td><input type="text" class="form-control" value="{{consultingExperience.organization}}"></td>
@@ -289,6 +300,14 @@
             </tr>
             </tbody>
         </table>
+        <div class="row placeholders" ng-hide="active!=3">
+            <div class="col-xs-12 col-sm-12 placeholder">
+                <input type="button" value="Modifier" class="btn btn-default" ng-click="modif()"
+                       ng-if="!modified">
+                <button class="btn btn-success" ng-click="updateConExp()" ng-if="modified">Sauvegarder</button>
+                <button class="btn btn-danger" ng-click="cancel()" ng-if="modified">Annuler</button>
+            </div>
+        </div>
     </uib-tab>
     <uib-tab index="4" heading="{{tabs[4].name}}" disable="tabs[4].disabled">
         <table class="table table-striped">
@@ -312,7 +331,7 @@
                             ng-model="auditExperience.fk_NMSStandard" disabled></select>
                 </td>
                 <td>
-                    <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
+                    <input type="number" min="1" max="39" class="form-control"
                            ng-value="auditExperience.EAScope" disabled>
                 </td>
                 <td>{{auditExperience.oc}}</td>
@@ -331,7 +350,7 @@
                             ng-model="auditExperience.fk_NMSStandard"></select>
                 </td>
                 <td>
-                    <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
+                    <input type="number" min="1" max="39" class="form-control"
                            ng-value="auditExperience.EAScope">
                 </td>
                 <td><input type="text" class="form-control" value="{{auditExperience.oc}}"></td>
@@ -349,6 +368,14 @@
             </tr>
             </tbody>
         </table>
+        <div class="row placeholders" ng-hide="active!=4">
+            <div class="col-xs-12 col-sm-12 placeholder">
+                <input type="button" value="Modifier" class="btn btn-default" ng-click="modif()"
+                       ng-if="!modified">
+                <button class="btn btn-success" ng-click="updateProfExp()" ng-if="modified">Sauvegarder</button>
+                <button class="btn btn-danger" ng-click="cancel()" ng-if="modified">Annuler</button>
+            </div>
+        </div>
     </uib-tab>
     <uib-tab index="5" heading="{{tabs[5].name}}" disable="tabs[5].disabled">
         <table class="table table-striped">
@@ -407,7 +434,7 @@
                                              ng-if="auditObservation.attachement != null"></span>
                         {{auditObservation.attachement}}</a></td>
                 <td>
-                    <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
+                    <input type="number" min="1" max="39" class="form-control"
                            ng-value="auditObservation.EAScope" disabled>
                 </td>
                 <td><textarea class="form-control" disabled>{{auditObservation.comment}}</textarea></td>
@@ -423,7 +450,7 @@
                 <td><input type="text" class="form-control" value="{{auditObservation.observer}}"></td>
                 <td><input type="file" class="form-control"></td>
                 <td>
-                    <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
+                    <input type="number" min="1" max="39" class="form-control"
                            ng-value="auditObservation.EAScope">
                 </td>
                 <td><textarea class="form-control">{{auditObservation.comment}}</textarea></td>
@@ -459,7 +486,7 @@
             <tr ng-repeat="mandateSheet in mandateSheets" ng-if="!modified">
                 <td>{{mandateSheet.organization}}</td>
                 <td>
-                    <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
+                    <input type="number" min="1" max="39" class="form-control"
                            ng-value="mandateSheet.EAScope" disabled>
                 </td>
                 <td>{{mandateSheet.date | date : "dd.MM.yyyy"}}</td>
@@ -477,7 +504,7 @@
                 </td>
                 <td><input type="text" class="form-control" value="{{mandateSheet.organization}}"></td>
                 <td>
-                    <input type="number" min="1" max="39" class="form-control" placeholder="EA Scope"
+                    <input type="number" min="1" max="39" class="form-control"
                            ng-value="mandateSheet.EAScope">
                 </td>
                 <td><input type="text" class="form-control" value="{{mandateSheet.date | date : 'dd.MM.yyyy'}}"></td>
@@ -570,4 +597,3 @@
         <button class="btn btn-danger" ng-click="cancel()" ng-if="modified">Annuler</button>
     </div>
 </div>
-{{formations}}
