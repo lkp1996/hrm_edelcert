@@ -15,11 +15,7 @@
 </div>
 <div class="row">
     <div class="col-lg-6">
-        <div class="input-group input-employee">
-            <span class="input-group-addon">Date de naissance</span>
-            <input type="date" class="form-control" placeholder="Date de naissance (dd.MM.yyyy)"
-                   ng-model="employee.birthDate">
-        </div>
+        <date-picker-input dt="employee.birthDate" title="'Date de naissance'"></date-picker-input>
     </div>
     <div class="col-lg-6">
         <div class="input-group input-employee">
@@ -73,11 +69,7 @@
 </div>
 <div class="row">
     <div class="col-lg-6">
-        <div class="input-group input-employee">
-            <span class="input-group-addon">Date d’entrée en fonction</span>
-            <input type="date" class="form-control" placeholder="Date d’entrée en fonction"
-                   ng-model="employee.comingToOfficeDate">
-        </div>
+        <date-picker-input dt="employee.comingToOfficeDate" title="'Date d’entrée en fonction'"></date-picker-input>
     </div>
     <div class="col-lg-6">
         <div class="input-group input-employee">
@@ -92,7 +84,7 @@
         <div class="col-lg-6">
             <div class="input-group input-employee">
                 <span class="input-group-addon">Photo</span>
-                <input type="file" class="form-control" placeholder="Photo" file-model="picture"  accept="image/*">
+                <input type="file" class="form-control" placeholder="Photo" file-model="picture" accept="image/*">
             </div>
         </div>
         <div class="col-lg-6">
@@ -110,8 +102,8 @@
         </div>
     </div>
 </div>
-<div class="input-group input-employee">
-    <button class="btn btn-success" ng-click="add()">Ajouter</button>
+<div class="row placeholders input-employee">
+    <div class="col-xs-12 col-sm-12 placeholder">
+        <button class="btn btn-success btn-lg" ng-click="add()">Ajouter</button>
+    </div>
 </div>
-
-{{employee}}

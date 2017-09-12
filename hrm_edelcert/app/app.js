@@ -8,6 +8,8 @@ angular.module('myApp', [
     'myApp.newEmployee',
     'myApp.version',
     'ui.bootstrap',
+    'myApp.datePicker',
+    'myApp.datePickerSimple',
     'lr.upload'
 ]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');

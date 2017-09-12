@@ -145,3 +145,12 @@ body {
 .a-remove:hover {
     color: #761c19;
 }
+
+.input-group-addon {
+    width: 200px;
+    text-align: left;
+}
+
+.input-group {
+    width: 100%;
+}

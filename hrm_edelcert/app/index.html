@@ -13,12 +13,12 @@
     <title>My AngularJS App</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="app.css">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
     <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css">
+    <link rel="stylesheet" href="app.css">
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -35,6 +35,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="#!/employees">Employés</a></li>
+                <li><a href="#!/newEmployee">Nouvel Employé</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Déconnexion</a>
                 </li>
             </ul>
@@ -44,13 +46,13 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
+        <!--<div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
                 <li><a href="#!/employees">Employés</a></li>
                 <li><a href="#!/newEmployee">Nouvel Employé</a></li>
             </ul>
-        </div>
-        <div class="col-sm-9 col-md-10 main">
+        </div>-->
+        <div class="main">
             <div ng-view></div>
         </div>
     </div>
@@ -70,6 +72,8 @@
 <script src="employees/employees.js"></script>
 <script src="employee/employee.js"></script>
 <script src="newEmployee/newEmployee.js"></script>
+<script src="datePicker/datePicker.js"></script>
+<script src="datePickerSimple/datePickerSimple.js"></script>
 <script src="components/version/version.js"></script>
 <script src="components/version/version-directive.js"></script>
 <script src="components/version/interpolate-filter.js"></script>
