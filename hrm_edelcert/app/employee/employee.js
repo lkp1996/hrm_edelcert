@@ -32,6 +32,9 @@ angular.module('myApp.employee', ['ngRoute'])
         $scope.formationsAttachements = [];
         $scope.professionnalExperiencesAttachements = [];
         $scope.consultingExperiencesAttachements = [];
+        $scope.internalQualificationsAttachements = [];
+        $scope.auditObservationsAttachements = [];
+        $scope.mandateSheetsAttachements = [];
 
         $scope.tabs = [
             {
@@ -163,29 +166,64 @@ angular.module('myApp.employee', ['ngRoute'])
             );
         };
 
-        $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_internalqualifications=" + $routeParams.employeeId).then(
-            function (data) {
-                $scope.internalQualifications = data.data;
-            }
-        );
+        $scope.getEmployeeInternalQualifications = function () {
+            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_internalqualifications=" + $routeParams.employeeId).then(
+                function (data) {
+                    $scope.internalQualifications = data.data;
+                    angular.forEach($scope.internalQualifications, function (internalQualification, key) {
+                        internalQualification.validationDate = new Date(internalQualification.validationDate - 0);
+                    });
+                }
+            );
+        };
 
-        $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_auditobservation=" + $routeParams.employeeId).then(
-            function (data) {
-                $scope.auditObservations = data.data;
-            }
-        );
+        $scope.getEmployeeAuditObs = function() {
+            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_auditobservation=" + $routeParams.employeeId).then(
+                function (data) {
+                    if (!Array.isArray(data.data)) {
+                        $scope.auditObservations = [];
+                    } else {
+                        $scope.auditObservations = data.data;
+                        angular.forEach($scope.auditObservations, function (auditObservation, key) {
+                            auditObservation.EAScope = auditObservation.EAScope - 0;
+                            auditObservation.date = new Date(auditObservation.date - 0);
+                        });
+                    }
+                }
+            );
+        };
 
-        $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_objective=" + $routeParams.employeeId).then(
-            function (data) {
-                $scope.objectives = data.data;
-            }
-        );
+        $scope.getEmployeeMandateSheets = function() {
+            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_mandatesheet=" + $routeParams.employeeId).then(
+                function (data) {
+                    if (!Array.isArray(data.data)) {
+                        $scope.mandateSheets = [];
+                    } else {
+                        $scope.mandateSheets = data.data;
+                        angular.forEach($scope.mandateSheets, function (mandateSheet, key) {
+                            mandateSheet.EAScope = mandateSheet.EAScope - 0;
+                            mandateSheet.date = new Date(mandateSheet.date - 0);
+                        });
+                    }
+                }
+            );
+        };
 
-        $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_mandatesheet=" + $routeParams.employeeId).then(
-            function (data) {
-                $scope.mandateSheets = data.data;
-            }
-        );
+        $scope.getEmployeeObjectives = function() {
+            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_objective=" + $routeParams.employeeId).then(
+                function (data) {
+                    $scope.objectives = data.data;
+                    if (!Array.isArray(data.data)) {
+                        $scope.objectives = [];
+                    } else {
+                        $scope.objectives = data.data;
+                        angular.forEach($scope.objectives, function (objective, key) {
+                            objective.date = new Date(objective.date - 0);
+                        });
+                    }
+                }
+            );
+        };
 
         $scope.modif = function () {
             $scope.modified = true;
@@ -204,6 +242,10 @@ angular.module('myApp.employee', ['ngRoute'])
             $scope.getEmployeeProfExp();
             $scope.getEmployeeConExp();
             $scope.getEmployeeAuditExp();
+            $scope.getEmployeeInternalQualifications();
+            $scope.getEmployeeAuditObs();
+            $scope.getEmployeeMandateSheets();
+            $scope.getEmployeeObjectives();
 
             angular.forEach($scope.tabs, function (tab, key) {
                 tab.disabled = false;
@@ -254,6 +296,45 @@ angular.module('myApp.employee', ['ngRoute'])
             } else {
                 $scope.auditExperiences.push({
                     "pk_auditExperience": 0,
+                    "fk_employee": $scope.employeeId
+                });
+            }
+        };
+
+        $scope.addAuditObsRow = function () {
+            if (!Array.isArray($scope.auditObservations)) {
+                $scope.auditObservations = [
+                    {"pk_auditObservation": 0, "fk_employee": $scope.employeeId}
+                ];
+            } else {
+                $scope.auditObservations.push({
+                    "pk_auditObservation": 0,
+                    "fk_employee": $scope.employeeId
+                });
+            }
+        };
+
+        $scope.addMandateSheetRow = function () {
+            if (!Array.isArray($scope.mandateSheets)) {
+                $scope.mandateSheets = [
+                    {"pk_mandateSheet": 0, "fk_employee": $scope.employeeId}
+                ];
+            } else {
+                $scope.mandateSheets.push({
+                    "pk_mandateSheet": 0,
+                    "fk_employee": $scope.employeeId
+                });
+            }
+        };
+
+        $scope.addObjectiveRow = function () {
+            if (!Array.isArray($scope.objectives)) {
+                $scope.objectives = [
+                    {"pk_objective": 0, "fk_employee": $scope.employeeId}
+                ];
+            } else {
+                $scope.objectives.push({
+                    "pk_objective": 0,
                     "fk_employee": $scope.employeeId
                 });
             }
@@ -368,7 +449,6 @@ angular.module('myApp.employee', ['ngRoute'])
                 angular.forEach($scope.professionnalExperiences, function (professionnalExperience, key) {
                     professionnalExperience.fromDate = new Date(professionnalExperience.fromDate).getTime();
                     professionnalExperience.toDate = new Date(professionnalExperience.toDate).getTime();
-                    console.dir($scope.professionnalExperiencesAttachements[key]);
                     if (angular.isDefined($scope.professionnalExperiencesAttachements[key])) {
                         professionnalExperience.attachement = $scope.professionnalExperiencesAttachements[key].name;
                     }
@@ -421,7 +501,7 @@ angular.module('myApp.employee', ['ngRoute'])
             }
         };
 
-        $scope.updateAuditExp = function(){
+        $scope.updateAuditExp = function () {
             if ($scope.auditExperiences.length == 0) {
                 $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
                     {"auditexps": "empty", "fk_employee": $scope.employeeId}
@@ -446,6 +526,146 @@ angular.module('myApp.employee', ['ngRoute'])
             }
         };
 
+        $scope.updateEmployeeIntQual = function () {
+            angular.forEach($scope.internalQualifications, function (internalQualifications, key) {
+                internalQualifications.validationDate = new Date(internalQualifications.validationDate).getTime();
+                if (angular.isDefined($scope.internalQualificationsAttachements[key])) {
+                    internalQualifications.attachement = $scope.internalQualificationsAttachements[key].name;
+                }
+
+            });
+            $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                $scope.internalQualifications
+            ).success(function (data) {
+                console.log(data);
+                $scope.modified = false;
+                angular.forEach($scope.internalQualifications, function (internalQualification, key) {
+                    internalQualification.validationDate = new Date(internalQualification.validationDate);
+                });
+                angular.forEach($scope.internalQualifications, function (internalQualification, key) {
+                    if (angular.isDefined($scope.internalQualificationsAttachements[key])) {
+                        $scope.uploadFile($scope.employeeId, $scope.internalQualificationsAttachements[key], 'intqual');
+                    }
+                });
+                $scope.cancel();
+            }).error(function (data) {
+                console.log(data);
+            });
+        };
+
+        $scope.updateEmployeeAuditObservations = function(){
+            if ($scope.auditObservations.length == 0) {
+                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                    {"auditObs": "empty", "fk_employee": $scope.employeeId}
+                ).success(function (data) {
+                    $scope.modified = false;
+                    $scope.cancel();
+                }).error(
+                    function (data) {
+                        console.log(data);
+                    }
+                );
+            } else {
+                angular.forEach($scope.auditObservations, function (auditObservation, key) {
+                    auditObservation.date = new Date(auditObservation.date).getTime();
+                    if (angular.isDefined($scope.auditObservationsAttachements[key])) {
+                        auditObservation.attachement = $scope.auditObservationsAttachements[key].name;
+                    }
+
+                });
+                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                    $scope.auditObservations
+                ).success(function (data) {
+                    console.log(data);
+                    $scope.modified = false;
+                    if ($scope.auditObservations) {
+                        angular.forEach($scope.auditObservations, function (auditObservation, key) {
+                            auditObservation.date = new Date(auditObservation.date);
+                        });
+                        angular.forEach($scope.auditObservations, function (auditObservation, key) {
+                            if (angular.isDefined($scope.auditObservationsAttachements[key])) {
+                                $scope.uploadFile($scope.employeeId, $scope.auditObservationsAttachements[key], 'auditobs');
+                            }
+                        });
+                    }
+                    $scope.cancel();
+                }).error(function (data) {
+                    console.log(data);
+                });
+            }
+        };
+
+        $scope.updateEmployeeMandateSheets = function(){
+            if ($scope.mandateSheets.length == 0) {
+                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                    {"mandateSheets": "empty", "fk_employee": $scope.employeeId}
+                ).success(function (data) {
+                    $scope.modified = false;
+                    $scope.cancel();
+                }).error(
+                    function (data) {
+                        console.log(data);
+                    }
+                );
+            } else {
+                angular.forEach($scope.mandateSheets, function (mandateSheet, key) {
+                    mandateSheet.date = new Date(mandateSheet.date).getTime();
+                    if (angular.isDefined($scope.mandateSheetsAttachements[key])) {
+                        mandateSheet.attachement = $scope.mandateSheetsAttachements[key].name;
+                    }
+
+                });
+                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                    $scope.mandateSheets
+                ).success(function (data) {
+                    console.log(data);
+                    $scope.modified = false;
+                    if ($scope.mandateSheets) {
+                        angular.forEach($scope.mandateSheets, function (mandateSheet, key) {
+                            mandateSheet.date = new Date(mandateSheet.date);
+                        });
+                        angular.forEach($scope.mandateSheets, function (mandateSheet, key) {
+                            if (angular.isDefined($scope.mandateSheetsAttachements[key])) {
+                                $scope.uploadFile($scope.employeeId, $scope.mandateSheetsAttachements[key], 'mandatesheets');
+                            }
+                        });
+                    }
+                    $scope.cancel();
+                }).error(function (data) {
+                    console.log(data);
+                });
+            }
+        };
+
+        $scope.updateEmployeeObjectives = function(){
+            if ($scope.objectives.length == 0) {
+                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                    {"objectives": "empty", "fk_employee": $scope.employeeId}
+                ).success(function (data) {
+                    $scope.modified = false;
+                    $scope.cancel();
+                }).error(
+                    function (data) {
+                        console.log(data);
+                    }
+                );
+            } else {
+                angular.forEach($scope.objectives, function (objective, key) {
+                    objective.date = new Date(objective.date).getTime();
+
+                });
+                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                    $scope.objectives
+                ).success(function (data) {
+                    console.log(data);
+                    $scope.modified = false;
+                    $scope.cancel();
+                }).error(function (data) {
+                    console.log(data);
+                });
+            }
+        };
+
         $scope.uploadFile = function (id, file, type) {
             var uploadUrl = "http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php";
             fileUpload.uploadFileToUrl(file, uploadUrl, id, type);
@@ -456,5 +676,9 @@ angular.module('myApp.employee', ['ngRoute'])
         $scope.getEmployeeProfExp();
         $scope.getEmployeeConExp();
         $scope.getEmployeeAuditExp();
+        $scope.getEmployeeInternalQualifications();
+        $scope.getEmployeeAuditObs();
+        $scope.getEmployeeMandateSheets();
+        $scope.getEmployeeObjectives();
     }])
 ;
