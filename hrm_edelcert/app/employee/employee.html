@@ -616,6 +616,11 @@
         <input type="file" class="form-control" placeholder="Casier judiciaire"
                file-model="$parent.criminalRecord" ng-if="modified">
     </div>
+    <div class="input-group input-employee" ng-if="modified">
+        <span class="input-group-addon">Photo</span>
+        <input type="file" class="form-control" placeholder="Photo"
+               file-model="$parent.picture"  accept="image/*">
+    </div>
 </div>
 <br>
 <div class="row placeholders" ng-hide="active!=0">

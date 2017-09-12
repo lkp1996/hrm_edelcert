@@ -29,6 +29,7 @@ angular.module('myApp.employee', ['ngRoute'])
 
         $scope.cv = {};
         $scope.criminalRecord = {};
+        $scope.picture = {};
         $scope.formationsAttachements = [];
         $scope.professionnalExperiencesAttachements = [];
         $scope.consultingExperiencesAttachements = [];
@@ -340,10 +341,6 @@ angular.module('myApp.employee', ['ngRoute'])
             }
         };
 
-        $scope.addRow = function (element) {
-            element.push({});
-        };
-
         $scope.delRow = function (element, index) {
             if (confirm("Voulez-vous vraiment supprimer cet élément ?")) {
                 element.splice(index, 1);
@@ -359,6 +356,9 @@ angular.module('myApp.employee', ['ngRoute'])
             if (angular.isDefined($scope.criminalRecord) && angular.isDefined($scope.criminalRecord.name)) {
                 $scope.employee.criminalRecord = $scope.criminalRecord.name;
             }
+            if (angular.isDefined($scope.picture) && angular.isDefined($scope.picture.name)) {
+                $scope.employee.picture = $scope.picture.name;
+            }
 
             $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
                 $scope.employee
@@ -373,6 +373,9 @@ angular.module('myApp.employee', ['ngRoute'])
                     }
                     if (angular.isDefined($scope.criminalRecord) && angular.isDefined($scope.criminalRecord.name)) {
                         $scope.uploadFile($scope.employeeId, $scope.criminalRecord, 'criminalRecord');
+                    }
+                    if (angular.isDefined($scope.picture) && angular.isDefined($scope.picture.name)) {
+                        $scope.uploadFile($scope.employeeId, $scope.picture, 'picture');
                     }
                     $scope.cancel();
                 }
