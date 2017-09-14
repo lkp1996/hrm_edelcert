@@ -3,7 +3,7 @@
         <span class="input-group-addon input-group-addon-form">{{title}}</span>
         <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="$parent.dt"
                is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"
-               alt-input-formats="altInputFormats" placeholder="Format : 'jj.mm.aaaa'"/>
+               alt-input-formats="altInputFormats" placeholder="Format : 'jj.mm.aaaa'" ng-required="false"/>
         <span class="input-group-btn">
             <button type="button" class="btn btn-default" ng-click="open1()"><i
                     class="glyphicon glyphicon-calendar"></i></button>

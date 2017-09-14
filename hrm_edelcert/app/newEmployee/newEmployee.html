@@ -1,109 +1,120 @@
 <h1 class="page-header">Ajouter un nouvel employé</h1>
-<div class="row">
-    <div class="col-lg-6">
-        <div class="input-group input-employee">
-            <span class="input-group-addon">Nom</span>
-            <input type="text" class="form-control" placeholder="Nom" ng-model="employee.lastName">
+<form name="form" role="form">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <strong>*</strong> Champs obligatoires
+            </div>
         </div>
     </div>
-    <div class="col-lg-6">
-        <div class="input-group input-employee">
-            <span class="input-group-addon">Prénom</span>
-            <input type="text" class="form-control" placeholder="Prénom" ng-model="employee.firstName">
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-6">
-        <date-picker-input dt="employee.birthDate" title="'Date de naissance'"></date-picker-input>
-    </div>
-    <div class="col-lg-6">
-        <div class="input-group input-employee">
-            <span class="input-group-addon">Adresse</span>
-            <input type="text" class="form-control" placeholder="Adresse" ng-model="employee.address">
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-6">
-        <div class="input-group input-employee">
-            <span class="input-group-addon">NPA</span>
-            <input type="text" class="form-control" placeholder="NPA" ng-model="employee.postCode">
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="input-group input-employee">
-            <span class="input-group-addon">Localité</span>
-            <input type="text" class="form-control" placeholder="Localité" ng-model="employee.location">
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-6">
-        <div class="input-group input-employee">
-            <span class="input-group-addon">AVS</span>
-            <input type="text" class="form-control" placeholder="AVS" ng-model="employee.avs">
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="input-group input-employee">
-            <span class="input-group-addon">N° téléphone</span>
-            <input type="text" class="form-control" placeholder="N° téléphone" ng-model="employee.phone">
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-6">
-        <div class="input-group input-employee">
-            <span class="input-group-addon">Email</span>
-            <input type="email" class="form-control" placeholder="Email" ng-model="employee.email">
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="input-group input-employee">
-            <span class="input-group-addon">Titre du poste actuel</span>
-            <input type="text" class="form-control" placeholder="Titre du poste actuel"
-                   ng-model="employee.currentTitle">
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-6">
-        <date-picker-input dt="employee.comingToOfficeDate" title="'Date d’entrée en fonction'"></date-picker-input>
-    </div>
-    <div class="col-lg-6">
-        <div class="input-group input-employee">
-            <span class="input-group-addon">Salaire horaire actuel</span>
-            <input type="text" class="form-control" placeholder="Salaire horaire actuel"
-                   ng-model="employee.currentHourlyWage">
-        </div>
-    </div>
-</div>
-<div class="file-upload">
     <div class="row">
         <div class="col-lg-6">
             <div class="input-group input-employee">
-                <span class="input-group-addon">Photo</span>
-                <input type="file" class="form-control" placeholder="Photo" file-model="picture" accept="image/*">
+                <span class="input-group-addon">Nom *</span>
+                <input type="text" class="form-control" placeholder="Nom" ng-model="employee.lastName" required ng-required="true" autofocus>
             </div>
         </div>
         <div class="col-lg-6">
             <div class="input-group input-employee">
-                <span class="input-group-addon">CV</span>
-                <input type="file" class="form-control" placeholder="CV" file-model="cv">
+                <span class="input-group-addon">Prénom *</span>
+                <input type="text" class="form-control" placeholder="Prénom" ng-model="employee.firstName" required ng-required="true">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <date-picker-input dt="employee.birthDate" title="'Date de naissance *'"></date-picker-input>
+        </div>
+        <div class="col-lg-6">
+            <div class="input-group input-employee">
+                <span class="input-group-addon">Adresse</span>
+                <input type="text" class="form-control" placeholder="Adresse" ng-model="employee.address" ng-required="false">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="input-group input-employee">
+                <span class="input-group-addon">NPA</span>
+                <input type="text" class="form-control" placeholder="NPA" ng-model="employee.postCode" ng-required="false">
             </div>
         </div>
         <div class="col-lg-6">
             <div class="input-group input-employee">
-                <span class="input-group-addon">Casier judiciaire</span>
-                <input type="file" class="form-control" placeholder="Casier judiciaire"
-                       file-model="criminalRecord">
+                <span class="input-group-addon">Localité</span>
+                <input type="text" class="form-control" placeholder="Localité" ng-model="employee.location" ng-required="false">
             </div>
         </div>
     </div>
-</div>
-<div class="row placeholders input-employee">
-    <div class="col-xs-12 col-sm-12 placeholder">
-        <button class="btn btn-success btn-lg" ng-click="add()">Ajouter</button>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="input-group input-employee">
+                <span class="input-group-addon">AVS</span>
+                <input type="text" class="form-control" placeholder="AVS" ng-model="employee.avs" ng-required="false">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="input-group input-employee">
+                <span class="input-group-addon">N° téléphone</span>
+                <input type="text" class="form-control" placeholder="N° téléphone" ng-model="employee.phone" ng-required="false">
+            </div>
+        </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="input-group input-employee">
+                <span class="input-group-addon">Email</span>
+                <input type="email" class="form-control" placeholder="Email" ng-model="employee.email" ng-required="false">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="input-group input-employee">
+                <span class="input-group-addon">Titre du poste actuel</span>
+                <input type="text" class="form-control" placeholder="Titre du poste actuel"
+                       ng-model="employee.currentTitle" ng-required="false">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <date-picker-input dt="employee.comingToOfficeDate" title="'Date d’entrée en fonction *'"></date-picker-input>
+        </div>
+        <div class="col-lg-6">
+            <div class="input-group input-employee">
+                <span class="input-group-addon">Salaire horaire actuel</span>
+                <input type="text" class="form-control" placeholder="Salaire horaire actuel"
+                       ng-model="employee.currentHourlyWage" ng-required="false">
+            </div>
+        </div>
+    </div>
+    <div class="file-upload">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="input-group input-employee">
+                    <span class="input-group-addon">Photo</span>
+                    <input type="file" class="form-control" placeholder="Photo" file-model="picture" accept="image/*">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="input-group input-employee">
+                    <span class="input-group-addon">CV</span>
+                    <input type="file" class="form-control" placeholder="CV" file-model="cv">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="input-group input-employee">
+                    <span class="input-group-addon">Casier judiciaire</span>
+                    <input type="file" class="form-control" placeholder="Casier judiciaire"
+                           file-model="criminalRecord">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row placeholders input-employee">
+        <div class="col-xs-12 col-sm-12 placeholder">
+            <button class="btn btn-success btn-lg" ng-click="add()" ng-disabled="form.$invalid">Ajouter</button>
+        </div>
+    </div>
+</form>
