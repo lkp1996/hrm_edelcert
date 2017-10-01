@@ -11,11 +11,12 @@ angular.module('myApp', [
     'myApp.datePicker',
     'myApp.datePickerSimple',
     'myApp.login',
-    'lr.upload'
+    'lr.upload',
+    'angular-md5'
 ]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
-    $locationProvider.hashPrefix('!');
+    //$locationProvider.hashPrefix('!');
 
-    $routeProvider.otherwise({redirectTo: '/employees'});
+    $routeProvider.otherwise({redirectTo: '/login'});
 }]).directive('fileModel', ['$parse', function ($parse) {
     return {
         restrict: 'A',
