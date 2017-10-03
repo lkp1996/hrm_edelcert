@@ -25,17 +25,21 @@ angular.module('myApp.employees', ['ngRoute'])
             if (confirm("Voulez-vous vraiment supprimer cet employé ?")) {
                 $http.delete("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php", {
                     params: {deleteId: id}
-                }).success(
+                }).then(
                     function (data) {
                         console.log(data);
                         $scope.getEmployees();
                     }
-                ).error(
-                    function (data) {
-                        console.log(data);
-                    }
-                )
+                );
             }
+        };
+
+        $scope.isConnected = function(){
+            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?isConnected").then(
+                function (data) {
+
+                }
+            );
         };
 
         $scope.getEmployees();

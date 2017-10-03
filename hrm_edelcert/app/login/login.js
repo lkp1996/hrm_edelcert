@@ -19,18 +19,15 @@ angular.module('myApp.login', ['ngRoute'])
                 "password": md5.createHash($scope.user.password || '')
             };
             $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php", userInfo
-            ).success(
+            ).then(
                 function (data) {
-                    if (data == "1") {
+                    if (data.data == "1") {
                         $location.path("/employees")
-                    }else{
+                    } else {
                         $scope.error = true;
                     }
                 }
-            ).error(
-                function () {
-                    $scope.error = true;
-                });
-        }
+            );
+        };
 
     }]);

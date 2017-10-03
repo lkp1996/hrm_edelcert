@@ -95,12 +95,13 @@ angular.module('myApp.employee', ['ngRoute'])
         );
 
         $scope.getEmployeeFormations = function () {
-            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_formation=" + $routeParams.employeeId).success(
+            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_formation=" + $routeParams.employeeId).then(
                 function (data) {
-                    if (!Array.isArray(data)) {
+                    if (!Array.isArray(data.data)) {
                         $scope.formations = [];
                     } else {
-                        $scope.formations = data;
+
+                        $scope.formations = data.data;
                         angular.forEach($scope.formations, function (formation, key) {
                             formation.EAScope = formation.EAScope - 0;
                             formation.fromDate = new Date(formation.fromDate - 0);
@@ -108,10 +109,7 @@ angular.module('myApp.employee', ['ngRoute'])
                         });
                     }
                 }
-            ).error(function (data) {
-                console.log("error");
-                $scope.formations = [];
-            });
+            );
         };
 
         $scope.getEmployeeProfExp = function () {
@@ -362,7 +360,7 @@ angular.module('myApp.employee', ['ngRoute'])
 
             $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
                 $scope.employee
-            ).success(
+            ).then(
                 function (data) {
                     $scope.modified = false;
                     $scope.employee.birthDate = new Date($scope.employee.birthDate);
@@ -379,25 +377,17 @@ angular.module('myApp.employee', ['ngRoute'])
                     }
                     $scope.cancel();
                 }
-            ).error(
-                function (data) {
-                    console.log(data);
-                }
-            )
+            );
         };
 
         $scope.updateFormations = function () {
             if ($scope.formations.length == 0) {
                 $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
                     {"formations": "empty", "fk_employee": $scope.employeeId}
-                ).success(function (data) {
+                ).then(function (data) {
                     $scope.modified = false;
                     $scope.cancel();
-                }).error(
-                    function (data) {
-                        console.log(data);
-                    }
-                );
+                });
             } else {
                 angular.forEach($scope.formations, function (formation, key) {
                     formation.fromDate = new Date(formation.fromDate).getTime();
@@ -412,7 +402,7 @@ angular.module('myApp.employee', ['ngRoute'])
                 });
                 $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
                     $scope.formations
-                ).success(
+                ).then(
                     function (data) {
                         $scope.modified = false;
                         if ($scope.formations) {
@@ -428,10 +418,6 @@ angular.module('myApp.employee', ['ngRoute'])
                         }
                         $scope.cancel();
                     }
-                ).error(
-                    function (data) {
-                        console.log(data);
-                    }
                 );
             }
         };
@@ -440,14 +426,10 @@ angular.module('myApp.employee', ['ngRoute'])
             if ($scope.professionnalExperiences.length == 0) {
                 $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
                     {"profexps": "empty", "fk_employee": $scope.employeeId}
-                ).success(function (data) {
+                ).then(function (data) {
                     $scope.modified = false;
                     $scope.cancel();
-                }).error(
-                    function (data) {
-                        console.log(data);
-                    }
-                );
+                });
             } else {
                 angular.forEach($scope.professionnalExperiences, function (professionnalExperience, key) {
                     professionnalExperience.fromDate = new Date(professionnalExperience.fromDate).getTime();
@@ -459,7 +441,7 @@ angular.module('myApp.employee', ['ngRoute'])
                 });
                 $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
                     $scope.professionnalExperiences
-                ).success(function (data) {
+                ).then(function (data) {
                     $scope.modified = false;
                     if ($scope.professionnalExperiences) {
                         angular.forEach($scope.professionnalExperiences, function (professionnalExperience, key) {
@@ -473,8 +455,6 @@ angular.module('myApp.employee', ['ngRoute'])
                         });
                     }
                     $scope.cancel();
-                }).error(function (data) {
-                    console.log(data);
                 });
             }
         };
@@ -483,23 +463,17 @@ angular.module('myApp.employee', ['ngRoute'])
             if ($scope.consultingExperiences.length == 0) {
                 $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
                     {"conexps": "empty", "fk_employee": $scope.employeeId}
-                ).success(function (data) {
+                ).then(function (data) {
                     $scope.modified = false;
                     $scope.cancel();
-                }).error(
-                    function (data) {
-                        console.log(data);
-                    }
-                );
+                });
             } else {
                 $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
                     $scope.consultingExperiences
-                ).success(function (data) {
+                ).then(function (data) {
                     console.log(data);
                     $scope.modified = false;
                     $scope.cancel();
-                }).error(function (data) {
-                    console.log(data);
                 });
             }
         };
@@ -508,23 +482,17 @@ angular.module('myApp.employee', ['ngRoute'])
             if ($scope.auditExperiences.length == 0) {
                 $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
                     {"auditexps": "empty", "fk_employee": $scope.employeeId}
-                ).success(function (data) {
+                ).then(function (data) {
                     $scope.modified = false;
                     $scope.cancel();
-                }).error(
-                    function (data) {
-                        console.log(data);
-                    }
-                );
+                });
             } else {
                 $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
                     $scope.auditExperiences
-                ).success(function (data) {
+                ).then(function (data) {
                     console.log(data);
                     $scope.modified = false;
                     $scope.cancel();
-                }).error(function (data) {
-                    console.log(data);
                 });
             }
         };
@@ -539,7 +507,7 @@ angular.module('myApp.employee', ['ngRoute'])
             });
             $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
                 $scope.internalQualifications
-            ).success(function (data) {
+            ).then(function (data) {
                 console.log(data);
                 $scope.modified = false;
                 angular.forEach($scope.internalQualifications, function (internalQualification, key) {
@@ -551,8 +519,6 @@ angular.module('myApp.employee', ['ngRoute'])
                     }
                 });
                 $scope.cancel();
-            }).error(function (data) {
-                console.log(data);
             });
         };
 
@@ -560,14 +526,10 @@ angular.module('myApp.employee', ['ngRoute'])
             if ($scope.auditObservations.length == 0) {
                 $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
                     {"auditObs": "empty", "fk_employee": $scope.employeeId}
-                ).success(function (data) {
+                ).then(function (data) {
                     $scope.modified = false;
                     $scope.cancel();
-                }).error(
-                    function (data) {
-                        console.log(data);
-                    }
-                );
+                });
             } else {
                 angular.forEach($scope.auditObservations, function (auditObservation, key) {
                     auditObservation.date = new Date(auditObservation.date).getTime();
@@ -578,7 +540,7 @@ angular.module('myApp.employee', ['ngRoute'])
                 });
                 $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
                     $scope.auditObservations
-                ).success(function (data) {
+                ).then(function (data) {
                     console.log(data);
                     $scope.modified = false;
                     if ($scope.auditObservations) {
@@ -592,8 +554,6 @@ angular.module('myApp.employee', ['ngRoute'])
                         });
                     }
                     $scope.cancel();
-                }).error(function (data) {
-                    console.log(data);
                 });
             }
         };
@@ -602,14 +562,10 @@ angular.module('myApp.employee', ['ngRoute'])
             if ($scope.mandateSheets.length == 0) {
                 $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
                     {"mandateSheets": "empty", "fk_employee": $scope.employeeId}
-                ).success(function (data) {
+                ).then(function (data) {
                     $scope.modified = false;
                     $scope.cancel();
-                }).error(
-                    function (data) {
-                        console.log(data);
-                    }
-                );
+                });
             } else {
                 angular.forEach($scope.mandateSheets, function (mandateSheet, key) {
                     mandateSheet.date = new Date(mandateSheet.date).getTime();
@@ -620,7 +576,7 @@ angular.module('myApp.employee', ['ngRoute'])
                 });
                 $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
                     $scope.mandateSheets
-                ).success(function (data) {
+                ).then(function (data) {
                     console.log(data);
                     $scope.modified = false;
                     if ($scope.mandateSheets) {
@@ -634,8 +590,6 @@ angular.module('myApp.employee', ['ngRoute'])
                         });
                     }
                     $scope.cancel();
-                }).error(function (data) {
-                    console.log(data);
                 });
             }
         };
@@ -644,14 +598,10 @@ angular.module('myApp.employee', ['ngRoute'])
             if ($scope.objectives.length == 0) {
                 $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
                     {"objectives": "empty", "fk_employee": $scope.employeeId}
-                ).success(function (data) {
+                ).then(function (data) {
                     $scope.modified = false;
                     $scope.cancel();
-                }).error(
-                    function (data) {
-                        console.log(data);
-                    }
-                );
+                });
             } else {
                 angular.forEach($scope.objectives, function (objective, key) {
                     objective.date = new Date(objective.date).getTime();
@@ -659,12 +609,10 @@ angular.module('myApp.employee', ['ngRoute'])
                 });
                 $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
                     $scope.objectives
-                ).success(function (data) {
+                ).then(function (data) {
                     console.log(data);
                     $scope.modified = false;
                     $scope.cancel();
-                }).error(function (data) {
-                    console.log(data);
                 });
             }
         };

@@ -27,7 +27,7 @@ angular.module('myApp.newEmployee', ['ngRoute'])
 
             var id = null;
             $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php", $scope.employee
-            ).success(
+            ).then(
                 function (data) {
                     console.log(data);
                     id = data;
@@ -40,10 +40,7 @@ angular.module('myApp.newEmployee', ['ngRoute'])
                     $scope.criminalRecord = undefined;
 
                 }
-            ).error(
-                function (data) {
-                    console.log("error");
-                });
+            );
         };
 
         $scope.uploadFile = function (id, file, type) {
