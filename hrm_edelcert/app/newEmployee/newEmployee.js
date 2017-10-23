@@ -9,7 +9,11 @@ angular.module('myApp.newEmployee', ['ngRoute'])
         });
     }])
 
-    .controller('NewEmployeeCtrl', ['$scope', '$http', 'fileUpload', function ($scope, $http, fileUpload) {
+    .controller('NewEmployeeCtrl', ['$scope', '$rootScope', '$cookies', '$http', 'fileUpload', '$location', function ($scope, $rootScope, $cookies, $http, fileUpload, $location) {
+        if (!$rootScope.isConnected) {
+            $location.path("/login");
+        }
+
         $scope.employee = {};
 
         $scope.add = function () {

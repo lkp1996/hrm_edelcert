@@ -9,7 +9,10 @@ angular.module('myApp.employee', ['ngRoute'])
         });
     }])
 
-    .controller('EmployeeCtrl', ['$scope', '$http', '$routeParams', 'fileUpload', function ($scope, $http, $routeParams, fileUpload) {
+    .controller('EmployeeCtrl', ['$scope', '$rootScope', '$cookies', '$http', '$routeParams', 'fileUpload', '$location', function ($scope, $rootScope, $cookies, $http, $routeParams, fileUpload, $location) {
+        if (!$rootScope.isConnected) {
+            $location.path("/login");
+        }
 
         $scope.employeeId = $routeParams.employeeId;
 

@@ -9,7 +9,10 @@ angular.module('myApp.employees', ['ngRoute'])
         });
     }])
 
-    .controller('EmployeesCtrl', ['$scope', '$http', function ($scope, $http) {
+    .controller('EmployeesCtrl', ['$scope', '$rootScope', '$cookies', '$http', '$location', function ($scope, $rootScope, $cookies, $http, $location) {
+        if (!$rootScope.isConnected) {
+            $location.path("/login");
+        }
 
         $scope.employees = [];
 
@@ -32,14 +35,6 @@ angular.module('myApp.employees', ['ngRoute'])
                     }
                 );
             }
-        };
-
-        $scope.isConnected = function(){
-            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?isConnected").then(
-                function (data) {
-
-                }
-            );
         };
 
         $scope.getEmployees();

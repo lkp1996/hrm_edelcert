@@ -3,9 +3,11 @@
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
     'ngRoute',
+    'ngCookies',
     'myApp.employees',
     'myApp.employee',
     'myApp.newEmployee',
+    'myApp.updatePassword',
     'myApp.version',
     'ui.bootstrap',
     'myApp.datePicker',
@@ -20,30 +22,39 @@ angular.module('myApp', [
 }]).directive('fileModel', ['$parse', function ($parse) {
     return {
         restrict: 'A',
-        link: function(scope, element, attrs) {
+        link: function (scope, element, attrs) {
             var model = $parse(attrs.fileModel);
             var modelSetter = model.assign;
 
-            element.bind('change', function(){
-                scope.$apply(function(){
+            element.bind('change', function () {
+                scope.$apply(function () {
                     modelSetter(scope, element[0].files[0]);
                 });
             });
         }
     };
+}]).controller('AppCtrl', ['$cookies', '$scope', '$rootScope', '$route', function ($cookies, $scope, $rootScope, $route) {
+    $rootScope.isConnected = angular.isDefined($cookies.getObject('connectedUser'));
+    $rootScope.connectedUser = $cookies.getObject('connectedUser');
+
+    $scope.logout = function () {
+        $rootScope.isConnected = false;
+        $cookies.remove('connectedUser');
+        $route.reload();
+    };
 }]).service('fileUpload', ['$http', function ($http) {
-    this.uploadFileToUrl = function(file, uploadUrl, id, type){
+    this.uploadFileToUrl = function (file, uploadUrl, id, type) {
         var fd = new FormData();
         fd.append('id', id);
         fd.append(type, file);
         $http.post(uploadUrl, fd, {
             transformRequest: angular.identity,
-            headers: {'Content-Type': undefined,'Process-Data': false}
+            headers: {'Content-Type': undefined, 'Process-Data': false}
         })
-            .success(function(data){
+            .success(function (data) {
                 console.log(data);
             })
-            .error(function(){
+            .error(function () {
                 console.log("Error");
             });
     }
