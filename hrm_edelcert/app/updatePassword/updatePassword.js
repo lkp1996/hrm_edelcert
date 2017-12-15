@@ -14,7 +14,45 @@ angular.module('myApp.updatePassword', ['ngRoute'])
             $location.path("/login");
         }
 
-        $scope.udpatePassword = function(){
+        $scope.password = {};
 
+        $scope.error = false;
+
+        $scope.success = false;
+
+        $scope.message = "";
+
+        $scope.udpatePassword = function () {
+            if ($scope.password.new1 == $scope.password.new2) {
+                var password = {
+                    "pk_employee": $cookies.getObject('connectedUser').id,
+                    "oldPassword": md5.createHash($scope.password.old || ''),
+                    "newPassword": md5.createHash($scope.password.new1 || '')
+                };
+                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php", password
+                ).then(
+                    function (data) {
+                        $scope.password = {};
+                        if (data.data == 1) {
+                            $scope.success = true;
+                            $scope.error = false;
+                            $scope.message = "Mot de passe modifié";
+                        } else if (data.data == 2) {
+                            $scope.success = false;
+                            $scope.error = true;
+                            $scope.message = "Une erreur s'est produite pendant la modification du mot de passe";
+                        }else{
+                            $scope.success = false;
+                            $scope.error = true;
+                            $scope.message = "Mot de passe actuel incorrecte";
+                        }
+
+                    }
+                );
+            } else {
+                $scope.success = false;
+                $scope.error = true;
+                $scope.message = "Veuillez confirmer correctement votre nouveau mot de passe";
+            }
         };
     }]);
