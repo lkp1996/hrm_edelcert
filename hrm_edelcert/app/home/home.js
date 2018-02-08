@@ -1,0 +1,16 @@
+'use strict';
+
+angular.module('myApp.home', ['ngRoute'])
+
+    .config(['$routeProvider', function ($routeProvider) {
+        $routeProvider.when('/home', {
+            templateUrl: 'home/home.html',
+            controller: 'HomeCtrl'
+        });
+    }])
+
+    .controller('HomeCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+        if (!$rootScope.isConnected) {
+            $location.path("/login");
+        }
+    }]);

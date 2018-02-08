@@ -29,7 +29,7 @@ angular.module('myApp.login', ['ngRoute'])
                     if (data.data == "1") {
                         $scope.setConnectedUser($scope.user.username);
                         $rootScope.isConnected = true;
-                        $location.path("/employees")
+                        $location.path("/home")
                     } else {
                         $scope.error = true;
                     }
@@ -47,6 +47,16 @@ angular.module('myApp.login', ['ngRoute'])
                     };
                     $cookies.putObject("connectedUser", connectedUserInfo);
                     $rootScope.connectedUser = $cookies.getObject('connectedUser');
+                    $scope.isAdmin(data.data);
+                }
+            );
+        };
+
+        $scope.isAdmin = function (id) {
+            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?isAdmin=" + id
+            ).then(
+                function (data) {
+                    $rootScope.isAdmin = data.data;
                 }
             );
         }

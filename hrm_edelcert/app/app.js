@@ -13,6 +13,7 @@ angular.module('myApp', [
     'myApp.datePicker',
     'myApp.datePickerSimple',
     'myApp.login',
+    'myApp.home',
     'lr.upload',
     'angular-md5'
 ]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
@@ -33,7 +34,7 @@ angular.module('myApp', [
             });
         }
     };
-}]).controller('AppCtrl', ['$cookies', '$scope', '$rootScope', '$route', function ($cookies, $scope, $rootScope, $route) {
+}]).controller('AppCtrl', ['$cookies', '$scope', '$rootScope', '$route', '$http', function ($cookies, $scope, $rootScope, $route, $http) {
     $rootScope.isConnected = angular.isDefined($cookies.getObject('connectedUser'));
     $rootScope.connectedUser = $cookies.getObject('connectedUser');
 

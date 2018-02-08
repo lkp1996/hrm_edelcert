@@ -12,6 +12,8 @@ angular.module('myApp.employees', ['ngRoute'])
     .controller('EmployeesCtrl', ['$scope', '$rootScope', '$cookies', '$http', '$location', function ($scope, $rootScope, $cookies, $http, $location) {
         if (!$rootScope.isConnected) {
             $location.path("/login");
+        } else if ($rootScope.isAdmin == 0) {
+            $location.path("/employee/" + $rootScope.connectedUser.id);
         }
 
         $scope.employees = [];
