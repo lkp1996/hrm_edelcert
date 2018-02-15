@@ -12,7 +12,7 @@ angular.module('myApp.employee', ['ngRoute'])
     .controller('EmployeeCtrl', ['$scope', '$rootScope', '$cookies', '$http', '$routeParams', 'fileUpload', '$location', function ($scope, $rootScope, $cookies, $http, $routeParams, fileUpload, $location) {
         if (!$rootScope.isConnected) {
             $location.path("/login");
-        } else if ($routeParams.employeeId != $rootScope.connectedUser.id) {
+        } else if ($rootScope.connectedUser.isAdmin == "0" && $routeParams.employeeId != $rootScope.connectedUser.id) {
             $location.path("/home");
         }
 
@@ -181,7 +181,7 @@ angular.module('myApp.employee', ['ngRoute'])
             );
         };
 
-        $scope.getEmployeeAuditObs = function() {
+        $scope.getEmployeeAuditObs = function () {
             $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_auditobservation=" + $routeParams.employeeId).then(
                 function (data) {
                     if (!Array.isArray(data.data)) {
@@ -197,7 +197,7 @@ angular.module('myApp.employee', ['ngRoute'])
             );
         };
 
-        $scope.getEmployeeMandateSheets = function() {
+        $scope.getEmployeeMandateSheets = function () {
             $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_mandatesheet=" + $routeParams.employeeId).then(
                 function (data) {
                     if (!Array.isArray(data.data)) {
@@ -213,7 +213,7 @@ angular.module('myApp.employee', ['ngRoute'])
             );
         };
 
-        $scope.getEmployeeObjectives = function() {
+        $scope.getEmployeeObjectives = function () {
             $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_objective=" + $routeParams.employeeId).then(
                 function (data) {
                     $scope.objectives = data.data;
@@ -527,7 +527,7 @@ angular.module('myApp.employee', ['ngRoute'])
             });
         };
 
-        $scope.updateEmployeeAuditObservations = function(){
+        $scope.updateEmployeeAuditObservations = function () {
             if ($scope.auditObservations.length == 0) {
                 $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
                     {"auditObs": "empty", "fk_employee": $scope.employeeId}
@@ -563,7 +563,7 @@ angular.module('myApp.employee', ['ngRoute'])
             }
         };
 
-        $scope.updateEmployeeMandateSheets = function(){
+        $scope.updateEmployeeMandateSheets = function () {
             if ($scope.mandateSheets.length == 0) {
                 $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
                     {"mandateSheets": "empty", "fk_employee": $scope.employeeId}
@@ -599,7 +599,7 @@ angular.module('myApp.employee', ['ngRoute'])
             }
         };
 
-        $scope.updateEmployeeObjectives = function(){
+        $scope.updateEmployeeObjectives = function () {
             if ($scope.objectives.length == 0) {
                 $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
                     {"objectives": "empty", "fk_employee": $scope.employeeId}
