@@ -19,7 +19,7 @@ angular.module('myApp.employees', ['ngRoute'])
         $scope.employees = [];
 
         $scope.getEmployees = function () {
-            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employees_list").then(
+            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employees_list=" + $rootScope.connectedUser.id).then(
                 function (data) {
                     $scope.employees = data.data;
                 }

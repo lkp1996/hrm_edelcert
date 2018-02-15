@@ -16,7 +16,7 @@ angular.module('myApp.newEmployee', ['ngRoute'])
             $location.path("/home");
         }
 
-        $scope.employee = {};
+        $scope.employee = {"role": "employee"};
 
         $scope.add = function () {
             $scope.employee.birthDate = new Date($scope.employee.birthDate).getTime();
