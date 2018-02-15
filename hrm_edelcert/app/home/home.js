@@ -9,7 +9,7 @@ angular.module('myApp.home', ['ngRoute'])
         });
     }])
 
-    .controller('HomeCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+    .controller('HomeCtrl', ['$scope', '$rootScope', '$location', '$http', function ($scope, $rootScope, $location, $http) {
         if (!$rootScope.isConnected) {
             $location.path("/login");
         }

@@ -12,6 +12,8 @@ angular.module('myApp.newEmployee', ['ngRoute'])
     .controller('NewEmployeeCtrl', ['$scope', '$rootScope', '$cookies', '$http', 'fileUpload', '$location', function ($scope, $rootScope, $cookies, $http, fileUpload, $location) {
         if (!$rootScope.isConnected) {
             $location.path("/login");
+        } else if ($rootScope.connectedUser.isAdmin == "0") {
+            $location.path("/home");
         }
 
         $scope.employee = {};

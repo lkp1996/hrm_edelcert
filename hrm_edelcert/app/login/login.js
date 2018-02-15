@@ -11,11 +11,12 @@ angular.module('myApp.login', ['ngRoute'])
 
     .controller('LoginCtrl', ['$scope', '$rootScope', '$cookies', '$http', 'md5', '$location', function ($scope, $rootScope, $cookies, $http, md5, $location) {
         if ($rootScope.isConnected) {
-            $location.path("/employees");
+            $location.path("/home");
         }
 
         $scope.user = {};
         $scope.error = false;
+        $scope.isAdmin = null;
 
         $scope.login = function () {
             var userInfo = {
@@ -25,7 +26,6 @@ angular.module('myApp.login', ['ngRoute'])
             $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php", userInfo
             ).then(
                 function (data) {
-                    console.log(data.data);
                     if (data.data == "1") {
                         $scope.setConnectedUser($scope.user.username);
                         $rootScope.isConnected = true;
@@ -41,24 +41,20 @@ angular.module('myApp.login', ['ngRoute'])
             $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?getUserID=" + username
             ).then(
                 function (data) {
-                    var connectedUserInfo = {
-                        "username": $scope.user.username,
-                        "id": data.data
-                    };
-                    $cookies.putObject("connectedUser", connectedUserInfo);
-                    $rootScope.connectedUser = $cookies.getObject('connectedUser');
-                    $scope.isAdmin(data.data);
+                    $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?isAdmin=" + data.data
+                    ).then(
+                        function (data1) {
+                            var connectedUserInfo = {
+                                "username": $scope.user.username,
+                                "id": data.data,
+                                "isAdmin" : data1.data
+                            };
+                            $cookies.putObject("connectedUser", connectedUserInfo);
+                            $rootScope.connectedUser = $cookies.getObject('connectedUser');
+                        }
+                    );
                 }
             );
         };
-
-        $scope.isAdmin = function (id) {
-            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?isAdmin=" + id
-            ).then(
-                function (data) {
-                    $rootScope.isAdmin = data.data;
-                }
-            );
-        }
 
     }]);
