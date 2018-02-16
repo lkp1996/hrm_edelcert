@@ -9,7 +9,7 @@ angular.module('myApp.login', ['ngRoute'])
         });
     }])
 
-    .controller('LoginCtrl', ['$scope', '$rootScope', '$cookies', '$http', 'md5', '$location', function ($scope, $rootScope, $cookies, $http, md5, $location) {
+    .controller('LoginCtrl', ['$scope', '$rootScope', '$cookies', '$http', 'md5', '$location', 'Constant', function ($scope, $rootScope, $cookies, $http, md5, $location, Constant) {
         if ($rootScope.isConnected) {
             $location.path("/home");
         }
@@ -23,7 +23,7 @@ angular.module('myApp.login', ['ngRoute'])
                 "username": $scope.user.username,
                 "password": md5.createHash($scope.user.password || '')
             };
-            $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php", userInfo
+            $http.post(Constant.url, userInfo
             ).then(
                 function (data) {
                     if (data.data == "1") {
@@ -38,10 +38,10 @@ angular.module('myApp.login', ['ngRoute'])
         };
 
         $scope.setConnectedUser = function (username) {
-            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?getUserID=" + username
+            $http.get(Constant.url + "?getUserID=" + username
             ).then(
                 function (data) {
-                    $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?isAdmin=" + data.data
+                    $http.get(Constant.url + "?isAdmin=" + data.data
                     ).then(
                         function (data1) {
                             var connectedUserInfo = {

@@ -9,7 +9,7 @@ angular.module('myApp.employee', ['ngRoute'])
         });
     }])
 
-    .controller('EmployeeCtrl', ['$scope', '$rootScope', '$cookies', '$http', '$routeParams', 'fileUpload', '$location', function ($scope, $rootScope, $cookies, $http, $routeParams, fileUpload, $location) {
+    .controller('EmployeeCtrl', ['$scope', '$rootScope', '$cookies', '$http', '$routeParams', 'fileUpload', '$location', 'Constant', function ($scope, $rootScope, $cookies, $http, $routeParams, fileUpload, $location, Constant) {
         if (!$rootScope.isConnected) {
             $location.path("/login");
         } else if ($rootScope.connectedUser.isAdmin == "0" && $routeParams.employeeId != $rootScope.connectedUser.id) {
@@ -83,7 +83,7 @@ angular.module('myApp.employee', ['ngRoute'])
         ];
 
         $scope.getEmployeeAdmin = function () {
-            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_administration=" + $routeParams.employeeId).then(
+            $http.get(Constant.url + "?employee_administration=" + $routeParams.employeeId).then(
                 function (data) {
                     $scope.employee = data.data;
                     $scope.employee.birthDate = new Date($scope.employee.birthDate - 0);
@@ -93,14 +93,14 @@ angular.module('myApp.employee', ['ngRoute'])
         };
 
 
-        $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?formation_types").then(
+        $http.get(Constant.url + "?formation_types").then(
             function (data) {
                 $scope.formationTypes = data.data;
             }
         );
 
         $scope.getEmployeeFormations = function () {
-            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_formation=" + $routeParams.employeeId).then(
+            $http.get(Constant.url + "?employee_formation=" + $routeParams.employeeId).then(
                 function (data) {
                     if (!Array.isArray(data.data)) {
                         $scope.formations = [];
@@ -118,7 +118,7 @@ angular.module('myApp.employee', ['ngRoute'])
         };
 
         $scope.getEmployeeProfExp = function () {
-            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_professionnalexperience=" + $routeParams.employeeId).then(
+            $http.get(Constant.url + "?employee_professionnalexperience=" + $routeParams.employeeId).then(
                 function (data) {
                     if (!Array.isArray(data.data)) {
                         $scope.formations = [];
@@ -135,7 +135,7 @@ angular.module('myApp.employee', ['ngRoute'])
         };
 
         $scope.getEmployeeConExp = function () {
-            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_consultingexperience=" + $routeParams.employeeId).then(
+            $http.get(Constant.url + "?employee_consultingexperience=" + $routeParams.employeeId).then(
                 function (data) {
                     if (!Array.isArray(data.data)) {
                         $scope.consultingExperiences = [];
@@ -149,14 +149,14 @@ angular.module('myApp.employee', ['ngRoute'])
             );
         };
 
-        $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?nmsstandards").then(
+        $http.get(Constant.url + "?nmsstandards").then(
             function (data) {
                 $scope.NMSStandards = data.data;
             }
         );
 
         $scope.getEmployeeAuditExp = function () {
-            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_auditexperience=" + $routeParams.employeeId).then(
+            $http.get(Constant.url + "?employee_auditexperience=" + $routeParams.employeeId).then(
                 function (data) {
                     if (!Array.isArray(data.data)) {
                         $scope.auditExperiences = [];
@@ -171,7 +171,7 @@ angular.module('myApp.employee', ['ngRoute'])
         };
 
         $scope.getEmployeeInternalQualifications = function () {
-            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_internalqualifications=" + $routeParams.employeeId).then(
+            $http.get(Constant.url + "?employee_internalqualifications=" + $routeParams.employeeId).then(
                 function (data) {
                     $scope.internalQualifications = data.data;
                     angular.forEach($scope.internalQualifications, function (internalQualification, key) {
@@ -182,7 +182,7 @@ angular.module('myApp.employee', ['ngRoute'])
         };
 
         $scope.getEmployeeAuditObs = function () {
-            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_auditobservation=" + $routeParams.employeeId).then(
+            $http.get(Constant.url + "?employee_auditobservation=" + $routeParams.employeeId).then(
                 function (data) {
                     if (!Array.isArray(data.data)) {
                         $scope.auditObservations = [];
@@ -198,7 +198,7 @@ angular.module('myApp.employee', ['ngRoute'])
         };
 
         $scope.getEmployeeMandateSheets = function () {
-            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_mandatesheet=" + $routeParams.employeeId).then(
+            $http.get(Constant.url + "?employee_mandatesheet=" + $routeParams.employeeId).then(
                 function (data) {
                     if (!Array.isArray(data.data)) {
                         $scope.mandateSheets = [];
@@ -214,7 +214,7 @@ angular.module('myApp.employee', ['ngRoute'])
         };
 
         $scope.getEmployeeObjectives = function () {
-            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employee_objective=" + $routeParams.employeeId).then(
+            $http.get(Constant.url + "?employee_objective=" + $routeParams.employeeId).then(
                 function (data) {
                     $scope.objectives = data.data;
                     if (!Array.isArray(data.data)) {
@@ -363,7 +363,7 @@ angular.module('myApp.employee', ['ngRoute'])
                 $scope.employee.picture = $scope.picture.name;
             }
 
-            $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+            $http.post(Constant.url,
                 $scope.employee
             ).then(
                 function (data) {
@@ -387,7 +387,7 @@ angular.module('myApp.employee', ['ngRoute'])
 
         $scope.updateFormations = function () {
             if ($scope.formations.length == 0) {
-                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                $http.post(Constant.url,
                     {"formations": "empty", "fk_employee": $scope.employeeId}
                 ).then(function (data) {
                     $scope.modified = false;
@@ -405,7 +405,7 @@ angular.module('myApp.employee', ['ngRoute'])
                     }
 
                 });
-                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                $http.post(Constant.url,
                     $scope.formations
                 ).then(
                     function (data) {
@@ -429,7 +429,7 @@ angular.module('myApp.employee', ['ngRoute'])
 
         $scope.updateProfExp = function () {
             if ($scope.professionnalExperiences.length == 0) {
-                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                $http.post(Constant.url,
                     {"profexps": "empty", "fk_employee": $scope.employeeId}
                 ).then(function (data) {
                     $scope.modified = false;
@@ -444,7 +444,7 @@ angular.module('myApp.employee', ['ngRoute'])
                     }
 
                 });
-                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                $http.post(Constant.url,
                     $scope.professionnalExperiences
                 ).then(function (data) {
                     $scope.modified = false;
@@ -466,17 +466,16 @@ angular.module('myApp.employee', ['ngRoute'])
 
         $scope.updateConExp = function () {
             if ($scope.consultingExperiences.length == 0) {
-                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                $http.post(Constant.url,
                     {"conexps": "empty", "fk_employee": $scope.employeeId}
                 ).then(function (data) {
                     $scope.modified = false;
                     $scope.cancel();
                 });
             } else {
-                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                $http.post(Constant.url,
                     $scope.consultingExperiences
                 ).then(function (data) {
-                    console.log(data);
                     $scope.modified = false;
                     $scope.cancel();
                 });
@@ -485,17 +484,16 @@ angular.module('myApp.employee', ['ngRoute'])
 
         $scope.updateAuditExp = function () {
             if ($scope.auditExperiences.length == 0) {
-                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                $http.post(Constant.url,
                     {"auditexps": "empty", "fk_employee": $scope.employeeId}
                 ).then(function (data) {
                     $scope.modified = false;
                     $scope.cancel();
                 });
             } else {
-                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                $http.post(Constant.url,
                     $scope.auditExperiences
                 ).then(function (data) {
-                    console.log(data);
                     $scope.modified = false;
                     $scope.cancel();
                 });
@@ -510,10 +508,9 @@ angular.module('myApp.employee', ['ngRoute'])
                 }
 
             });
-            $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+            $http.post(Constant.url,
                 $scope.internalQualifications
             ).then(function (data) {
-                console.log(data);
                 $scope.modified = false;
                 angular.forEach($scope.internalQualifications, function (internalQualification, key) {
                     internalQualification.validationDate = new Date(internalQualification.validationDate);
@@ -529,7 +526,7 @@ angular.module('myApp.employee', ['ngRoute'])
 
         $scope.updateEmployeeAuditObservations = function () {
             if ($scope.auditObservations.length == 0) {
-                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                $http.post(Constant.url,
                     {"auditObs": "empty", "fk_employee": $scope.employeeId}
                 ).then(function (data) {
                     $scope.modified = false;
@@ -543,10 +540,9 @@ angular.module('myApp.employee', ['ngRoute'])
                     }
 
                 });
-                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                $http.post(Constant.url,
                     $scope.auditObservations
                 ).then(function (data) {
-                    console.log(data);
                     $scope.modified = false;
                     if ($scope.auditObservations) {
                         angular.forEach($scope.auditObservations, function (auditObservation, key) {
@@ -565,7 +561,7 @@ angular.module('myApp.employee', ['ngRoute'])
 
         $scope.updateEmployeeMandateSheets = function () {
             if ($scope.mandateSheets.length == 0) {
-                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                $http.post(Constant.url,
                     {"mandateSheets": "empty", "fk_employee": $scope.employeeId}
                 ).then(function (data) {
                     $scope.modified = false;
@@ -579,10 +575,9 @@ angular.module('myApp.employee', ['ngRoute'])
                     }
 
                 });
-                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                $http.post(Constant.url,
                     $scope.mandateSheets
                 ).then(function (data) {
-                    console.log(data);
                     $scope.modified = false;
                     if ($scope.mandateSheets) {
                         angular.forEach($scope.mandateSheets, function (mandateSheet, key) {
@@ -601,7 +596,7 @@ angular.module('myApp.employee', ['ngRoute'])
 
         $scope.updateEmployeeObjectives = function () {
             if ($scope.objectives.length == 0) {
-                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                $http.post(Constant.url,
                     {"objectives": "empty", "fk_employee": $scope.employeeId}
                 ).then(function (data) {
                     $scope.modified = false;
@@ -612,10 +607,9 @@ angular.module('myApp.employee', ['ngRoute'])
                     objective.date = new Date(objective.date).getTime();
 
                 });
-                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php",
+                $http.post(Constant.url,
                     $scope.objectives
                 ).then(function (data) {
-                    console.log(data);
                     $scope.modified = false;
                     $scope.cancel();
                 });
@@ -623,7 +617,7 @@ angular.module('myApp.employee', ['ngRoute'])
         };
 
         $scope.uploadFile = function (id, file, type) {
-            var uploadUrl = "http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php";
+            var uploadUrl = Constant.url;
             fileUpload.uploadFileToUrl(file, uploadUrl, id, type);
         };
 

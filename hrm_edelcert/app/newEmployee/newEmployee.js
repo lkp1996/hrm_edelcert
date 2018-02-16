@@ -9,7 +9,7 @@ angular.module('myApp.newEmployee', ['ngRoute'])
         });
     }])
 
-    .controller('NewEmployeeCtrl', ['$scope', '$rootScope', '$cookies', '$http', 'fileUpload', '$location', function ($scope, $rootScope, $cookies, $http, fileUpload, $location) {
+    .controller('NewEmployeeCtrl', ['$scope', '$rootScope', '$cookies', '$http', 'fileUpload', '$location', 'Constant', function ($scope, $rootScope, $cookies, $http, fileUpload, $location, Constant) {
         if (!$rootScope.isConnected) {
             $location.path("/login");
         } else if ($rootScope.connectedUser.isAdmin == "0") {
@@ -32,10 +32,9 @@ angular.module('myApp.newEmployee', ['ngRoute'])
             }
 
             var id = null;
-            $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php", $scope.employee
+            $http.post(Constant.url, $scope.employee
             ).then(
                 function (data) {
-                    console.log(data);
                     id = data;
                     $scope.uploadFile(id, $scope.picture, 'picture');
                     $scope.uploadFile(id, $scope.cv, 'cv');
@@ -50,7 +49,7 @@ angular.module('myApp.newEmployee', ['ngRoute'])
         };
 
         $scope.uploadFile = function (id, file, type) {
-            var uploadUrl = "http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php";
+            var uploadUrl = Constant.url;
             fileUpload.uploadFileToUrl(file, uploadUrl, id, type);
         };
 

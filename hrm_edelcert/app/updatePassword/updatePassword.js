@@ -9,7 +9,7 @@ angular.module('myApp.updatePassword', ['ngRoute'])
         });
     }])
 
-    .controller('UpdatePasswordCtrl', ['$scope', '$rootScope', '$cookies', '$http', 'md5', '$location', function ($scope, $rootScope, $cookies, $http, md5, $location) {
+    .controller('UpdatePasswordCtrl', ['$scope', '$rootScope', '$cookies', '$http', 'md5', '$location', 'Constant', function ($scope, $rootScope, $cookies, $http, md5, $location, Constant) {
         if (!$rootScope.isConnected) {
             $location.path("/login");
         }
@@ -29,7 +29,7 @@ angular.module('myApp.updatePassword', ['ngRoute'])
                     "oldPassword": md5.createHash($scope.password.old || ''),
                     "newPassword": md5.createHash($scope.password.new1 || '')
                 };
-                $http.post("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php", password
+                $http.post(Constant.url, password
                 ).then(
                     function (data) {
                         $scope.password = {};

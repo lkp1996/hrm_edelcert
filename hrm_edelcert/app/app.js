@@ -51,12 +51,11 @@ angular.module('myApp', [
         $http.post(uploadUrl, fd, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined, 'Process-Data': false}
-        })
-            .success(function (data) {
-                console.log(data);
-            })
-            .error(function () {
-                console.log("Error");
-            });
+        });
     }
-}]);
+}]).factory('Constant', function () {
+    return {
+        //url: 'http://hrm-edelcert.ch/hrm_edelcert_server/ctrl/ctrl.php'
+        url: 'http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php'
+    };
+});

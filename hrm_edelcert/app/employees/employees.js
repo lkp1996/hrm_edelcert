@@ -9,7 +9,7 @@ angular.module('myApp.employees', ['ngRoute'])
         });
     }])
 
-    .controller('EmployeesCtrl', ['$scope', '$rootScope', '$cookies', '$http', '$location', function ($scope, $rootScope, $cookies, $http, $location) {
+    .controller('EmployeesCtrl', ['$scope', '$rootScope', '$cookies', '$http', '$location', 'Constant', function ($scope, $rootScope, $cookies, $http, $location, Constant) {
         if (!$rootScope.isConnected) {
             $location.path("/login");
         } else if ($rootScope.connectedUser.isAdmin == "0") {
@@ -19,7 +19,7 @@ angular.module('myApp.employees', ['ngRoute'])
         $scope.employees = [];
 
         $scope.getEmployees = function () {
-            $http.get("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php?employees_list=" + $rootScope.connectedUser.id).then(
+            $http.get(Constant.url + "?employees_list=" + $rootScope.connectedUser.id).then(
                 function (data) {
                     $scope.employees = data.data;
                 }
@@ -28,11 +28,10 @@ angular.module('myApp.employees', ['ngRoute'])
 
         $scope.delEmployee = function (id) {
             if (confirm("Voulez-vous vraiment supprimer cet employé ?")) {
-                $http.delete("http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php", {
+                $http.delete(Constant.url, {
                     params: {deleteId: id}
                 }).then(
                     function (data) {
-                        console.log(data);
                         $scope.getEmployees();
                     }
                 );
