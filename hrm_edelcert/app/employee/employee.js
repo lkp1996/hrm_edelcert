@@ -42,6 +42,8 @@ angular.module('myApp.employee', ['ngRoute'])
         $scope.auditObservationsAttachements = [];
         $scope.mandateSheetsAttachements = [];
 
+        $scope.attachement = Constant.attachement;
+
         $scope.tabs = [
             {
                 name: "Administratif",
@@ -121,7 +123,7 @@ angular.module('myApp.employee', ['ngRoute'])
             $http.get(Constant.url + "?employee_professionnalexperience=" + $routeParams.employeeId).then(
                 function (data) {
                     if (!Array.isArray(data.data)) {
-                        $scope.formations = [];
+                        $scope.professionnalExperiences = [];
                     } else {
                         $scope.professionnalExperiences = data.data;
                         angular.forEach($scope.professionnalExperiences, function (professionnalExperience, key) {

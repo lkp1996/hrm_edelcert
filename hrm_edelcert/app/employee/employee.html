@@ -2,7 +2,7 @@
 
 <div class="row placeholders">
     <div class="col-xs-12 col-sm-12 placeholder">
-        <img src="http://localhost:8888/hrm_edelcert_server/attachements/picture/{{employeeId}}/{{employee.picture}}"
+        <img src="{{attachement}}/picture/{{employeeId}}/{{employee.picture}}"
              width="150"
              height="150" class="img-responsive" alt="Generic placeholder thumbnail">
         <h4>{{employee.firstName}} {{employee.lastName}}</h4>
@@ -111,7 +111,7 @@
                             ng-model="formation.fk_formationType" disabled></select>
                 </td>
                 <td>
-                    <a href="http://localhost:8888/hrm_edelcert_server/attachements/formation/{{employeeId}}/{{formation.attachement}}"
+                    <a href="{{attachement}}/formation/{{employeeId}}/{{formation.attachement}}"
                        target="_blank"><span
                             class="glyphicon glyphicon-file" aria-hidden="true"
                             ng-if="formation.attachement"></span> {{formation.attachement}}</a></td>
@@ -190,7 +190,7 @@
                 <td>{{professionnalExperience.organizationActivity}}</td>
                 <td>{{professionnalExperience.fonction}}</td>
                 <td>
-                    <a href="http://localhost:8888/hrm_edelcert_server/attachements/professionnalexperience/{{employeeId}}/{{professionnalExperience.attachement}}"
+                    <a href="{{attachement}}/professionnalexperience/{{employeeId}}/{{professionnalExperience.attachement}}"
                        target="_blank" ng-if="professionnalExperience.attachement"><span
                             class="glyphicon glyphicon-file" aria-hidden="true"
                             ng-if="professionnalExperience.attachement != null"></span>
@@ -388,7 +388,7 @@
             <thead>
             <tr>
                 <th>Marche à suivre selon procédure de qualification en cours</th>
-                <th>Oui – Non</th>
+                <th>OUI</th>
                 <th>Résultats ou renvoi à des enregistrements existants</th>
                 <th>Pièces jointes</th>
                 <th>Date de la validation</th>
@@ -397,10 +397,10 @@
             <tbody>
             <tr ng-repeat="internalQualification in internalQualifications" ng-if="!modified">
                 <td>{{internalQualification.process}}</td>
-                <td><input type="checkbox" ng-checked="internalQualification.yesno" disabled></td>
+                <td><input type="checkbox" ng-checked="internalQualification.yesno"  ng-if="internalQualification.pk_internalQualifications!='2'" disabled></td>
                 <td>{{internalQualification.result}}</td>
                 <td>
-                    <a href="http://localhost:8888/hrm_edelcert_server/attachements/internalqualification/{{employeeId}}/{{internalQualification.attachement}}"
+                    <a href="{{attachement}}/internalqualification/{{employeeId}}/{{internalQualification.attachement}}"
                        target="_blank" ng-if="internalQualification.attachement"><span class="glyphicon glyphicon-file"
                                                                                        aria-hidden="true"
                                                                                        ng-if="internalQualification.attachement"></span>
@@ -409,7 +409,7 @@
             </tr>
             <tr ng-repeat="internalQualification in internalQualifications" ng-if="modified">
                 <td>{{internalQualification.process}}</td>
-                <td><input type="checkbox" ng-model="internalQualification.yesno"></td>
+                <td><input type="checkbox" ng-model="internalQualification.yesno" ng-if="internalQualification.pk_internalQualifications!='2'"></td>
                 <td><input type="text" class="form-control" ng-model="internalQualification.result"></td>
                 <td><input type="file" class="form-control" file-model="internalQualificationsAttachements[{{$index}}]">
                 </td>
@@ -445,7 +445,7 @@
                 <td>{{auditObservation.organization}}</td>
                 <td>{{auditObservation.observer}}</td>
                 <td>
-                    <a href="http://localhost:8888/hrm_edelcert_server/attachements/auditobservation/{{employeeId}}/{{auditObservation.attachement}}"
+                    <a href="{{attachement}}/auditobservation/{{employeeId}}/{{auditObservation.attachement}}"
                        target="_blank" ng-if="auditObservation.attachement"><span class="glyphicon glyphicon-file"
                                                                                   aria-hidden="true"
                                                                                   ng-if="auditObservation.attachement"></span>
@@ -471,8 +471,6 @@
                            ng-model="auditObservation.EAScope">
                 </td>
                 <td><textarea class="form-control" ng-model="auditObservation.comment"></textarea></td>
-                <td><input type="date" class="form-control" ng-model="auditObservation.date">
-                </td>
                 <td>
                     <date-picker-simple-input dt="auditObservation.date"></date-picker-simple-input>
                 </td>
@@ -508,7 +506,7 @@
                 <th>Organisation-institution</th>
                 <th>EA Scope</th>
                 <th>Date</th>
-                <th>Honoraires</th>
+                <th>Honoraires (CHF)</th>
                 <th>Pièces jointes</th>
             </tr>
             </thead>
@@ -522,7 +520,7 @@
                 <td>{{mandateSheet.date | date : "dd.MM.yyyy"}}</td>
                 <td>{{mandateSheet.fees}}</td>
                 <td>
-                    <a href="http://localhost:8888/hrm_edelcert_server/attachements/mandatesheet/{{employeeId}}/{{mandateSheet.attachement}}"
+                    <a href="{{attachement}}/mandatesheet/{{employeeId}}/{{mandateSheet.attachement}}"
                        target="_blank" ng-if="mandateSheet.attachement"><span class="glyphicon glyphicon-file"
                                                                               aria-hidden="true"
                                                                               ng-if="mandateSheet.attachement"></span>
@@ -619,7 +617,7 @@
 <div class="file-upload" ng-hide="active!=0">
     <div class="input-group input-employee">
         <span class="input-group-addon">CV</span>
-        <a href="http://localhost:8888/hrm_edelcert_server/attachements/cv/{{employeeId}}/{{employee.cv}}"
+        <a href="{{attachement}}/cv/{{employeeId}}/{{employee.cv}}"
            target="_blank" ng-if="!modified"> <span
                 class="glyphicon glyphicon-file"
                 aria-hidden="true" ng-if="employee.cv"></span>
@@ -628,7 +626,7 @@
     </div>
     <div class="input-group input-employee">
         <span class="input-group-addon">Casier judiciaire</span>
-        <a href="http://localhost:8888/hrm_edelcert_server/attachements/criminalrecord/{{employeeId}}/{{employee.criminalRecord}}"
+        <a href="{{attachement}}/criminalrecord/{{employeeId}}/{{employee.criminalRecord}}"
            target="_blank"
            ng-if="!modified"> <span
                 class="glyphicon glyphicon-file"
