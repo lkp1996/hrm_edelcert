@@ -28,7 +28,7 @@ angular.module('myApp.employee', ['ngRoute'])
         $scope.internalQualifications = [];
         $scope.auditObservations = [];
         $scope.objectives = [];
-        $scope.mandateSheets = [];
+        //$scope.mandateSheets = [];
 
         $scope.modified = false;
 
@@ -58,7 +58,7 @@ angular.module('myApp.employee', ['ngRoute'])
                 disabled: false
             },
             {
-                name: "Expériences en conseil",
+                name: "Expériences en conseil et en formation",
                 disabled: false
             },
             {
@@ -71,10 +71,6 @@ angular.module('myApp.employee', ['ngRoute'])
             },
             {
                 name: "Observation en audit",
-                disabled: false
-            },
-            {
-                name: "Fiches mandat",
                 disabled: false
             },
             {
@@ -199,7 +195,7 @@ angular.module('myApp.employee', ['ngRoute'])
             );
         };
 
-        $scope.getEmployeeMandateSheets = function () {
+        /*$scope.getEmployeeMandateSheets = function () {
             $http.get(Constant.url + "?employee_mandatesheet=" + $routeParams.employeeId).then(
                 function (data) {
                     if (!Array.isArray(data.data)) {
@@ -213,7 +209,7 @@ angular.module('myApp.employee', ['ngRoute'])
                     }
                 }
             );
-        };
+        };*/
 
         $scope.getEmployeeObjectives = function () {
             $http.get(Constant.url + "?employee_objective=" + $routeParams.employeeId).then(
@@ -250,7 +246,7 @@ angular.module('myApp.employee', ['ngRoute'])
             $scope.getEmployeeAuditExp();
             $scope.getEmployeeInternalQualifications();
             $scope.getEmployeeAuditObs();
-            $scope.getEmployeeMandateSheets();
+            //$scope.getEmployeeMandateSheets();
             $scope.getEmployeeObjectives();
 
             angular.forEach($scope.tabs, function (tab, key) {
@@ -320,7 +316,7 @@ angular.module('myApp.employee', ['ngRoute'])
             }
         };
 
-        $scope.addMandateSheetRow = function () {
+        /*$scope.addMandateSheetRow = function () {
             if (!Array.isArray($scope.mandateSheets)) {
                 $scope.mandateSheets = [
                     {"pk_mandateSheet": 0, "fk_employee": $scope.employeeId}
@@ -331,7 +327,7 @@ angular.module('myApp.employee', ['ngRoute'])
                     "fk_employee": $scope.employeeId
                 });
             }
-        };
+        };*/
 
         $scope.addObjectiveRow = function () {
             if (!Array.isArray($scope.objectives)) {
@@ -493,9 +489,22 @@ angular.module('myApp.employee', ['ngRoute'])
                     $scope.cancel();
                 });
             } else {
+                angular.forEach($scope.auditExperiences, function (auditExperience, key) {
+                    if (angular.isDefined($scope.mandateSheetsAttachements[key])) {
+                        auditExperience.mandatesheet = $scope.mandateSheetsAttachements[key].name;
+                    }
+
+                });
                 $http.post(Constant.url,
                     $scope.auditExperiences
                 ).then(function (data) {
+                    if ($scope.auditExperiences) {
+                        angular.forEach($scope.auditExperiences, function (auditExperience, key) {
+                            if (angular.isDefined($scope.mandateSheetsAttachements[key])) {
+                                $scope.uploadFile($scope.employeeId, $scope.mandateSheetsAttachements[key], 'mandatesheets');
+                            }
+                        });
+                    }
                     $scope.modified = false;
                     $scope.cancel();
                 });
@@ -561,7 +570,7 @@ angular.module('myApp.employee', ['ngRoute'])
             }
         };
 
-        $scope.updateEmployeeMandateSheets = function () {
+        /*$scope.updateEmployeeMandateSheets = function () {
             if ($scope.mandateSheets.length == 0) {
                 $http.post(Constant.url,
                     {"mandateSheets": "empty", "fk_employee": $scope.employeeId}
@@ -594,7 +603,7 @@ angular.module('myApp.employee', ['ngRoute'])
                     $scope.cancel();
                 });
             }
-        };
+        };*/
 
         $scope.updateEmployeeObjectives = function () {
             if ($scope.objectives.length == 0) {
@@ -630,7 +639,7 @@ angular.module('myApp.employee', ['ngRoute'])
         $scope.getEmployeeAuditExp();
         $scope.getEmployeeInternalQualifications();
         $scope.getEmployeeAuditObs();
-        $scope.getEmployeeMandateSheets();
+        //$scope.getEmployeeMandateSheets();
         $scope.getEmployeeObjectives();
     }])
 ;

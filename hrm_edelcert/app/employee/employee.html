@@ -326,6 +326,8 @@
                 <th>EA Scope</th>
                 <th>OC</th>
                 <th>Année</th>
+                <th>Honoraires (CHF)</th>
+                <th>Fiches mandat</th>
             </tr>
             </thead>
             <tbody>
@@ -342,6 +344,12 @@
                 </td>
                 <td>{{auditExperience.oc}}</td>
                 <td>{{auditExperience.year}}</td>
+                <td>{{auditExperience.fees}}</td>
+                <td><a href="{{attachement}}/mandatesheet/{{employeeId}}/{{auditExperience.mandatesheet}}"
+                       target="_blank" ng-if="auditExperience.mandatesheet"><span class="glyphicon glyphicon-file"
+                                                                              aria-hidden="true"
+                                                                              ng-if="auditExperience.mandatesheet"></span>
+                    {{auditExperience.mandatesheet}}</a></td>
             </tr>
             <tr ng-repeat="auditExperience in auditExperiences" ng-if="modified">
                 <td>
@@ -361,10 +369,15 @@
                 </td>
                 <td><input type="text" class="form-control" ng-model="auditExperience.oc"></td>
                 <td><input type="text" class="form-control" ng-model="auditExperience.year"></td>
+                <td><input type="text" class="form-control" ng-model="auditExperience.fees"></td>
+                <td><input type="file" class="form-control" file-model="mandateSheetsAttachements[{{$index}}]"></td>
+
             </tr>
             <tr ng-if="modified">
                 <td><a ng-click="addAuditExpRow()"><span class="glyphicon glyphicon-plus"
                                                          aria-hidden="true"></span></a></td>
+                <td></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -389,7 +402,7 @@
             <tr>
                 <th>Marche à suivre selon procédure de qualification en cours</th>
                 <th>OUI</th>
-                <th>Résultats ou renvoi à des enregistrements existants</th>
+                <th>Remarques</th>
                 <th>Pièces jointes</th>
                 <th>Date de la validation</th>
             </tr>
@@ -503,71 +516,6 @@
             <thead>
             <tr>
                 <th ng-if="modified"></th>
-                <th>Organisation-institution</th>
-                <th>EA Scope</th>
-                <th>Date</th>
-                <th>Honoraires (CHF)</th>
-                <th>Pièces jointes</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="mandateSheet in mandateSheets" ng-if="!modified">
-                <td>{{mandateSheet.organization}}</td>
-                <td>
-                    <input type="number" min="1" max="39" class="form-control"
-                           ng-value="mandateSheet.EAScope" disabled>
-                </td>
-                <td>{{mandateSheet.date | date : "dd.MM.yyyy"}}</td>
-                <td>{{mandateSheet.fees}}</td>
-                <td>
-                    <a href="{{attachement}}/mandatesheet/{{employeeId}}/{{mandateSheet.attachement}}"
-                       target="_blank" ng-if="mandateSheet.attachement"><span class="glyphicon glyphicon-file"
-                                                                              aria-hidden="true"
-                                                                              ng-if="mandateSheet.attachement"></span>
-                        {{mandateSheet.attachement}}</a></td>
-            </tr>
-            <tr ng-repeat="mandateSheet in mandateSheets" ng-if="modified">
-                <td>
-                    <a class="a-remove" ng-click="delRow(mandateSheets, $index)"><span class="glyphicon glyphicon-minus"
-                                                                                       aria-hidden="true"></span></a>
-                </td>
-                <td><input type="text" class="form-control" ng-model="mandateSheet.organization"></td>
-                <td>
-                    <input type="number" min="1" max="39" class="form-control"
-                           ng-model="mandateSheet.EAScope">
-                </td>
-                <td>
-                    <date-picker-simple-input dt="mandateSheet.date"></date-picker-simple-input>
-                </td>
-                <td><input type="text" class="form-control" ng-model="mandateSheet.fees"></td>
-                <td><input type="file" class="form-control" file-model="mandateSheetsAttachements[{{$index}}]"></td>
-            </tr>
-            <tr ng-if="modified">
-                <td><a ng-click="addMandateSheetRow()"><span class="glyphicon glyphicon-plus"
-                                                             aria-hidden="true"></span></a></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            </tbody>
-        </table>
-        <div class="row placeholders" ng-hide="active!=7">
-            <div class="col-xs-12 col-sm-12 placeholder">
-                <input type="button" value="Modifier" class="btn btn-default" ng-click="modif()" ng-if="!modified">
-                <button class="btn btn-success" ng-click="updateEmployeeMandateSheets()" ng-if="modified">Sauvegarder
-                </button>
-                <button class="btn btn-danger" ng-click="cancel()" ng-if="modified">Annuler</button>
-            </div>
-        </div>
-    </uib-tab>
-    <uib-tab index="8" heading="{{tabs[8].name}}" disable="tabs[8].disabled">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th ng-if="modified"></th>
                 <th>Objectifs à moyen et long terme</th>
                 <th>Stratégie mise en place par l’auditeur</th>
                 <th>Date</th>
@@ -603,7 +551,7 @@
             </tr>
             </tbody>
         </table>
-        <div class="row placeholders" ng-hide="active!=8">
+        <div class="row placeholders" ng-hide="active!=7">
             <div class="col-xs-12 col-sm-12 placeholder">
                 <input type="button" value="Modifier" class="btn btn-default" ng-click="modif()" ng-if="!modified">
                 <button class="btn btn-success" ng-click="updateEmployeeObjectives()" ng-if="modified">Sauvegarder
