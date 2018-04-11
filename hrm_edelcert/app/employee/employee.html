@@ -256,7 +256,7 @@
                 <th>Activité de l'organisation</th>
                 <th>NMS Standard</th>
                 <th>EA Scope</th>
-                <th>Orgarnisation</th>
+                <th>Thèmes et durée</th>
                 <th>Année</th>
             </tr>
             </thead>
@@ -400,6 +400,43 @@
         <table class="table table-striped">
             <thead>
             <tr>
+                <th>Le candidat auditeur dispose-t-il des capacités et des  connaissances spécifiques concernant :
+                </th>
+                <th>OUI</th>
+                <th>Remarques</th>
+                <th>Pièces jointes</th>
+                <th>Date de la validation</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="i in iqCapacitiesNum" ng-if="!modified">
+                <td>{{internalQualifications[i].process}}</td>
+                <td><input type="checkbox" ng-checked="internalQualifications[i].yesno"  ng-if="internalQualifications[i].pk_internalQualifications!='2'" disabled></td>
+                <td>{{internalQualifications[i].result}}</td>
+                <td>
+                    <a href="{{attachement}}/internalqualification/{{employeeId}}/{{internalQualifications[i].attachement}}"
+                       target="_blank" ng-if="internalQualifications[i].attachement"><span class="glyphicon glyphicon-file"
+                                                                                                aria-hidden="true"
+                                                                                                ng-if="internalQualifications[i].attachement"></span>
+                        {{internalQualifications[i].attachement}}</a></td>
+                <td>{{internalQualifications[i].validationDate | date : "dd.MM.yyyy"}}</td>
+            </tr>
+            <tr ng-repeat="i in iqCapacitiesNum" ng-if="modified">
+                <td>{{internalQualifications[i].process}}</td>
+                <td><input type="checkbox" ng-model="internalQualifications[i].yesno" ng-if="internalQualifications[i].pk_internalQualifications!='2'"></td>
+                <td><input type="text" class="form-control" ng-model="internalQualifications[i].result"></td>
+                <td><input type="file" class="form-control" file-model="internalQualificationsAttachements[{{i}}]">
+                </td>
+                <td>
+                    <date-picker-simple-input dt="internalQualifications[i].validationDate"></date-picker-simple-input>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
                 <th>Marche à suivre selon procédure de qualification en cours</th>
                 <th>OUI</th>
                 <th>Remarques</th>
@@ -408,26 +445,26 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="internalQualification in internalQualifications" ng-if="!modified">
-                <td>{{internalQualification.process}}</td>
-                <td><input type="checkbox" ng-checked="internalQualification.yesno"  ng-if="internalQualification.pk_internalQualifications!='2'" disabled></td>
-                <td>{{internalQualification.result}}</td>
+            <tr ng-repeat="i in iqStepsNum" ng-if="!modified">
+                <td>{{internalQualifications[i].process}}</td>
+                <td><input type="checkbox" ng-checked="internalQualifications[i].yesno"  ng-if="internalQualifications[i].pk_internalQualifications!='2'" disabled></td>
+                <td>{{internalQualifications[i].result}}</td>
                 <td>
-                    <a href="{{attachement}}/internalqualification/{{employeeId}}/{{internalQualification.attachement}}"
-                       target="_blank" ng-if="internalQualification.attachement"><span class="glyphicon glyphicon-file"
+                    <a href="{{attachement}}/internalqualification/{{employeeId}}/{{internalQualifications[i].attachement}}"
+                       target="_blank" ng-if="internalQualifications[i].attachement"><span class="glyphicon glyphicon-file"
                                                                                        aria-hidden="true"
-                                                                                       ng-if="internalQualification.attachement"></span>
-                        {{internalQualification.attachement}}</a></td>
-                <td>{{internalQualification.validationDate | date : "dd.MM.yyyy"}}</td>
+                                                                                       ng-if="internalQualifications[i].attachement"></span>
+                        {{internalQualifications[i].attachement}}</a></td>
+                <td>{{internalQualifications[i].validationDate | date : "dd.MM.yyyy"}}</td>
             </tr>
-            <tr ng-repeat="internalQualification in internalQualifications" ng-if="modified">
-                <td>{{internalQualification.process}}</td>
-                <td><input type="checkbox" ng-model="internalQualification.yesno" ng-if="internalQualification.pk_internalQualifications!='2'"></td>
-                <td><input type="text" class="form-control" ng-model="internalQualification.result"></td>
-                <td><input type="file" class="form-control" file-model="internalQualificationsAttachements[{{$index}}]">
+            <tr ng-repeat="i in iqStepsNum" ng-if="modified">
+                <td>{{internalQualifications[i].process}}</td>
+                <td><input type="checkbox" ng-model="internalQualifications[i].yesno" ng-if="internalQualifications[i].pk_internalQualifications!='2'"></td>
+                <td><input type="text" class="form-control" ng-model="internalQualifications[i].result"></td>
+                <td><input type="file" class="form-control" file-model="internalQualificationsAttachements[{{i}}]">
                 </td>
                 <td>
-                    <date-picker-simple-input dt="internalQualification.validationDate"></date-picker-simple-input>
+                    <date-picker-simple-input dt="internalQualifications[i].validationDate"></date-picker-simple-input>
                 </td>
             </tr>
             </tbody>
@@ -597,3 +634,4 @@
         <button class="btn btn-danger" ng-click="cancel()" ng-if="modified">Annuler</button>
     </div>
 </div>
+<div ng-repeat="a in getNumber(iqStepsNum) track by $index">{{$index}}</div>

@@ -80,6 +80,10 @@ angular.module('myApp.employee', ['ngRoute'])
 
         ];
 
+        $scope.iqStepsNum = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+        $scope.iqCapacitiesNum = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
+
+
         $scope.getEmployeeAdmin = function () {
             $http.get(Constant.url + "?employee_administration=" + $routeParams.employeeId).then(
                 function (data) {
