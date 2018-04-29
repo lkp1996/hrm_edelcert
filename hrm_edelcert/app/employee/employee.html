@@ -469,7 +469,7 @@
             </tr>
             </tbody>
         </table>
-        <div class="row placeholders" ng-hide="active!=5">
+        <div class="row placeholders" ng-hide="active!=5 || connectedUser.isAdmin=='0'">
             <div class="col-xs-12 col-sm-12 placeholder">
                 <input type="button" value="Modifier" class="btn btn-default" ng-click="modif()" ng-if="!modified">
                 <button class="btn btn-success" ng-click="updateEmployeeIntQual()" ng-if="modified">Sauvegarder</button>
