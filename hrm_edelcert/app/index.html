@@ -37,15 +37,15 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li ng-hide="connectedUser.isAdmin=='0'"><a href="#/employees">Employés</a></li>
-                    <li ng-hide="connectedUser.isAdmin=='0'"><a href="#/newEmployee">Nouvel Employé</a></li>
+                    <li ng-hide="connectedUser.employeeType=='Employé'"><a href="#/employees">Employés</a></li>
+                    <li ng-hide="connectedUser.employeeType=='Employé' || connectedUser.employeeType=='Administrateur lecture seul'"><a href="#/newEmployee">Nouvel Employé</a></li>
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button"
                                             aria-haspopup="true" aria-expanded="false"><span
                             class="glyphicon glyphicon-user" aria-hidden="true"></span> {{connectedUser.username}}
                         <span
                                 class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#/employee/{{connectedUser.id}}">Profil</a></li>
+                            <li ng-hide="connectedUser.employeeType=='Administrateur lecture seul'"><a href="#/employee/{{connectedUser.id}}">Profil</a></li>
                             <li><a href="#/updatePassword">Changer mot de passe</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="" ng-click="logout()"><span class="glyphicon glyphicon-log-out"

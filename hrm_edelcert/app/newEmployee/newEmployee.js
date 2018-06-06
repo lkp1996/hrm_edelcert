@@ -12,11 +12,13 @@ angular.module('myApp.newEmployee', ['ngRoute'])
     .controller('NewEmployeeCtrl', ['$scope', '$rootScope', '$cookies', '$http', 'fileUpload', '$location', 'Constant', function ($scope, $rootScope, $cookies, $http, fileUpload, $location, Constant) {
         if (!$rootScope.isConnected) {
             $location.path("/login");
-        } else if ($rootScope.connectedUser.isAdmin == "0") {
+        } else if ($rootScope.connectedUser.employeeType == "Employé" || $rootScope.connectedUser.employeeType == "Administrateur lecture seul") {
             $location.path("/home");
         }
 
         $scope.employee = {"role": "employee"};
+
+        $scope.types = [];
 
         $scope.add = function () {
             $scope.employee.birthDate = new Date($scope.employee.birthDate).getTime();
@@ -48,9 +50,19 @@ angular.module('myApp.newEmployee', ['ngRoute'])
             );
         };
 
+        $scope.getTypeList = function () {
+            $http.get(Constant.url + "?type_list").then(
+                function (data) {
+                    $scope.types = data.data;
+                }
+            )
+        };
+
         $scope.uploadFile = function (id, file, type) {
             var uploadUrl = Constant.url;
             fileUpload.uploadFileToUrl(file, uploadUrl, id, type);
         };
+
+        $scope.getTypeList();
 
     }]);

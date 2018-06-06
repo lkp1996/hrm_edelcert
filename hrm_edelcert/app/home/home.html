@@ -2,7 +2,15 @@
 <div class="jumbotron">
     <div class="container">
         <h1>Bienvenue sur HRM Edelcert</h1>
-        <p>Vous pouvez dès lors compléter les informations qui vous concerne en accédant à votre profil.</p>
-        <p><a class="btn btn-primary btn-lg" href="#/employee/{{connectedUser.id}}" role="button">Accéder à mon profil &raquo;</a></p>
+        <div ng-hide="connectedUser.employeeType=='Administrateur lecture seul'">
+            <p>Vous pouvez dès lors compléter les informations qui vous concerne en accédant à votre profil.</p>
+            <p><a class="btn btn-primary btn-lg" href="#/employee/{{connectedUser.id}}" role="button">Accéder à mon
+                profil &raquo;</a></p>
+        </div>
+        <div ng-hide="connectedUser.employeeType!='Administrateur lecture seul'">
+            <p>Vous pouvez dès lors consulter les informations des employés en accédant à la liste d'employés.</p>
+            <p><a class="btn btn-primary btn-lg" href="#/employees" role="button">Accéder à la liste &raquo;</a>
+            </p>
+        </div>
     </div>
 </div>

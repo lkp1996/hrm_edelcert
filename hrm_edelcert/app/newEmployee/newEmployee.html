@@ -113,10 +113,9 @@
             <div class="col-lg-6">
                 <div class="input-group input-employee">
                     <span class="input-group-addon">Rôle</span>
-                    <select class="form-control" ng-model="employee.role">
-                        <option value="employee" selected>Employé</option>
-                        <option value="admin">Administrateur</option>
-                    </select>
+                    <select class="form-control"
+                            ng-options="type.pk_employeetype as type.type for type in types"
+                            ng-model="employee.fk_employeetype" ><option value="">-- Veuillez choisir un rôle --</option></select>
                 </div>
             </div>
         </div>

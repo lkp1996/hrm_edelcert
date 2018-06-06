@@ -16,7 +16,6 @@ angular.module('myApp.login', ['ngRoute'])
 
         $scope.user = {};
         $scope.error = false;
-        $scope.isAdmin = null;
 
         $scope.login = function () {
             var userInfo = {
@@ -41,13 +40,13 @@ angular.module('myApp.login', ['ngRoute'])
             $http.get(Constant.url + "?getUserID=" + username
             ).then(
                 function (data) {
-                    $http.get(Constant.url + "?isAdmin=" + data.data
+                    $http.get(Constant.url + "?employeeType=" + data.data
                     ).then(
                         function (data1) {
                             var connectedUserInfo = {
                                 "username": $scope.user.username,
                                 "id": data.data,
-                                "isAdmin" : data1.data
+                                "employeeType" : data1.data
                             };
                             $cookies.putObject("connectedUser", connectedUserInfo);
                             $rootScope.connectedUser = $cookies.getObject('connectedUser');

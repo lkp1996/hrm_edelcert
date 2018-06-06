@@ -12,7 +12,7 @@ angular.module('myApp.employees', ['ngRoute'])
     .controller('EmployeesCtrl', ['$scope', '$rootScope', '$cookies', '$http', '$location', 'Constant', function ($scope, $rootScope, $cookies, $http, $location, Constant) {
         if (!$rootScope.isConnected) {
             $location.path("/login");
-        } else if ($rootScope.connectedUser.isAdmin == "0") {
+        } else if ($rootScope.connectedUser.employeeType == "Employé") {
             $location.path("/home");
 
         }

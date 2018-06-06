@@ -12,7 +12,8 @@ angular.module('myApp.employee', ['ngRoute'])
     .controller('EmployeeCtrl', ['$scope', '$rootScope', '$cookies', '$http', '$routeParams', 'fileUpload', '$location', 'Constant', function ($scope, $rootScope, $cookies, $http, $routeParams, fileUpload, $location, Constant) {
         if (!$rootScope.isConnected) {
             $location.path("/login");
-        } else if ($rootScope.connectedUser.isAdmin == "0" && $routeParams.employeeId != $rootScope.connectedUser.id) {
+        } else if (($rootScope.connectedUser.employeeType == "Employé" && $routeParams.employeeId != $rootScope.connectedUser.id) ||
+            ($rootScope.connectedUser.employeeType == "Administrateur lecture seul" && $routeParams.employeeId == $rootScope.connectedUser.id)) {
             $location.path("/home");
         }
 
