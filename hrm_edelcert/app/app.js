@@ -55,9 +55,9 @@ angular.module('myApp', [
     }
 }]).factory('Constant', function () {
     return {
-        url: 'http://hrm-edelcert.ch/hrm_edelcert_server/ctrl/ctrl.php',
-        //url: 'http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php',
-        attachement: 'http://hrm-edelcert.ch/hrm_edelcert_server/attachements'
-        //attachement: 'http://localhost:8888/hrm_edelcert_server/attachements'
+        //url: 'http://hrm-edelcert.ch/hrm_edelcert_server/ctrl/ctrl.php',
+        url: 'http://localhost:8888/hrm_edelcert_server/ctrl/ctrl.php',
+        //attachement: 'http://hrm-edelcert.ch/hrm_edelcert_server/attachements'
+        attachement: 'http://localhost:8888/hrm_edelcert_server/attachements'
     };
 });

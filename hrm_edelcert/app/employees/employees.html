@@ -10,7 +10,7 @@
             <th class="hidden-sm hidden-xs">Numéro de téléphone</th>
             <th class="hidden-sm hidden-xs">Email</th>
             <th class="hidden-sm hidden-xs">Poste actuel</th>
-            <th></th>
+            <th ng-hide="connectedUser.employeeType=='Administrateur lecture seul'"></th>
         </tr>
         </thead>
         <tbody>
@@ -23,7 +23,7 @@
             <td class="hidden-sm hidden-xs">{{employee.phone}}</td>
             <td class="hidden-sm hidden-xs">{{employee.email}}</td>
             <td class="hidden-sm hidden-xs">{{employee.currentTitle}}</td>
-            <td style="width: 10px;">
+            <td style="width: 10px;" ng-hide="connectedUser.employeeType=='Administrateur lecture seul'">
                 <a ng-click="delEmployee(employee.pk_employee)"><span class="glyphicon glyphicon-remove a-remove" aria-hidden="true"></span></a>
             </td>
         </tr>
