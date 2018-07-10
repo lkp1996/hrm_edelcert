@@ -87,7 +87,7 @@
             <input type="text" class="form-control" placeholder="Salaire horaire actuel"
                    ng-model="employee.currentHourlyWage" disabled ng-if="!modified">
             <input type="text" class="form-control" placeholder="Salaire horaire actuel"
-                   ng-model="employee.currentHourlyWage" ng-if="modified">
+                   ng-model="employee.currentHourlyWage" uib-popover="Format : 'xx.xx'" popover-trigger="'focus'" popover-placement="bottom-left" ng-if="modified">
         </div>
     </uib-tab>
     <uib-tab index="1" heading="{{tabs[1].name}}" disable="tabs[1].disabled">
