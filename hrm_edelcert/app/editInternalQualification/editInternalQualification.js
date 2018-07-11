@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('myApp.newEmployee', ['ngRoute'])
+angular.module('myApp.editInternalQualification', ['ngRoute'])
 
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/newEmployee', {
-            templateUrl: 'newEmployee/newEmployee.html',
-            controller: 'NewEmployeeCtrl'
+        $routeProvider.when('/editInternalQualification', {
+            templateUrl: 'editInternalQualification/editInternalQualification.html',
+            controller: 'EditInternalQualificationCtrl'
         });
     }])
 
-    .controller('NewEmployeeCtrl', ['$scope', '$rootScope', '$cookies', '$http', 'fileUpload', '$location', 'Constant', function ($scope, $rootScope, $cookies, $http, fileUpload, $location, Constant) {
+    .controller('EditInternalQualificationCtrl', ['$scope', '$rootScope', '$cookies', '$http', 'fileUpload', '$location', 'Constant', function ($scope, $rootScope, $cookies, $http, fileUpload, $location, Constant) {
         if (!$rootScope.isConnected) {
             $location.path("/login");
         } else if ($rootScope.connectedUser.employeeType == "Employé" || $rootScope.connectedUser.employeeType == "Administrateur lecture seule") {
@@ -18,7 +18,10 @@ angular.module('myApp.newEmployee', ['ngRoute'])
 
         $scope.employee = {"role": "employee"};
 
-        $scope.types = [];
+        $scope.internalQualifications = [];
+
+        $scope.iqStepsNum = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+        $scope.iqCapacitiesNum = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
 
         $scope.add = function () {
             $scope.employee.birthDate = new Date($scope.employee.birthDate).getTime();
@@ -50,19 +53,14 @@ angular.module('myApp.newEmployee', ['ngRoute'])
             );
         };
 
-        $scope.getTypeList = function () {
-            $http.get(Constant.url + "?type_list").then(
+        $scope.getIQNames = function () {
+            $http.get(Constant.url + "?internalqualification_names").then(
                 function (data) {
-                    $scope.types = data.data;
+                    $scope.internalQualifications = data.data;
                 }
             )
         };
 
-        $scope.uploadFile = function (id, file, type) {
-            var uploadUrl = Constant.url;
-            fileUpload.uploadFileToUrl(file, uploadUrl, id, type);
-        };
-
-        $scope.getTypeList();
+        $scope.getIQNames();
 
     }]);

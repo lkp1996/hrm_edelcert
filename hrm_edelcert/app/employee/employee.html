@@ -87,7 +87,8 @@
             <input type="text" class="form-control" placeholder="Salaire horaire actuel"
                    ng-model="employee.currentHourlyWage" disabled ng-if="!modified">
             <input type="text" class="form-control" placeholder="Salaire horaire actuel"
-                   ng-model="employee.currentHourlyWage" uib-popover="Format : 'xx.xx'" popover-trigger="'focus'" popover-placement="bottom-left" ng-if="modified">
+                   ng-model="employee.currentHourlyWage" uib-popover="Format : 'xx.xx'" popover-trigger="'focus'"
+                   popover-placement="bottom-left" ng-if="modified">
         </div>
     </uib-tab>
     <uib-tab index="1" heading="{{tabs[1].name}}" disable="tabs[1].disabled">
@@ -161,7 +162,7 @@
             </tbody>
         </table>
 
-        <div class="row placeholders" ng-hide="active!=1 || connectedUser.employeeType=='Administrateur lecture seul'">
+        <div class="row placeholders" ng-hide="active!=1 || connectedUser.employeeType=='Administrateur lecture seule'">
             <div class="col-xs-12 col-sm-12 placeholder">
                 <input type="button" value="Modifier" class="btn btn-default" ng-click="modif()"
                        ng-if="!modified">
@@ -238,7 +239,7 @@
             </tr>
             </tbody>
         </table>
-        <div class="row placeholders" ng-hide="active!=2 || connectedUser.employeeType=='Administrateur lecture seul'">
+        <div class="row placeholders" ng-hide="active!=2 || connectedUser.employeeType=='Administrateur lecture seule'">
             <div class="col-xs-12 col-sm-12 placeholder">
                 <input type="button" value="Modifier" class="btn btn-default" ng-click="modif()"
                        ng-if="!modified">
@@ -306,7 +307,7 @@
             </tr>
             </tbody>
         </table>
-        <div class="row placeholders" ng-hide="active!=3 || connectedUser.employeeType=='Administrateur lecture seul'">
+        <div class="row placeholders" ng-hide="active!=3 || connectedUser.employeeType=='Administrateur lecture seule'">
             <div class="col-xs-12 col-sm-12 placeholder">
                 <input type="button" value="Modifier" class="btn btn-default" ng-click="modif()"
                        ng-if="!modified">
@@ -347,8 +348,8 @@
                 <td>{{auditExperience.fees}}</td>
                 <td><a href="{{attachement}}/mandatesheet/{{employeeId}}/{{auditExperience.mandatesheet}}"
                        target="_blank" ng-if="auditExperience.mandatesheet"><span class="glyphicon glyphicon-file"
-                                                                              aria-hidden="true"
-                                                                              ng-if="auditExperience.mandatesheet"></span>
+                                                                                  aria-hidden="true"
+                                                                                  ng-if="auditExperience.mandatesheet"></span>
                     {{auditExperience.mandatesheet}}</a></td>
             </tr>
             <tr ng-repeat="auditExperience in auditExperiences" ng-if="modified">
@@ -369,7 +370,9 @@
                 </td>
                 <td><input type="text" class="form-control" ng-model="auditExperience.oc"></td>
                 <td><input type="text" class="form-control" ng-model="auditExperience.year"></td>
-                <td><input type="text" class="form-control" ng-model="auditExperience.fees"></td>
+                <td><input type="text" class="form-control" ng-model="auditExperience.fees"
+                           uib-popover="Format : 'xx.xx'" popover-trigger="'focus'" popover-placement="bottom-left">
+                </td>
                 <td><input type="file" class="form-control" file-model="mandateSheetsAttachements[{{$index}}]"></td>
 
             </tr>
@@ -387,7 +390,7 @@
             </tr>
             </tbody>
         </table>
-        <div class="row placeholders" ng-hide="active!=4 || connectedUser.employeeType=='Administrateur lecture seul'">
+        <div class="row placeholders" ng-hide="active!=4 || connectedUser.employeeType=='Administrateur lecture seule'">
             <div class="col-xs-12 col-sm-12 placeholder">
                 <input type="button" value="Modifier" class="btn btn-default" ng-click="modif()"
                        ng-if="!modified">
@@ -400,7 +403,7 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Le candidat auditeur dispose-t-il des capacités et des  connaissances spécifiques concernant :
+                <th>Le candidat auditeur dispose-t-il des capacités et des connaissances spécifiques concernant :
                 </th>
                 <th>OUI</th>
                 <th>Remarques</th>
@@ -409,26 +412,27 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="i in iqCapacitiesNum" ng-if="!modified">
-                <td>{{internalQualifications[i].process}}</td>
-                <td><input type="checkbox" ng-checked="internalQualifications[i].yesno"  ng-if="internalQualifications[i].pk_internalQualifications!='2'" disabled></td>
-                <td>{{internalQualifications[i].result}}</td>
+            <tr ng-repeat="internalQualificationCapacity in internalQualificationsCapacity" ng-if="!modified">
+                <td>{{internalQualificationCapacity.capacity}}</td>
+                <td><input type="checkbox" ng-checked="internalQualificationCapacity.yesno" disabled></td>
+                <td>{{internalQualificationCapacity.result}}</td>
                 <td>
-                    <a href="{{attachement}}/internalqualification/{{employeeId}}/{{internalQualifications[i].attachement}}"
-                       target="_blank" ng-if="internalQualifications[i].attachement"><span class="glyphicon glyphicon-file"
-                                                                                                aria-hidden="true"
-                                                                                                ng-if="internalQualifications[i].attachement"></span>
-                        {{internalQualifications[i].attachement}}</a></td>
-                <td>{{internalQualifications[i].validationDate | date : "dd.MM.yyyy"}}</td>
+                    <a href="{{attachement}}/internalqualification/{{employeeId}}/{{internalQualificationCapacity.attachement}}"
+                       target="_blank" ng-if="internalQualificationCapacity.attachement"><span
+                            class="glyphicon glyphicon-file"
+                            aria-hidden="true"
+                            ng-if="internalQualificationCapacity.attachement"></span>
+                        {{internalQualificationCapacity.attachement}}</a></td>
+                <td>{{internalQualificationCapacity.validationDate | date : "dd.MM.yyyy"}}</td>
             </tr>
-            <tr ng-repeat="i in iqCapacitiesNum" ng-if="modified">
-                <td>{{internalQualifications[i].process}}</td>
-                <td><input type="checkbox" ng-model="internalQualifications[i].yesno" ng-if="internalQualifications[i].pk_internalQualifications!='2'"></td>
-                <td><input type="text" class="form-control" ng-model="internalQualifications[i].result"></td>
-                <td><input type="file" class="form-control" file-model="internalQualificationsAttachements[{{i}}]">
+            <tr ng-repeat="internalQualificationCapacity in internalQualificationsCapacity" ng-if="modified">
+                <td>{{internalQualificationCapacity.capacity}}</td>
+                <td><input type="checkbox" ng-model="internalQualificationCapacity.yesno"></td>
+                <td><input type="text" class="form-control" ng-model="internalQualificationCapacity.result"></td>
+                <td><input type="file" class="form-control" file-model="internalQualificationsCapacityAttachements[{{$index}}]">
                 </td>
                 <td>
-                    <date-picker-simple-input dt="internalQualifications[i].validationDate"></date-picker-simple-input>
+                    <date-picker-simple-input dt="internalQualificationCapacity.validationDate"></date-picker-simple-input>
                 </td>
             </tr>
             </tbody>
@@ -445,31 +449,47 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="i in iqStepsNum" ng-if="!modified">
-                <td>{{internalQualifications[i].process}}</td>
-                <td><input type="checkbox" ng-checked="internalQualifications[i].yesno"  ng-if="internalQualifications[i].pk_internalQualifications!='2'" disabled></td>
-                <td>{{internalQualifications[i].result}}</td>
+            <tr ng-repeat="internalQualificationProcess in internalQualificationsProcess" ng-if="!modified">
+                <td>{{internalQualificationProcess.process}}</td>
+                <td><input type="checkbox" ng-checked="internalQualificationProcess.yesno"
+                           ng-if="internalQualificationProcess.pk_internalQualificationsProcess!='2'" disabled></td>
+                <td>{{internalQualificationProcess.result}}</td>
                 <td>
-                    <a href="{{attachement}}/internalqualification/{{employeeId}}/{{internalQualifications[i].attachement}}"
-                       target="_blank" ng-if="internalQualifications[i].attachement"><span class="glyphicon glyphicon-file"
-                                                                                       aria-hidden="true"
-                                                                                       ng-if="internalQualifications[i].attachement"></span>
-                        {{internalQualifications[i].attachement}}</a></td>
-                <td>{{internalQualifications[i].validationDate | date : "dd.MM.yyyy"}}</td>
+                    <a href="{{attachement}}/internalqualification/{{employeeId}}/{{internalQualificationProcess.attachement}}"
+                       target="_blank" ng-if="internalQualificationProcess.attachement"><span
+                            class="glyphicon glyphicon-file"
+                            aria-hidden="true"
+                            ng-if="internalQualificationProcess.attachement"></span>
+                        {{internalQualificationProcess.attachement}}</a></td>
+                <td>{{internalQualificationProcess.validationDate | date : "dd.MM.yyyy"}}</td>
             </tr>
-            <tr ng-repeat="i in iqStepsNum" ng-if="modified">
-                <td>{{internalQualifications[i].process}}</td>
-                <td><input type="checkbox" ng-model="internalQualifications[i].yesno" ng-if="internalQualifications[i].pk_internalQualifications!='2'"></td>
-                <td><input type="text" class="form-control" ng-model="internalQualifications[i].result"></td>
-                <td><input type="file" class="form-control" file-model="internalQualificationsAttachements[{{i}}]">
+            <tr ng-repeat="internalQualificationProcess in internalQualificationsProcess" ng-if="modified">
+                <td>{{internalQualificationProcess.process}}</td>
+                <td><input type="checkbox" ng-model="internalQualificationProcess.yesno"
+                           ng-if="internalQualificationProcess.pk_internalQualificationsProcess!='2'"></td>
+                <td><input type="text" class="form-control" ng-model="internalQualificationProcess.result"></td>
+                <td><input type="file" class="form-control" file-model="internalQualificationsProcessAttachements[{{$index}}]">
                 </td>
                 <td>
-                    <date-picker-simple-input dt="internalQualifications[i].validationDate"></date-picker-simple-input>
+                    <date-picker-simple-input dt="internalQualificationProcess.validationDate"></date-picker-simple-input>
                 </td>
             </tr>
             </tbody>
         </table>
-        <div class="row placeholders" ng-hide="active!=5 || connectedUser.employeeType=='Employé' || connectedUser.employeeType=='Administrateur lecture seul'">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Qualifications reconnues pour les normes suivantes</th>
+                <th>OUI</th>
+                <th>Pièces jointes</th>
+                <th>Scope concerné</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <div class="row placeholders"
+             ng-hide="active!=5 || connectedUser.employeeType=='Employé' || connectedUser.employeeType=='Administrateur lecture seule'">
             <div class="col-xs-12 col-sm-12 placeholder">
                 <input type="button" value="Modifier" class="btn btn-default" ng-click="modif()" ng-if="!modified">
                 <button class="btn btn-success" ng-click="updateEmployeeIntQual()" ng-if="modified">Sauvegarder</button>
@@ -537,7 +557,7 @@
             </tr>
             </tbody>
         </table>
-        <div class="row placeholders" ng-hide="active!=6 || connectedUser.employeeType=='Administrateur lecture seul'">
+        <div class="row placeholders" ng-hide="active!=6 || connectedUser.employeeType=='Administrateur lecture seule'">
             <div class="col-xs-12 col-sm-12 placeholder">
                 <input type="button" value="Modifier" class="btn btn-default" ng-click="modif()" ng-if="!modified">
                 <button class="btn btn-success" ng-click="updateEmployeeAuditObservations()" ng-if="modified">
@@ -588,7 +608,7 @@
             </tr>
             </tbody>
         </table>
-        <div class="row placeholders" ng-hide="active!=7 || connectedUser.employeeType=='Administrateur lecture seul'">
+        <div class="row placeholders" ng-hide="active!=7 || connectedUser.employeeType=='Administrateur lecture seule'">
             <div class="col-xs-12 col-sm-12 placeholder">
                 <input type="button" value="Modifier" class="btn btn-default" ng-click="modif()" ng-if="!modified">
                 <button class="btn btn-success" ng-click="updateEmployeeObjectives()" ng-if="modified">Sauvegarder
@@ -627,7 +647,7 @@
     </div>
 </div>
 <br>
-<div class="row placeholders" ng-hide="active!=0 || connectedUser.employeeType=='Administrateur lecture seul'">
+<div class="row placeholders" ng-hide="active!=0 || connectedUser.employeeType=='Administrateur lecture seule'">
     <div class="col-xs-12 col-sm-12 placeholder">
         <input type="button" value="Modifier" class="btn btn-default" ng-click="modif()" ng-if="!modified">
         <button class="btn btn-success" ng-click="updateEmployeeAdmin()" ng-if="modified">Sauvegarder</button>

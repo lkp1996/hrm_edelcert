@@ -13,7 +13,7 @@ angular.module('myApp.employee', ['ngRoute'])
         if (!$rootScope.isConnected) {
             $location.path("/login");
         } else if (($rootScope.connectedUser.employeeType == "Employé" && $routeParams.employeeId != $rootScope.connectedUser.id) ||
-            ($rootScope.connectedUser.employeeType == "Administrateur lecture seul" && $routeParams.employeeId == $rootScope.connectedUser.id)) {
+            ($rootScope.connectedUser.employeeType == "Administrateur lecture seule" && $routeParams.employeeId == $rootScope.connectedUser.id)) {
             $location.path("/home");
         }
 
@@ -26,7 +26,8 @@ angular.module('myApp.employee', ['ngRoute'])
         $scope.consultingExperiences = [];
         $scope.NMSStandards = [];
         $scope.auditExperiences = [];
-        $scope.internalQualifications = [];
+        $scope.internalQualificationsProcess = [];
+        $scope.internalQualificationsCapacity = [];
         $scope.auditObservations = [];
         $scope.objectives = [];
         //$scope.mandateSheets = [];
@@ -39,7 +40,8 @@ angular.module('myApp.employee', ['ngRoute'])
         $scope.formationsAttachements = [];
         $scope.professionnalExperiencesAttachements = [];
         $scope.consultingExperiencesAttachements = [];
-        $scope.internalQualificationsAttachements = [];
+        $scope.internalQualificationsProcessAttachements = [];
+        $scope.internalQualificationsCapacityAttachements = [];
         $scope.auditObservationsAttachements = [];
         $scope.mandateSheetsAttachements = [];
 
@@ -80,10 +82,6 @@ angular.module('myApp.employee', ['ngRoute'])
             }
 
         ];
-
-        $scope.iqStepsNum = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-        $scope.iqCapacitiesNum = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
-
 
         $scope.getEmployeeAdmin = function () {
             $http.get(Constant.url + "?employee_administration=" + $routeParams.employeeId).then(
@@ -173,12 +171,23 @@ angular.module('myApp.employee', ['ngRoute'])
             );
         };
 
-        $scope.getEmployeeInternalQualifications = function () {
-            $http.get(Constant.url + "?employee_internalqualifications=" + $routeParams.employeeId).then(
+        $scope.getEmployeeInternalQualificationsProcess = function () {
+            $http.get(Constant.url + "?employee_internalqualificationsprocess=" + $routeParams.employeeId).then(
                 function (data) {
-                    $scope.internalQualifications = data.data;
-                    angular.forEach($scope.internalQualifications, function (internalQualification, key) {
-                        internalQualification.validationDate = new Date(internalQualification.validationDate - 0);
+                    $scope.internalQualificationsProcess = data.data;
+                    angular.forEach($scope.internalQualificationsProcess, function (internalQualificationProcess, key) {
+                        internalQualificationProcess.validationDate = new Date(internalQualificationProcess.validationDate - 0);
+                    });
+                }
+            );
+        };
+
+        $scope.getEmployeeInternalQualificationsCapacity = function () {
+            $http.get(Constant.url + "?employee_internalqualificationscapacity=" + $routeParams.employeeId).then(
+                function (data) {
+                    $scope.internalQualificationsCapacity = data.data;
+                    angular.forEach($scope.internalQualificationsCapacity, function (internalQualificationsCapacity, key) {
+                        internalQualificationsCapacity.validationDate = new Date(internalQualificationsCapacity.validationDate - 0);
                     });
                 }
             );
@@ -249,7 +258,8 @@ angular.module('myApp.employee', ['ngRoute'])
             $scope.getEmployeeProfExp();
             $scope.getEmployeeConExp();
             $scope.getEmployeeAuditExp();
-            $scope.getEmployeeInternalQualifications();
+            $scope.getEmployeeInternalQualificationsProcess();
+            $scope.getEmployeeInternalQualificationsCapacity();
             $scope.getEmployeeAuditObs();
             //$scope.getEmployeeMandateSheets();
             $scope.getEmployeeObjectives();
@@ -373,7 +383,6 @@ angular.module('myApp.employee', ['ngRoute'])
                     $scope.modified = false;
                     $scope.employee.birthDate = new Date($scope.employee.birthDate);
                     $scope.employee.comingToOfficeDate = new Date($scope.employee.comingToOfficeDate);
-                    console.dir($scope.cv);
                     if (angular.isDefined($scope.cv) && angular.isDefined($scope.cv.name)) {
                         $scope.uploadFile($scope.employeeId, $scope.cv, 'cv');
                     }
@@ -392,7 +401,7 @@ angular.module('myApp.employee', ['ngRoute'])
             if ($scope.formations.length == 0) {
                 $http.post(Constant.url,
                     {"formations": "empty", "fk_employee": $scope.employeeId}
-                ).then(function (data) {
+                ).then(function () {
                     $scope.modified = false;
                     $scope.cancel();
                 });
@@ -411,7 +420,7 @@ angular.module('myApp.employee', ['ngRoute'])
                 $http.post(Constant.url,
                     $scope.formations
                 ).then(
-                    function (data) {
+                    function () {
                         $scope.modified = false;
                         if ($scope.formations) {
                             angular.forEach($scope.formations, function (formation, key) {
@@ -517,23 +526,53 @@ angular.module('myApp.employee', ['ngRoute'])
         };
 
         $scope.updateEmployeeIntQual = function () {
-            angular.forEach($scope.internalQualifications, function (internalQualifications, key) {
-                internalQualifications.validationDate = new Date(internalQualifications.validationDate).getTime();
-                if (angular.isDefined($scope.internalQualificationsAttachements[key])) {
-                    internalQualifications.attachement = $scope.internalQualificationsAttachements[key].name;
+            $scope.udpateEmployeeIntQualProcess();
+            $scope.udpateEmployeeIntQualCapacity();
+
+        };
+
+        $scope.udpateEmployeeIntQualProcess = function () {
+            angular.forEach($scope.internalQualificationsProcess, function (internalQualificationsProcess, key) {
+                internalQualificationsProcess.validationDate = new Date(internalQualificationsProcess.validationDate).getTime();
+                if (angular.isDefined($scope.internalQualificationsProcessAttachements[key])) {
+                    internalQualificationsProcess.attachement = $scope.internalQualificationsProcessAttachements[key].name;
                 }
 
             });
             $http.post(Constant.url,
-                $scope.internalQualifications
+                $scope.internalQualificationsProcess
             ).then(function (data) {
                 $scope.modified = false;
-                angular.forEach($scope.internalQualifications, function (internalQualification, key) {
-                    internalQualification.validationDate = new Date(internalQualification.validationDate);
+                angular.forEach($scope.internalQualificationsProcess, function (internalQualificationProcess, key) {
+                    internalQualificationProcess.validationDate = new Date(internalQualificationProcess.validationDate);
                 });
-                angular.forEach($scope.internalQualifications, function (internalQualification, key) {
-                    if (angular.isDefined($scope.internalQualificationsAttachements[key])) {
-                        $scope.uploadFile($scope.employeeId, $scope.internalQualificationsAttachements[key], 'intqual');
+                angular.forEach($scope.internalQualificationsProcess, function (internalQualification, key) {
+                    if (angular.isDefined($scope.internalQualificationsProcessAttachements[key])) {
+                        $scope.uploadFile($scope.employeeId, $scope.internalQualificationsProcessAttachements[key], 'intqual');
+                    }
+                });
+                $scope.cancel();
+            });
+        };
+
+        $scope.udpateEmployeeIntQualCapacity = function () {
+            angular.forEach($scope.internalQualificationsCapacity, function (internalQualificationsCapacity, key) {
+                internalQualificationsCapacity.validationDate = new Date(internalQualificationsCapacity.validationDate).getTime();
+                if (angular.isDefined($scope.internalQualificationsCapacityAttachements[key])) {
+                    internalQualificationsCapacity.attachement = $scope.internalQualificationsCapacityAttachements[key].name;
+                }
+
+            });
+            $http.post(Constant.url,
+                $scope.internalQualificationsCapacity
+            ).then(function (data) {
+                $scope.modified = false;
+                angular.forEach($scope.internalQualificationsCapacity, function (internalQualificationCapacity, key) {
+                    internalQualificationCapacity.validationDate = new Date(internalQualificationCapacity.validationDate);
+                });
+                angular.forEach($scope.internalQualificationsCapacity, function (internalQualificationCapacity, key) {
+                    if (angular.isDefined($scope.internalQualificationsCapacityAttachements[key])) {
+                        $scope.uploadFile($scope.employeeId, $scope.internalQualificationsCapacityAttachements[key], 'intqual');
                     }
                 });
                 $scope.cancel();
@@ -642,7 +681,8 @@ angular.module('myApp.employee', ['ngRoute'])
         $scope.getEmployeeProfExp();
         $scope.getEmployeeConExp();
         $scope.getEmployeeAuditExp();
-        $scope.getEmployeeInternalQualifications();
+        $scope.getEmployeeInternalQualificationsProcess();
+        $scope.getEmployeeInternalQualificationsCapacity();
         $scope.getEmployeeAuditObs();
         //$scope.getEmployeeMandateSheets();
         $scope.getEmployeeObjectives();

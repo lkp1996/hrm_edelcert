@@ -85,7 +85,8 @@
             <div class="input-group input-employee">
                 <span class="input-group-addon">Salaire horaire actuel</span>
                 <input type="text" class="form-control" placeholder="Salaire horaire actuel"
-                       ng-model="employee.currentHourlyWage" ng-required="false">
+                       ng-model="employee.currentHourlyWage" uib-popover="Format : 'xx.xx'" popover-trigger="'focus'"
+                       popover-placement="bottom-left" ng-required="false">
             </div>
         </div>
     </div>
