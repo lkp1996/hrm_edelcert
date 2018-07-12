@@ -116,10 +116,7 @@
                        target="_blank"><span
                             class="glyphicon glyphicon-file" aria-hidden="true"
                             ng-if="formation.attachement"></span> {{formation.attachement}}</a></td>
-                <td>
-                    <input type="number" min="1" max="39" class="form-control"
-                           ng-value="formation.EAScope" disabled>
-                </td>
+                <td>{{formation.EAScope}}</td>
                 <td>{{formation.fromDate | date : "dd.MM.yyyy"}}</td>
                 <td>{{formation.toDate | date : "dd.MM.yyyy"}}</td>
             </tr>
@@ -140,7 +137,8 @@
                            file-model="formationsAttachements[{{$index}}]"></td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control"
-                           ng-model="formation.EAScope">
+                           ng-model="formation.EAScope" uib-popover="Min : 1, max : 39" popover-trigger="'focus'"
+                           popover-placement="bottom-left">
                 </td>
                 <td>
                     <date-picker-simple-input dt="formation.fromDate"></date-picker-simple-input>
@@ -196,10 +194,7 @@
                             class="glyphicon glyphicon-file" aria-hidden="true"
                             ng-if="professionnalExperience.attachement != null"></span>
                         {{professionnalExperience.attachement}}</a></td>
-                <td>
-                    <input type="number" min="1" max="39" class="form-control"
-                           ng-value="professionnalExperience.EAScope" disabled>
-                </td>
+                <td>{{professionnalExperience.EAScope}}</td>
                 <td>{{professionnalExperience.fromDate | date : "dd.MM.yyyy"}}</td>
                 <td>{{professionnalExperience.toDate | date : "dd.MM.yyyy"}}</td>
             </tr>
@@ -217,7 +212,8 @@
                            file-model="professionnalExperiencesAttachements[{{$index}}]"></td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control"
-                           ng-model="professionnalExperience.EAScope">
+                           ng-model="professionnalExperience.EAScope" uib-popover="Min : 1, max : 39"
+                           popover-trigger="'focus'" popover-placement="bottom-left">
                 </td>
                 <td>
                     <date-picker-simple-input dt="professionnalExperience.fromDate"></date-picker-simple-input>
@@ -269,10 +265,7 @@
                             ng-options="NMSStandard.pk_NMSStandard as NMSStandard.name for NMSStandard in NMSStandards"
                             ng-model="consultingExperience.fk_NMSStandard" disabled></select>
                 </td>
-                <td>
-                    <input type="number" min="1" max="39" class="form-control"
-                           ng-value="consultingExperience.EAScope" disabled>
-                </td>
+                <td>{{consultingExperience.EAScope}}</td>
                 <td>{{consultingExperience.organization}}</td>
                 <td>{{consultingExperience.year}}</td>
             </tr>
@@ -290,7 +283,8 @@
                 </td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control"
-                           ng-model="consultingExperience.EAScope">
+                           ng-model="consultingExperience.EAScope" uib-popover="Min : 1, max : 39"
+                           popover-trigger="'focus'" popover-placement="bottom-left">
                 </td>
                 <td><input type="text" class="form-control" ng-model="consultingExperience.organization"></td>
                 <td><input type="text" class="form-control" ng-model="consultingExperience.year"></td>
@@ -339,10 +333,7 @@
                             ng-options="NMSStandard.pk_NMSStandard as NMSStandard.name for NMSStandard in NMSStandards"
                             ng-model="auditExperience.fk_NMSStandard" disabled></select>
                 </td>
-                <td>
-                    <input type="number" min="1" max="39" class="form-control"
-                           ng-value="auditExperience.EAScope" disabled>
-                </td>
+                <td>{{auditExperience.EAScope}}</td>
                 <td>{{auditExperience.oc}}</td>
                 <td>{{auditExperience.year}}</td>
                 <td>{{auditExperience.fees}}</td>
@@ -366,7 +357,8 @@
                 </td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control"
-                           ng-model="auditExperience.EAScope">
+                           ng-model="auditExperience.EAScope" uib-popover="Min : 1, max : 39" popover-trigger="'focus'"
+                           popover-placement="bottom-left">
                 </td>
                 <td><input type="text" class="form-control" ng-model="auditExperience.oc"></td>
                 <td><input type="text" class="form-control" ng-model="auditExperience.year"></td>
@@ -486,7 +478,7 @@
                 <th>Qualifications reconnues pour les normes suivantes</th>
                 <th>OUI</th>
                 <th>Pièces jointes</th>
-                <th>Scope concerné</th>
+                <th colspan="2">Scope(s) concerné(s)</th>
             </tr>
             </thead>
             <tbody>
@@ -500,7 +492,8 @@
                             aria-hidden="true"
                             ng-if="internalQualificationStandard.attachement"></span>
                         {{internalQualificationStandard.attachement}}</a></td>
-                <td>{{internalQualificationStandard.concernedScope}}</td>
+                <td>{{internalQualificationStandard.concernedScope1}}</td>
+                <td>{{internalQualificationStandard.concernedScope2}}</td>
             </tr>
             <tr ng-repeat="internalQualificationStandard in internalQualificationsStandard" ng-if="modified">
                 <td>{{internalQualificationStandard.standard}}</td>
@@ -508,7 +501,16 @@
                 <td><input type="file" class="form-control"
                            file-model="internalQualificationsStandardAttachements[{{$index}}]">
                 </td>
-                <td><input type="text" class="form-control" ng-model="internalQualificationStandard.concernedScope"></td>
+                <td>
+                    <input type="number" min="1" max="39" class="form-control"
+                           ng-model="internalQualificationStandard.concernedScope1" uib-popover="Min : 1, max : 39"
+                           popover-trigger="'focus'" popover-placement="bottom-left">
+                </td>
+                <td>
+                    <input type="number" min="1" max="39" class="form-control"
+                           ng-model="internalQualificationStandard.concernedScope2" uib-popover="Min : 1, max : 39"
+                           popover-trigger="'focus'" popover-placement="bottom-left">
+                </td>
             </tr>
             </tbody>
         </table>
@@ -544,10 +546,7 @@
                                                                                   aria-hidden="true"
                                                                                   ng-if="auditObservation.attachement"></span>
                         {{auditObservation.attachement}}</a></td>
-                <td>
-                    <input type="number" min="1" max="39" class="form-control"
-                           ng-value="auditObservation.EAScope" disabled>
-                </td>
+                <td>{{auditObservation.EAScope}}</td>
                 <td><textarea class="form-control" disabled>{{auditObservation.comment}}</textarea></td>
                 <td>{{auditObservation.date | date : "dd.MM.yyyy"}}</td>
             </tr>
@@ -562,7 +561,8 @@
                 <td><input type="file" class="form-control" file-model="auditObservationsAttachements[{{$index}}]"></td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control"
-                           ng-model="auditObservation.EAScope">
+                           ng-model="auditObservation.EAScope" uib-popover="Min : 1, max : 39" popover-trigger="'focus'"
+                           popover-placement="bottom-left">
                 </td>
                 <td><textarea class="form-control" ng-model="auditObservation.comment"></textarea></td>
                 <td>
