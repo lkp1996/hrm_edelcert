@@ -16,51 +16,125 @@ angular.module('myApp.editInternalQualification', ['ngRoute'])
             $location.path("/home");
         }
 
-        $scope.employee = {"role": "employee"};
+        $scope.internalQualificationsProcess = [];
+        $scope.internalQualificationsCapacity = [];
+        $scope.internalQualificationsStandard = [];
+        $scope.modified = false;
 
-        $scope.internalQualifications = [];
-
-        $scope.iqStepsNum = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-        $scope.iqCapacitiesNum = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
-
-        $scope.add = function () {
-            $scope.employee.birthDate = new Date($scope.employee.birthDate).getTime();
-            $scope.employee.comingToOfficeDate = new Date($scope.employee.comingToOfficeDate).getTime();
-            if (angular.isDefined($scope.picture)) {
-                $scope.employee.picture = $scope.picture.name;
-            }
-            if (angular.isDefined($scope.cv)) {
-                $scope.employee.cv = $scope.cv.name;
-            }
-            if (angular.isDefined($scope.criminalRecord)) {
-                $scope.employee.criminalRecord = $scope.criminalRecord.name;
-            }
-
-            var id = null;
-            $http.post(Constant.url, $scope.employee
-            ).then(
+        $scope.getInternalQualificationsProcess = function(){
+            $http.get(Constant.url + "?internalqualificationsprocess_name").then(
                 function (data) {
-                    id = data;
-                    $scope.uploadFile(id, $scope.picture, 'picture');
-                    $scope.uploadFile(id, $scope.cv, 'cv');
-                    $scope.uploadFile(id, $scope.criminalRecord, 'criminalRecord');
-                    $scope.employee = {};
-                    $scope.picture = undefined;
-                    $scope.cv = undefined;
-                    $scope.criminalRecord = undefined;
-
+                    $scope.internalQualificationsProcess = data.data;
                 }
             );
         };
 
-        $scope.getIQNames = function () {
-            $http.get(Constant.url + "?internalqualification_names").then(
+        $scope.getInternalQualificationsCapacity = function(){
+            $http.get(Constant.url + "?internalqualificationscapacity_name").then(
                 function (data) {
-                    $scope.internalQualifications = data.data;
+                    $scope.internalQualificationsCapacity = data.data;
                 }
-            )
+            );
         };
 
-        $scope.getIQNames();
+        $scope.getInternalQualificationsStandard = function(){
+            $http.get(Constant.url + "?internalqualificationsstandard_name").then(
+                function (data) {
+                    $scope.internalQualificationsStandard = data.data;
+                }
+            );
+        };
+
+        $scope.cancel = function () {
+            $scope.modified = false;
+
+            $scope.getInternalQualificationsProcess();
+            $scope.getInternalQualificationsCapacity();
+            $scope.getInternalQualificationsStandard();
+        };
+
+        $scope.modif = function () {
+            $scope.modified = true;
+        };
+
+        $scope.updateIntQual = function(){
+            $scope.modified = false;
+        };
+
+        $scope.addCapacity = function(){
+            if (!Array.isArray($scope.internalQualificationsCapacity)) {
+                $scope.internalQualificationsCapacity = [
+                    {"pk_internalQualificationsCapacity": 0, "capacity": ""}
+                ];
+            } else {
+                $scope.internalQualificationsCapacity.push({"pk_internalQualificationsCapacity": 0, "capacity": ""});
+            }
+        };
+
+        $scope.addProcess = function(){
+            if (!Array.isArray($scope.internalQualificationsProcess)) {
+                $scope.internalQualificationsProcess = [
+                    {"pk_internalQualificationsProcess": 0, "process": ""}
+                ];
+            } else {
+                $scope.internalQualificationsProcess.push({"pk_internalQualificationsProcess": 0, "process": ""});
+            }
+        };
+
+        $scope.addStandard = function(){
+            if (!Array.isArray($scope.internalQualificationsStandard)) {
+                $scope.internalQualificationsStandard = [
+                    {"pk_internalQualificationsStandard": 0, "standard": ""}
+                ];
+            } else {
+                $scope.internalQualificationsStandard.push({"pk_internalQualificationsStandard": 0, "standard": ""});
+            }
+        };
+
+        $scope.delRow = function (element, index) {
+            if (confirm("Voulez-vous vraiment supprimer cet élément ?")) {
+                element.splice(index, 1);
+            }
+        };
+
+        $scope.updateIntQual = function(){
+            $scope.updateIntQualProcess();
+            $scope.updateIntQualCapacity();
+            $scope.updateIntQualStandard();
+        };
+
+        $scope.updateIntQualProcess = function(){
+            $http.post(Constant.url,
+                $scope.internalQualificationsProcess
+            ).then(function (data) {
+                console.log(data.data);
+                $scope.modified = false;
+                $scope.cancel();
+            });
+        };
+
+        $scope.updateIntQualCapacity = function(){
+            $http.post(Constant.url,
+                $scope.internalQualificationsCapacity
+            ).then(function (data) {
+                console.log(data.data);
+                $scope.modified = false;
+                $scope.cancel();
+            });
+        };
+
+        $scope.updateIntQualStandard = function(){
+            $http.post(Constant.url,
+                $scope.internalQualificationsStandard
+            ).then(function (data) {
+                console.log(data.data);
+                $scope.modified = false;
+                $scope.cancel();
+            });
+        };
+
+        $scope.getInternalQualificationsProcess();
+        $scope.getInternalQualificationsCapacity();
+        $scope.getInternalQualificationsStandard();
 
     }]);

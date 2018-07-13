@@ -199,14 +199,6 @@ angular.module('myApp.employee', ['ngRoute'])
             $http.get(Constant.url + "?employee_internalqualificationsstandard=" + $routeParams.employeeId).then(
                 function (data) {
                     $scope.internalQualificationsStandard = data.data;
-                    angular.forEach($scope.internalQualificationsStandard, function (internalQualificationStandard, key) {
-                        if (internalQualificationStandard.concernedScope1 != null) {
-                            internalQualificationStandard.concernedScope1 = internalQualificationStandard.concernedScope1 - 0;
-                        }
-                        if (internalQualificationStandard.concernedScope2 != null) {
-                            internalQualificationStandard.concernedScope2 = internalQualificationStandard.concernedScope2 - 0;
-                        }
-                    });
                 }
             );
         };

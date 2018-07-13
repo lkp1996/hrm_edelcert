@@ -478,7 +478,7 @@
                 <th>Qualifications reconnues pour les normes suivantes</th>
                 <th>OUI</th>
                 <th>Pièces jointes</th>
-                <th colspan="2">Scope(s) concerné(s)</th>
+                <th>Scope(s) concerné(s)</th>
             </tr>
             </thead>
             <tbody>
@@ -492,8 +492,7 @@
                             aria-hidden="true"
                             ng-if="internalQualificationStandard.attachement"></span>
                         {{internalQualificationStandard.attachement}}</a></td>
-                <td>{{internalQualificationStandard.concernedScope1}}</td>
-                <td>{{internalQualificationStandard.concernedScope2}}</td>
+                <td>{{internalQualificationStandard.concernedScope}}</td>
             </tr>
             <tr ng-repeat="internalQualificationStandard in internalQualificationsStandard" ng-if="modified">
                 <td>{{internalQualificationStandard.standard}}</td>
@@ -502,13 +501,8 @@
                            file-model="internalQualificationsStandardAttachements[{{$index}}]">
                 </td>
                 <td>
-                    <input type="number" min="1" max="39" class="form-control"
-                           ng-model="internalQualificationStandard.concernedScope1" uib-popover="Min : 1, max : 39"
-                           popover-trigger="'focus'" popover-placement="bottom-left">
-                </td>
-                <td>
-                    <input type="number" min="1" max="39" class="form-control"
-                           ng-model="internalQualificationStandard.concernedScope2" uib-popover="Min : 1, max : 39"
+                    <input type="text" class="form-control"
+                           ng-model="internalQualificationStandard.concernedScope" uib-popover="Min : 1, max : 39"
                            popover-trigger="'focus'" popover-placement="bottom-left">
                 </td>
             </tr>

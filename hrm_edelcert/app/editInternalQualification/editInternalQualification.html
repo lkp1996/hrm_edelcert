@@ -1,1 +1,85 @@
 <h1 class="page-header">Éditer qualifications internes</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th ng-if="modified"></th>
+        <th>Le candidat auditeur dispose-t-il des capacités et des connaissances spécifiques concernant :
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="internalQualificationCapacity in internalQualificationsCapacity" ng-if="!modified">
+        <td>{{internalQualificationCapacity.capacity}}</td>
+    </tr>
+    <tr ng-repeat="internalQualificationCapacity in internalQualificationsCapacity" ng-if="modified">
+        <td><a class="a-remove" ng-click="delRow(internalQualificationsCapacity, $index)"><span
+                class="glyphicon glyphicon-minus"
+                aria-hidden="true"></span></a></td>
+        <td><input type="text" class="form-control"
+                   ng-model="internalQualificationCapacity.capacity"></td>
+    </tr>
+    <tr ng-if="modified">
+        <td><a ng-click="addCapacity()"><span class="glyphicon glyphicon-plus"
+                                              aria-hidden="true"></span></a></td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th ng-if="modified"></th>
+        <th>Marche à suivre selon procédure de qualification en cours</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="internalQualificationProcess in internalQualificationsProcess" ng-if="!modified">
+        <td>{{internalQualificationProcess.process}}</td>
+    </tr>
+    <tr ng-repeat="internalQualificationProcess in internalQualificationsProcess" ng-if="modified">
+        <td><a class="a-remove" ng-click="delRow(internalQualificationsProcess, $index)"><span
+                class="glyphicon glyphicon-minus"
+                aria-hidden="true"></span></a></td>
+        <td><input type="text" class="form-control"
+                   ng-model="internalQualificationProcess.process"></td>
+    </tr>
+    <tr ng-if="modified">
+        <td><a ng-click="addProcess()"><span class="glyphicon glyphicon-plus"
+                                             aria-hidden="true"></span></a></td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th ng-if="modified"></th>
+        <th>Qualifications reconnues pour les normes suivantes</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="internalQualificationStandard in internalQualificationsStandard" ng-if="!modified">
+        <td>{{internalQualificationStandard.standard}}</td>
+    </tr>
+    <tr ng-repeat="internalQualificationStandard in internalQualificationsStandard" ng-if="modified">
+        <td><a class="a-remove" ng-click="delRow(internalQualificationsStandard, $index)"><span
+                class="glyphicon glyphicon-minus"
+                aria-hidden="true"></span></a></td>
+        <td><input type="text" class="form-control"
+                   ng-model="internalQualificationStandard.standard"></td>
+    </tr>
+    <tr ng-if="modified">
+        <td><a ng-click="addStandard()"><span class="glyphicon glyphicon-plus"
+                                              aria-hidden="true"></span></a></td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+<div class="row placeholders">
+    <div class="col-xs-12 col-sm-12 placeholder">
+        <input type="button" value="Modifier" class="btn btn-default" ng-click="modif()" ng-if="!modified">
+        <button class="btn btn-success" ng-click="updateIntQual()" ng-if="modified">Sauvegarder</button>
+        <button class="btn btn-danger" ng-click="cancel()" ng-if="modified">Annuler</button>
+    </div>
+</div>
