@@ -21,7 +21,7 @@ angular.module('myApp.editInternalQualification', ['ngRoute'])
         $scope.internalQualificationsStandard = [];
         $scope.modified = false;
 
-        $scope.getInternalQualificationsProcess = function(){
+        $scope.getInternalQualificationsProcess = function () {
             $http.get(Constant.url + "?internalqualificationsprocess_name").then(
                 function (data) {
                     $scope.internalQualificationsProcess = data.data;
@@ -29,7 +29,7 @@ angular.module('myApp.editInternalQualification', ['ngRoute'])
             );
         };
 
-        $scope.getInternalQualificationsCapacity = function(){
+        $scope.getInternalQualificationsCapacity = function () {
             $http.get(Constant.url + "?internalqualificationscapacity_name").then(
                 function (data) {
                     $scope.internalQualificationsCapacity = data.data;
@@ -37,7 +37,7 @@ angular.module('myApp.editInternalQualification', ['ngRoute'])
             );
         };
 
-        $scope.getInternalQualificationsStandard = function(){
+        $scope.getInternalQualificationsStandard = function () {
             $http.get(Constant.url + "?internalqualificationsstandard_name").then(
                 function (data) {
                     $scope.internalQualificationsStandard = data.data;
@@ -57,11 +57,11 @@ angular.module('myApp.editInternalQualification', ['ngRoute'])
             $scope.modified = true;
         };
 
-        $scope.updateIntQual = function(){
+        $scope.updateIntQual = function () {
             $scope.modified = false;
         };
 
-        $scope.addCapacity = function(){
+        $scope.addCapacity = function () {
             if (!Array.isArray($scope.internalQualificationsCapacity)) {
                 $scope.internalQualificationsCapacity = [
                     {"pk_internalQualificationsCapacity": 0, "capacity": ""}
@@ -71,7 +71,7 @@ angular.module('myApp.editInternalQualification', ['ngRoute'])
             }
         };
 
-        $scope.addProcess = function(){
+        $scope.addProcess = function () {
             if (!Array.isArray($scope.internalQualificationsProcess)) {
                 $scope.internalQualificationsProcess = [
                     {"pk_internalQualificationsProcess": 0, "process": ""}
@@ -81,7 +81,7 @@ angular.module('myApp.editInternalQualification', ['ngRoute'])
             }
         };
 
-        $scope.addStandard = function(){
+        $scope.addStandard = function () {
             if (!Array.isArray($scope.internalQualificationsStandard)) {
                 $scope.internalQualificationsStandard = [
                     {"pk_internalQualificationsStandard": 0, "standard": ""}
@@ -91,19 +91,24 @@ angular.module('myApp.editInternalQualification', ['ngRoute'])
             }
         };
 
-        $scope.delRow = function (element, index) {
-            if (confirm("Voulez-vous vraiment supprimer cet élément ?")) {
+        $scope.delRow = function (element, index, id) {
+            var message = "";
+            if (id == 0)
+                message = "Voulez-vous vraiment supprimer cet élément ?";
+            else
+                message = "Voulez-vous vraiment supprimer cet élément ?\nATTENTION !!! Cette action va également supprimer toutes les informations des employés concernant cet élément !";
+            if (confirm(message)) {
                 element.splice(index, 1);
             }
         };
 
-        $scope.updateIntQual = function(){
+        $scope.updateIntQual = function () {
             $scope.updateIntQualProcess();
             $scope.updateIntQualCapacity();
             $scope.updateIntQualStandard();
         };
 
-        $scope.updateIntQualProcess = function(){
+        $scope.updateIntQualProcess = function () {
             $http.post(Constant.url,
                 $scope.internalQualificationsProcess
             ).then(function (data) {
@@ -113,7 +118,7 @@ angular.module('myApp.editInternalQualification', ['ngRoute'])
             });
         };
 
-        $scope.updateIntQualCapacity = function(){
+        $scope.updateIntQualCapacity = function () {
             $http.post(Constant.url,
                 $scope.internalQualificationsCapacity
             ).then(function (data) {
@@ -123,7 +128,7 @@ angular.module('myApp.editInternalQualification', ['ngRoute'])
             });
         };
 
-        $scope.updateIntQualStandard = function(){
+        $scope.updateIntQualStandard = function () {
             $http.post(Constant.url,
                 $scope.internalQualificationsStandard
             ).then(function (data) {

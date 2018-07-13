@@ -63,7 +63,8 @@
         <td>{{internalQualificationStandard.standard}}</td>
     </tr>
     <tr ng-repeat="internalQualificationStandard in internalQualificationsStandard" ng-if="modified">
-        <td><a class="a-remove" ng-click="delRow(internalQualificationsStandard, $index)"><span
+        <td><a class="a-remove"
+               ng-click="delRow(internalQualificationsStandard, $index, internalQualificationStandard.pk_internalQualificationsStandard)"><span
                 class="glyphicon glyphicon-minus"
                 aria-hidden="true"></span></a></td>
         <td><input type="text" class="form-control"
