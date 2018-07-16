@@ -31,7 +31,6 @@ angular.module('myApp.employee', ['ngRoute'])
         $scope.internalQualificationsStandard = [];
         $scope.auditObservations = [];
         $scope.objectives = [];
-        //$scope.mandateSheets = [];
 
         $scope.modified = false;
 
@@ -219,22 +218,6 @@ angular.module('myApp.employee', ['ngRoute'])
             );
         };
 
-        /*$scope.getEmployeeMandateSheets = function () {
-            $http.get(Constant.url + "?employee_mandatesheet=" + $routeParams.employeeId).then(
-                function (data) {
-                    if (!Array.isArray(data.data)) {
-                        $scope.mandateSheets = [];
-                    } else {
-                        $scope.mandateSheets = data.data;
-                        angular.forEach($scope.mandateSheets, function (mandateSheet, key) {
-                            mandateSheet.EAScope = mandateSheet.EAScope - 0;
-                            mandateSheet.date = new Date(mandateSheet.date - 0);
-                        });
-                    }
-                }
-            );
-        };*/
-
         $scope.getEmployeeObjectives = function () {
             $http.get(Constant.url + "?employee_objective=" + $routeParams.employeeId).then(
                 function (data) {
@@ -272,7 +255,6 @@ angular.module('myApp.employee', ['ngRoute'])
             $scope.getEmployeeInternalQualificationsCapacity();
             $scope.getEmployeeInternalQualificationsStandard();
             $scope.getEmployeeAuditObs();
-            //$scope.getEmployeeMandateSheets();
             $scope.getEmployeeObjectives();
 
             angular.forEach($scope.tabs, function (tab, key) {
@@ -341,19 +323,6 @@ angular.module('myApp.employee', ['ngRoute'])
                 });
             }
         };
-
-        /*$scope.addMandateSheetRow = function () {
-            if (!Array.isArray($scope.mandateSheets)) {
-                $scope.mandateSheets = [
-                    {"pk_mandateSheet": 0, "fk_employee": $scope.employeeId}
-                ];
-            } else {
-                $scope.mandateSheets.push({
-                    "pk_mandateSheet": 0,
-                    "fk_employee": $scope.employeeId
-                });
-            }
-        };*/
 
         $scope.addObjectiveRow = function () {
             if (!Array.isArray($scope.objectives)) {
@@ -646,41 +615,6 @@ angular.module('myApp.employee', ['ngRoute'])
             }
         };
 
-        /*$scope.updateEmployeeMandateSheets = function () {
-            if ($scope.mandateSheets.length == 0) {
-                $http.post(Constant.url,
-                    {"mandateSheets": "empty", "fk_employee": $scope.employeeId}
-                ).then(function (data) {
-                    $scope.modified = false;
-                    $scope.cancel();
-                });
-            } else {
-                angular.forEach($scope.mandateSheets, function (mandateSheet, key) {
-                    mandateSheet.date = new Date(mandateSheet.date).getTime();
-                    if (angular.isDefined($scope.mandateSheetsAttachements[key])) {
-                        mandateSheet.attachement = $scope.mandateSheetsAttachements[key].name;
-                    }
-
-                });
-                $http.post(Constant.url,
-                    $scope.mandateSheets
-                ).then(function (data) {
-                    $scope.modified = false;
-                    if ($scope.mandateSheets) {
-                        angular.forEach($scope.mandateSheets, function (mandateSheet, key) {
-                            mandateSheet.date = new Date(mandateSheet.date);
-                        });
-                        angular.forEach($scope.mandateSheets, function (mandateSheet, key) {
-                            if (angular.isDefined($scope.mandateSheetsAttachements[key])) {
-                                $scope.uploadFile($scope.employeeId, $scope.mandateSheetsAttachements[key], 'mandatesheets');
-                            }
-                        });
-                    }
-                    $scope.cancel();
-                });
-            }
-        };*/
-
         $scope.updateEmployeeObjectives = function () {
             if ($scope.objectives.length == 0) {
                 $http.post(Constant.url,
@@ -703,6 +637,167 @@ angular.module('myApp.employee', ['ngRoute'])
             }
         };
 
+        $scope.delCV = function () {
+            if (confirm("Voulez-vous vraiment supprimer ce fichier ?")) {
+                $http.delete(Constant.url, {
+                    params: {deleteIdCV: $scope.employeeId}
+                }).then(
+                    function (data) {
+                        console.log(data.data);
+                        $scope.cv = {};
+                        $scope.employee.cv = null;
+                    }
+                );
+            }
+        };
+
+        $scope.delCriminalRecord = function () {
+            if (confirm("Voulez-vous vraiment supprimer ce fichier ?")) {
+                $http.delete(Constant.url, {
+                    params: {deleteIdCriminalRecord: $scope.employeeId}
+                }).then(
+                    function (data) {
+                        console.log(data.data);
+                        $scope.criminalRecord = {};
+                        $scope.employee.criminalRecord = null;
+                    }
+                );
+            }
+        };
+
+        $scope.delPicture = function () {
+            if (confirm("Voulez-vous vraiment supprimer ce fichier ?")) {
+                $http.delete(Constant.url, {
+                    params: {deleteIdPicture: $scope.employeeId}
+                }).then(
+                    function (data) {
+                        console.log(data.data);
+                        $scope.picture = {};
+                        $scope.employee.picture = null;
+                    }
+                );
+            }
+        };
+
+        $scope.delFormationAttachement = function (pk_formation, attachementIndex) {
+            if (confirm("Voulez-vous vraiment supprimer ce fichier ?")) {
+                $http.delete(Constant.url, {
+                    params: {
+                        deleteIdFormationAttachement: pk_formation,
+                        employeeId: $scope.employeeId
+                    }
+                }).then(
+                    function (data) {
+                        console.log(data.data);
+                        $scope.formationsAttachements[attachementIndex] = {};
+                        $scope.formations[attachementIndex].attachement = null;
+                    }
+                );
+            }
+        };
+
+        $scope.delProfessionnalExperienceAttachement = function (pk_professionnalExperience, attachementIndex) {
+            if (confirm("Voulez-vous vraiment supprimer ce fichier ?")) {
+                $http.delete(Constant.url, {
+                    params: {
+                        deleteIdProfessionnalExperienceAttachement: pk_professionnalExperience,
+                        employeeId: $scope.employeeId
+                    }
+                }).then(
+                    function (data) {
+                        console.log(data.data);
+                        $scope.professionnalExperiencesAttachements[attachementIndex] = {};
+                        $scope.professionnalExperiences[attachementIndex].attachement = null;
+                    }
+                );
+            }
+        };
+
+        $scope.delMandateSheetsAttachements = function (pk_auditExperience, attachementIndex) {
+            if (confirm("Voulez-vous vraiment supprimer ce fichier ?")) {
+                $http.delete(Constant.url, {
+                    params: {
+                        deleteIdMandateSheetsAttachements: pk_auditExperience,
+                        employeeId: $scope.employeeId
+                    }
+                }).then(
+                    function (data) {
+                        console.log(data.data);
+                        $scope.mandateSheetsAttachements[attachementIndex] = {};
+                        $scope.auditExperiences[attachementIndex].mandatesheet = null;
+                    }
+                );
+            }
+        };
+
+        $scope.delInternalQualificationsCapacityAttachements = function (fk_internalQualificationCapacity, attachementIndex) {
+            if (confirm("Voulez-vous vraiment supprimer ce fichier ?")) {
+                $http.delete(Constant.url, {
+                    params: {
+                        deleteIdQualificationsCapacityAttachements: fk_internalQualificationCapacity,
+                        employeeId: $scope.employeeId
+                    }
+                }).then(
+                    function (data) {
+                        console.log(data.data);
+                        $scope.internalQualificationsCapacityAttachements[attachementIndex] = {};
+                        $scope.internalQualificationsCapacity[attachementIndex].attachement = null;
+                    }
+                );
+            }
+        };
+
+        $scope.delInternalQualificationsProcessAttachements = function (fk_internalQualificationProcess, attachementIndex) {
+            if (confirm("Voulez-vous vraiment supprimer ce fichier ?")) {
+                $http.delete(Constant.url, {
+                    params: {
+                        deleteIdQualificationsProcessAttachements: fk_internalQualificationProcess,
+                        employeeId: $scope.employeeId
+                    }
+                }).then(
+                    function (data) {
+                        console.log(data.data);
+                        $scope.internalQualificationsProcessAttachements[attachementIndex] = {};
+                        $scope.internalQualificationsProcess[attachementIndex].attachement = null;
+                    }
+                );
+            }
+        };
+
+        $scope.delInternalQualificationsStandardAttachements = function (fk_internalQualificationStandard, attachementIndex) {
+            if (confirm("Voulez-vous vraiment supprimer ce fichier ?")) {
+                $http.delete(Constant.url, {
+                    params: {
+                        deleteIdInternalQualificationsStandardAttachements: fk_internalQualificationStandard,
+                        employeeId: $scope.employeeId
+                    }
+                }).then(
+                    function (data) {
+                        console.log(data.data);
+                        $scope.internalQualificationsStandardAttachements[attachementIndex] = {};
+                        $scope.internalQualificationsStandard[attachementIndex].attachement = null;
+                    }
+                );
+            }
+        };
+
+        $scope.delAuditObservationsAttachements = function (pk_auditObservation, attachementIndex) {
+            if (confirm("Voulez-vous vraiment supprimer ce fichier ?")) {
+                $http.delete(Constant.url, {
+                    params: {
+                        deleteIdAuditObservationsAttachements: pk_auditObservation,
+                        employeeId: $scope.employeeId
+                    }
+                }).then(
+                    function (data) {
+                        console.log(data.data);
+                        $scope.auditObservationsAttachements[attachementIndex] = {};
+                        $scope.auditObservations[attachementIndex].attachement = null;
+                    }
+                );
+            }
+        };
+
         $scope.uploadFile = function (id, file, type) {
             var uploadUrl = Constant.url;
             fileUpload.uploadFileToUrl(file, uploadUrl, id, type);
@@ -717,7 +812,6 @@ angular.module('myApp.employee', ['ngRoute'])
         $scope.getEmployeeInternalQualificationsCapacity();
         $scope.getEmployeeInternalQualificationsStandard();
         $scope.getEmployeeAuditObs();
-        //$scope.getEmployeeMandateSheets();
         $scope.getEmployeeObjectives();
     }])
 ;

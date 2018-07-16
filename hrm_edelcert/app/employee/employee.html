@@ -133,8 +133,12 @@
                             ng-options="formationType.pk_formationType as formationType.formation for formationType in formationTypes"
                             ng-model="formation.fk_formationType"></select>
                 </td>
-                <td><input type="file" class="form-control" placeholder="CV"
-                           file-model="formationsAttachements[{{$index}}]"></td>
+                <td>
+                    <div class="input-group"><input type="file" class="form-control" placeholder="CV"
+                                                    file-model="formationsAttachements[{{$index}}]"><span
+                            class="input-group-btn" ng-if="formation.attachement"><button
+                            class="btn btn-danger" ng-click="delFormationAttachement(formation.pk_formation, $index)">x</button></span></div>
+                </td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control"
                            ng-model="formation.EAScope" uib-popover="Min : 1, max : 39" popover-trigger="'focus'"
@@ -208,8 +212,13 @@
                 <td><input type="text" class="form-control" ng-model="professionnalExperience.organizationActivity">
                 </td>
                 <td><input type="text" class="form-control" ng-model="professionnalExperience.fonction"></td>
-                <td><input type="file" class="form-control" placeholder="CV"
-                           file-model="professionnalExperiencesAttachements[{{$index}}]"></td>
+                <td>
+                    <div class="input-group"><input type="file" class="form-control"
+                                                    file-model="professionnalExperiencesAttachements[{{$index}}]"><span
+                            class="input-group-btn" ng-if="professionnalExperience.attachement"><button
+                            class="btn btn-danger" ng-click="delProfessionnalExperienceAttachement(professionnalExperience.pk_professionnalExperience, $index)">x</button></span>
+                    </div>
+                </td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control"
                            ng-model="professionnalExperience.EAScope" uib-popover="Min : 1, max : 39"
@@ -365,7 +374,13 @@
                 <td><input type="text" class="form-control" ng-model="auditExperience.fees"
                            uib-popover="Format : 'xx.xx'" popover-trigger="'focus'" popover-placement="bottom-left">
                 </td>
-                <td><input type="file" class="form-control" file-model="mandateSheetsAttachements[{{$index}}]"></td>
+                <td>
+                    <div class="input-group"><input type="file" class="form-control"
+                                                    file-model="mandateSheetsAttachements[{{$index}}]"><span
+                            class="input-group-btn" ng-if="auditExperience.mandatesheet"><button
+                            class="btn btn-danger" ng-click="delMandateSheetsAttachements(auditExperience.pk_auditExperience, $index)">x</button></span>
+                    </div>
+                </td>
 
             </tr>
             <tr ng-if="modified">
@@ -421,8 +436,12 @@
                 <td>{{internalQualificationCapacity.capacity}}</td>
                 <td><input type="checkbox" ng-model="internalQualificationCapacity.yesno"></td>
                 <td><input type="text" class="form-control" ng-model="internalQualificationCapacity.result"></td>
-                <td><input type="file" class="form-control"
-                           file-model="internalQualificationsCapacityAttachements[{{$index}}]">
+                <td>
+                    <div class="input-group"><input type="file" class="form-control"
+                                                    file-model="internalQualificationsCapacityAttachements[{{$index}}]"><span
+                            class="input-group-btn" ng-if="internalQualificationCapacity.attachement"><button
+                            class="btn btn-danger" ng-click="delInternalQualificationsCapacityAttachements(internalQualificationCapacity.pk_internalQualificationsCapacity, $index)">x</button></span>
+                    </div>
                 </td>
                 <td>
                     <date-picker-simple-input
@@ -462,8 +481,12 @@
                 <td><input type="checkbox" ng-model="internalQualificationProcess.yesno"
                            ng-if="internalQualificationProcess.pk_internalQualificationsProcess!='2'"></td>
                 <td><input type="text" class="form-control" ng-model="internalQualificationProcess.result"></td>
-                <td><input type="file" class="form-control"
-                           file-model="internalQualificationsProcessAttachements[{{$index}}]">
+                <td>
+                    <div class="input-group"><input type="file" class="form-control"
+                                                    file-model="internalQualificationsProcessAttachements[{{$index}}]"><span
+                            class="input-group-btn" ng-if="internalQualificationProcess.attachement"><button
+                            class="btn btn-danger" ng-click="delInternalQualificationsProcessAttachements(internalQualificationProcess.pk_internalQualificationsProcess, $index)">x</button></span>
+                    </div>
                 </td>
                 <td>
                     <date-picker-simple-input
@@ -497,8 +520,12 @@
             <tr ng-repeat="internalQualificationStandard in internalQualificationsStandard" ng-if="modified">
                 <td>{{internalQualificationStandard.standard}}</td>
                 <td><input type="checkbox" ng-model="internalQualificationStandard.yesno"></td>
-                <td><input type="file" class="form-control"
-                           file-model="internalQualificationsStandardAttachements[{{$index}}]">
+                <td>
+                    <div class="input-group"><input type="file" class="form-control"
+                                                    file-model="internalQualificationsStandardAttachements[{{$index}}]"><span
+                            class="input-group-btn" ng-if="internalQualificationStandard.attachement"><button
+                            class="btn btn-danger" ng-click="delInternalQualificationsStandardAttachements(internalQualificationStandard.pk_internalQualificationsStandard, $index)">x</button></span>
+                    </div>
                 </td>
                 <td>
                     <input type="text" class="form-control"
@@ -552,7 +579,13 @@
                 </td>
                 <td><input type="text" class="form-control" ng-model="auditObservation.organization"></td>
                 <td><input type="text" class="form-control" ng-model="auditObservation.observer"></td>
-                <td><input type="file" class="form-control" file-model="auditObservationsAttachements[{{$index}}]"></td>
+                <td>
+                    <div class="input-group"><input type="file" class="form-control"
+                                                    file-model="auditObservationsAttachements[{{$index}}]"><span
+                            class="input-group-btn" ng-if="auditObservation.attachement"><button
+                            class="btn btn-danger" ng-click="delAuditObservationsAttachements(auditObservation.pk_auditObservation, $index)">x</button></span>
+                    </div>
+                </td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control"
                            ng-model="auditObservation.EAScope" uib-popover="Min : 1, max : 39" popover-trigger="'focus'"
@@ -646,6 +679,7 @@
                 aria-hidden="true" ng-if="employee.cv"></span>
             {{employee.cv}}</a>
         <input type="file" class="form-control" placeholder="CV" file-model="$parent.cv" ng-if="modified">
+        <span class="input-group-btn"><button class="btn btn-danger" ng-click="delCV()" ng-if="modified && employee.cv">Supprimer fichier actuel</button></span>
     </div>
     <div class="input-group input-employee">
         <span class="input-group-addon">Casier judiciaire</span>
@@ -657,11 +691,15 @@
             {{employee.criminalRecord}}</a>
         <input type="file" class="form-control" placeholder="Casier judiciaire"
                file-model="$parent.criminalRecord" ng-if="modified">
+        <span class="input-group-btn"><button class="btn btn-danger" ng-click="delCriminalRecord()"
+                                              ng-if="modified && employee.criminalRecord">Supprimer fichier actuel</button></span>
     </div>
     <div class="input-group input-employee" ng-if="modified">
         <span class="input-group-addon">Photo</span>
         <input type="file" class="form-control" placeholder="Photo"
                file-model="$parent.picture" accept="image/*">
+        <span class="input-group-btn"><button class="btn btn-danger" ng-click="delPicture()"
+                                              ng-if="modified && employee.picture">Supprimer fichier actuel</button></span>
     </div>
 </div>
 <br>
