@@ -32,6 +32,9 @@ angular.module('myApp.newEmployee', ['ngRoute'])
             if (angular.isDefined($scope.criminalRecord)) {
                 $scope.employee.criminalRecord = $scope.criminalRecord.name;
             }
+            if (angular.isDefined($scope.contract)) {
+                $scope.employee.contract = $scope.contract.name;
+            }
 
             var id = null;
             $http.post(Constant.url, $scope.employee
@@ -41,10 +44,12 @@ angular.module('myApp.newEmployee', ['ngRoute'])
                     $scope.uploadFile(id, $scope.picture, 'picture');
                     $scope.uploadFile(id, $scope.cv, 'cv');
                     $scope.uploadFile(id, $scope.criminalRecord, 'criminalRecord');
+                    $scope.uploadFile(id, $scope.contract, 'contract');
                     $scope.employee = {};
                     $scope.picture = undefined;
                     $scope.cv = undefined;
                     $scope.criminalRecord = undefined;
+                    $scope.contract = undefined;
 
                 }
             );

@@ -137,7 +137,8 @@
                     <div class="input-group"><input type="file" class="form-control" placeholder="CV"
                                                     file-model="formationsAttachements[{{$index}}]"><span
                             class="input-group-btn" ng-if="formation.attachement"><button
-                            class="btn btn-danger" ng-click="delFormationAttachement(formation.pk_formation, $index)">x</button></span></div>
+                            class="btn btn-danger"
+                            ng-click="delFormationAttachement(formation.pk_formation, $index)">x</button></span></div>
                 </td>
                 <td>
                     <input type="number" min="1" max="39" class="form-control"
@@ -216,7 +217,8 @@
                     <div class="input-group"><input type="file" class="form-control"
                                                     file-model="professionnalExperiencesAttachements[{{$index}}]"><span
                             class="input-group-btn" ng-if="professionnalExperience.attachement"><button
-                            class="btn btn-danger" ng-click="delProfessionnalExperienceAttachement(professionnalExperience.pk_professionnalExperience, $index)">x</button></span>
+                            class="btn btn-danger"
+                            ng-click="delProfessionnalExperienceAttachement(professionnalExperience.pk_professionnalExperience, $index)">x</button></span>
                     </div>
                 </td>
                 <td>
@@ -378,7 +380,8 @@
                     <div class="input-group"><input type="file" class="form-control"
                                                     file-model="mandateSheetsAttachements[{{$index}}]"><span
                             class="input-group-btn" ng-if="auditExperience.mandatesheet"><button
-                            class="btn btn-danger" ng-click="delMandateSheetsAttachements(auditExperience.pk_auditExperience, $index)">x</button></span>
+                            class="btn btn-danger"
+                            ng-click="delMandateSheetsAttachements(auditExperience.pk_auditExperience, $index)">x</button></span>
                     </div>
                 </td>
 
@@ -440,7 +443,8 @@
                     <div class="input-group"><input type="file" class="form-control"
                                                     file-model="internalQualificationsCapacityAttachements[{{$index}}]"><span
                             class="input-group-btn" ng-if="internalQualificationCapacity.attachement"><button
-                            class="btn btn-danger" ng-click="delInternalQualificationsCapacityAttachements(internalQualificationCapacity.pk_internalQualificationsCapacity, $index)">x</button></span>
+                            class="btn btn-danger"
+                            ng-click="delInternalQualificationsCapacityAttachements(internalQualificationCapacity.pk_internalQualificationsCapacity, $index)">x</button></span>
                     </div>
                 </td>
                 <td>
@@ -485,7 +489,8 @@
                     <div class="input-group"><input type="file" class="form-control"
                                                     file-model="internalQualificationsProcessAttachements[{{$index}}]"><span
                             class="input-group-btn" ng-if="internalQualificationProcess.attachement"><button
-                            class="btn btn-danger" ng-click="delInternalQualificationsProcessAttachements(internalQualificationProcess.pk_internalQualificationsProcess, $index)">x</button></span>
+                            class="btn btn-danger"
+                            ng-click="delInternalQualificationsProcessAttachements(internalQualificationProcess.pk_internalQualificationsProcess, $index)">x</button></span>
                     </div>
                 </td>
                 <td>
@@ -524,7 +529,8 @@
                     <div class="input-group"><input type="file" class="form-control"
                                                     file-model="internalQualificationsStandardAttachements[{{$index}}]"><span
                             class="input-group-btn" ng-if="internalQualificationStandard.attachement"><button
-                            class="btn btn-danger" ng-click="delInternalQualificationsStandardAttachements(internalQualificationStandard.pk_internalQualificationsStandard, $index)">x</button></span>
+                            class="btn btn-danger"
+                            ng-click="delInternalQualificationsStandardAttachements(internalQualificationStandard.pk_internalQualificationsStandard, $index)">x</button></span>
                     </div>
                 </td>
                 <td>
@@ -583,7 +589,8 @@
                     <div class="input-group"><input type="file" class="form-control"
                                                     file-model="auditObservationsAttachements[{{$index}}]"><span
                             class="input-group-btn" ng-if="auditObservation.attachement"><button
-                            class="btn btn-danger" ng-click="delAuditObservationsAttachements(auditObservation.pk_auditObservation, $index)">x</button></span>
+                            class="btn btn-danger"
+                            ng-click="delAuditObservationsAttachements(auditObservation.pk_auditObservation, $index)">x</button></span>
                     </div>
                 </td>
                 <td>
@@ -693,6 +700,19 @@
                file-model="$parent.criminalRecord" ng-if="modified">
         <span class="input-group-btn"><button class="btn btn-danger" ng-click="delCriminalRecord()"
                                               ng-if="modified && employee.criminalRecord">Supprimer fichier actuel</button></span>
+    </div>
+    <div class="input-group input-employee">
+        <span class="input-group-addon">Contrat</span>
+        <a href="{{attachement}}/contract/{{employeeId}}/{{employee.contract}}"
+           target="_blank"
+           ng-if="!modified"> <span
+                class="glyphicon glyphicon-file"
+                aria-hidden="true" ng-if="employee.contract"></span>
+            {{employee.contract}}</a>
+        <input type="file" class="form-control" placeholder="Contrat"
+               file-model="$parent.contract" ng-if="modified">
+        <span class="input-group-btn"><button class="btn btn-danger" ng-click="delContract()"
+                                              ng-if="modified && employee.contract">Supprimer fichier actuel</button></span>
     </div>
     <div class="input-group input-employee" ng-if="modified">
         <span class="input-group-addon">Photo</span>

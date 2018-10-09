@@ -36,6 +36,7 @@ angular.module('myApp.employee', ['ngRoute'])
 
         $scope.cv = {};
         $scope.criminalRecord = {};
+        $scope.contract = {};
         $scope.picture = {};
         $scope.formationsAttachements = [];
         $scope.professionnalExperiencesAttachements = [];
@@ -352,6 +353,9 @@ angular.module('myApp.employee', ['ngRoute'])
             if (angular.isDefined($scope.criminalRecord) && angular.isDefined($scope.criminalRecord.name)) {
                 $scope.employee.criminalRecord = $scope.criminalRecord.name;
             }
+            if (angular.isDefined($scope.contract) && angular.isDefined($scope.contract.name)) {
+                $scope.employee.contract = $scope.contract.name;
+            }
             if (angular.isDefined($scope.picture) && angular.isDefined($scope.picture.name)) {
                 $scope.employee.picture = $scope.picture.name;
             }
@@ -368,6 +372,9 @@ angular.module('myApp.employee', ['ngRoute'])
                     }
                     if (angular.isDefined($scope.criminalRecord) && angular.isDefined($scope.criminalRecord.name)) {
                         $scope.uploadFile($scope.employeeId, $scope.criminalRecord, 'criminalRecord');
+                    }
+                    if (angular.isDefined($scope.contract) && angular.isDefined($scope.contract.name)) {
+                        $scope.uploadFile($scope.employeeId, $scope.contract, 'contract');
                     }
                     if (angular.isDefined($scope.picture) && angular.isDefined($scope.picture.name)) {
                         $scope.uploadFile($scope.employeeId, $scope.picture, 'picture');
@@ -660,6 +667,20 @@ angular.module('myApp.employee', ['ngRoute'])
                         console.log(data.data);
                         $scope.criminalRecord = {};
                         $scope.employee.criminalRecord = null;
+                    }
+                );
+            }
+        };
+
+        $scope.delContract = function () {
+            if (confirm("Voulez-vous vraiment supprimer ce fichier ?")) {
+                $http.delete(Constant.url, {
+                    params: {deleteIdContract: $scope.employeeId}
+                }).then(
+                    function (data) {
+                        console.log(data.data);
+                        $scope.contract = {};
+                        $scope.employee.contract = null;
                     }
                 );
             }

@@ -113,6 +113,13 @@
             </div>
             <div class="col-lg-6">
                 <div class="input-group input-employee">
+                    <span class="input-group-addon">Contrat</span>
+                    <input type="file" class="form-control" placeholder="Contrat"
+                           file-model="contract">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="input-group input-employee">
                     <span class="input-group-addon">Rôle</span>
                     <select class="form-control"
                             ng-options="type.pk_employeetype as type.type for type in types"
