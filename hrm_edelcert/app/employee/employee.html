@@ -714,6 +714,19 @@
         <span class="input-group-btn"><button class="btn btn-danger" ng-click="delContract()"
                                               ng-if="modified && employee.contract">Supprimer fichier actuel</button></span>
     </div>
+    <div class="input-group input-employee">
+        <span class="input-group-addon">Attestation d'indépendant</span>
+        <a href="{{attachement}}/certificateIndependence/{{employeeId}}/{{employee.certificateIndependence}}"
+           target="_blank"
+           ng-if="!modified"> <span
+                class="glyphicon glyphicon-file"
+                aria-hidden="true" ng-if="employee.certificateIndependence"></span>
+            {{employee.certificateIndependence}}</a>
+        <input type="file" class="form-control" placeholder="Attestation d'indépendant"
+               file-model="$parent.certificateIndependence" ng-if="modified">
+        <span class="input-group-btn"><button class="btn btn-danger" ng-click="delCertificateIndependence()"
+                                              ng-if="modified && employee.certificateIndependence">Supprimer fichier actuel</button></span>
+    </div>
     <div class="input-group input-employee" ng-if="modified">
         <span class="input-group-addon">Photo</span>
         <input type="file" class="form-control" placeholder="Photo"

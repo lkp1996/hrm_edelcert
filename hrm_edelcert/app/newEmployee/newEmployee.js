@@ -23,34 +23,13 @@ angular.module('myApp.newEmployee', ['ngRoute'])
         $scope.add = function () {
             $scope.employee.birthDate = new Date($scope.employee.birthDate).getTime();
             $scope.employee.comingToOfficeDate = new Date($scope.employee.comingToOfficeDate).getTime();
-            if (angular.isDefined($scope.picture)) {
-                $scope.employee.picture = $scope.picture.name;
-            }
-            if (angular.isDefined($scope.cv)) {
-                $scope.employee.cv = $scope.cv.name;
-            }
-            if (angular.isDefined($scope.criminalRecord)) {
-                $scope.employee.criminalRecord = $scope.criminalRecord.name;
-            }
-            if (angular.isDefined($scope.contract)) {
-                $scope.employee.contract = $scope.contract.name;
-            }
 
             var id = null;
             $http.post(Constant.url, $scope.employee
             ).then(
                 function (data) {
                     id = data;
-                    $scope.uploadFile(id, $scope.picture, 'picture');
-                    $scope.uploadFile(id, $scope.cv, 'cv');
-                    $scope.uploadFile(id, $scope.criminalRecord, 'criminalRecord');
-                    $scope.uploadFile(id, $scope.contract, 'contract');
                     $scope.employee = {};
-                    $scope.picture = undefined;
-                    $scope.cv = undefined;
-                    $scope.criminalRecord = undefined;
-                    $scope.contract = undefined;
-
                 }
             );
         };

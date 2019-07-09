@@ -37,6 +37,7 @@ angular.module('myApp.employee', ['ngRoute'])
         $scope.cv = {};
         $scope.criminalRecord = {};
         $scope.contract = {};
+        $scope.certificateIndependence = {};
         $scope.picture = {};
         $scope.formationsAttachements = [];
         $scope.professionnalExperiencesAttachements = [];
@@ -85,6 +86,19 @@ angular.module('myApp.employee', ['ngRoute'])
 
         ];
 
+
+        $http.get(Constant.url + "?formation_types").then(
+            function (data) {
+                $scope.formationTypes = data.data;
+            }
+        );
+
+        $http.get(Constant.url + "?nmsstandards").then(
+            function (data) {
+                $scope.NMSStandards = data.data;
+            }
+        );
+
         $scope.getEmployeeAdmin = function () {
             $http.get(Constant.url + "?employee_administration=" + $routeParams.employeeId).then(
                 function (data) {
@@ -94,13 +108,6 @@ angular.module('myApp.employee', ['ngRoute'])
                 }
             );
         };
-
-
-        $http.get(Constant.url + "?formation_types").then(
-            function (data) {
-                $scope.formationTypes = data.data;
-            }
-        );
 
         $scope.getEmployeeFormations = function () {
             $http.get(Constant.url + "?employee_formation=" + $routeParams.employeeId).then(
@@ -151,12 +158,6 @@ angular.module('myApp.employee', ['ngRoute'])
                 }
             );
         };
-
-        $http.get(Constant.url + "?nmsstandards").then(
-            function (data) {
-                $scope.NMSStandards = data.data;
-            }
-        );
 
         $scope.getEmployeeAuditExp = function () {
             $http.get(Constant.url + "?employee_auditexperience=" + $routeParams.employeeId).then(
@@ -356,6 +357,9 @@ angular.module('myApp.employee', ['ngRoute'])
             if (angular.isDefined($scope.contract) && angular.isDefined($scope.contract.name)) {
                 $scope.employee.contract = $scope.contract.name;
             }
+            if (angular.isDefined($scope.certificateIndependence) && angular.isDefined($scope.certificateIndependence.name)) {
+                $scope.employee.certificateIndependence = $scope.certificateIndependence.name;
+            }
             if (angular.isDefined($scope.picture) && angular.isDefined($scope.picture.name)) {
                 $scope.employee.picture = $scope.picture.name;
             }
@@ -375,6 +379,9 @@ angular.module('myApp.employee', ['ngRoute'])
                     }
                     if (angular.isDefined($scope.contract) && angular.isDefined($scope.contract.name)) {
                         $scope.uploadFile($scope.employeeId, $scope.contract, 'contract');
+                    }
+                    if (angular.isDefined($scope.certificateIndependence) && angular.isDefined($scope.certificateIndependence.name)) {
+                        $scope.uploadFile($scope.employeeId, $scope.certificateIndependence, 'certificateIndependence');
                     }
                     if (angular.isDefined($scope.picture) && angular.isDefined($scope.picture.name)) {
                         $scope.uploadFile($scope.employeeId, $scope.picture, 'picture');
@@ -681,6 +688,20 @@ angular.module('myApp.employee', ['ngRoute'])
                         console.log(data.data);
                         $scope.contract = {};
                         $scope.employee.contract = null;
+                    }
+                );
+            }
+        };
+
+        $scope.delCertificateIndependence = function () {
+            if (confirm("Voulez-vous vraiment supprimer ce fichier ?")) {
+                $http.delete(Constant.url, {
+                    params: {deleteIdCertificateIndependence: $scope.employeeId}
+                }).then(
+                    function (data) {
+                        console.log(data.data);
+                        $scope.certificateIndependence = {};
+                        $scope.employee.certificateIndependence = null;
                     }
                 );
             }

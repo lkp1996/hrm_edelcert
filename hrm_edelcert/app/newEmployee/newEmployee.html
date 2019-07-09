@@ -13,13 +13,15 @@
         <div class="col-lg-6">
             <div class="input-group input-employee">
                 <span class="input-group-addon">Nom *</span>
-                <input type="text" class="form-control" placeholder="Nom" ng-model="employee.lastName" required ng-required="true" autofocus>
+                <input type="text" class="form-control" placeholder="Nom" ng-model="employee.lastName" required
+                       ng-required="true" autofocus>
             </div>
         </div>
         <div class="col-lg-6">
             <div class="input-group input-employee">
                 <span class="input-group-addon">Prénom *</span>
-                <input type="text" class="form-control" placeholder="Prénom" ng-model="employee.firstName" required ng-required="true">
+                <input type="text" class="form-control" placeholder="Prénom" ng-model="employee.firstName" required
+                       ng-required="true">
             </div>
         </div>
     </div>
@@ -30,7 +32,8 @@
         <div class="col-lg-6">
             <div class="input-group input-employee">
                 <span class="input-group-addon">Adresse</span>
-                <input type="text" class="form-control" placeholder="Adresse" ng-model="employee.address" ng-required="false">
+                <input type="text" class="form-control" placeholder="Adresse" ng-model="employee.address"
+                       ng-required="false">
             </div>
         </div>
     </div>
@@ -38,13 +41,15 @@
         <div class="col-lg-6">
             <div class="input-group input-employee">
                 <span class="input-group-addon">NPA</span>
-                <input type="text" class="form-control" placeholder="NPA" ng-model="employee.postCode" ng-required="false">
+                <input type="text" class="form-control" placeholder="NPA" ng-model="employee.postCode"
+                       ng-required="false">
             </div>
         </div>
         <div class="col-lg-6">
             <div class="input-group input-employee">
                 <span class="input-group-addon">Localité</span>
-                <input type="text" class="form-control" placeholder="Localité" ng-model="employee.location" ng-required="false">
+                <input type="text" class="form-control" placeholder="Localité" ng-model="employee.location"
+                       ng-required="false">
             </div>
         </div>
     </div>
@@ -58,7 +63,8 @@
         <div class="col-lg-6">
             <div class="input-group input-employee">
                 <span class="input-group-addon">N° téléphone</span>
-                <input type="text" class="form-control" placeholder="N° téléphone" ng-model="employee.phone" ng-required="false">
+                <input type="text" class="form-control" placeholder="N° téléphone" ng-model="employee.phone"
+                       ng-required="false">
             </div>
         </div>
     </div>
@@ -66,7 +72,8 @@
         <div class="col-lg-6">
             <div class="input-group input-employee">
                 <span class="input-group-addon">Email *</span>
-                <input type="email" class="form-control" placeholder="Email" ng-model="employee.email" required ng-required="true">
+                <input type="email" class="form-control" placeholder="Email" ng-model="employee.email" required
+                       ng-required="true">
             </div>
         </div>
         <div class="col-lg-6">
@@ -79,7 +86,8 @@
     </div>
     <div class="row">
         <div class="col-lg-6">
-            <date-picker-input dt="employee.comingToOfficeDate" title="'Date d’entrée en fonction *'"></date-picker-input>
+            <date-picker-input dt="employee.comingToOfficeDate"
+                               title="'Date d’entrée en fonction *'"></date-picker-input>
         </div>
         <div class="col-lg-6">
             <div class="input-group input-employee">
@@ -90,41 +98,15 @@
             </div>
         </div>
     </div>
-    <div class="file-upload">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="input-group input-employee">
-                    <span class="input-group-addon">Photo</span>
-                    <input type="file" class="form-control" placeholder="Photo" file-model="picture" accept="image/*">
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="input-group input-employee">
-                    <span class="input-group-addon">CV</span>
-                    <input type="file" class="form-control" placeholder="CV" file-model="cv">
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="input-group input-employee">
-                    <span class="input-group-addon">Casier judiciaire</span>
-                    <input type="file" class="form-control" placeholder="Casier judiciaire"
-                           file-model="criminalRecord">
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="input-group input-employee">
-                    <span class="input-group-addon">Contrat</span>
-                    <input type="file" class="form-control" placeholder="Contrat"
-                           file-model="contract">
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="input-group input-employee">
-                    <span class="input-group-addon">Rôle</span>
-                    <select class="form-control"
-                            ng-options="type.pk_employeetype as type.type for type in types"
-                            ng-model="employee.fk_employeetype" ><option value="">-- Veuillez choisir un rôle --</option></select>
-                </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="input-group input-employee">
+                <span class="input-group-addon">Rôle *</span>
+                <select class="form-control"
+                        ng-options="type.pk_employeetype as type.type for type in types"
+                        ng-model="employee.fk_employeetype" required ng-required="true">
+                    <option value="">-- Veuillez choisir un rôle --</option>
+                </select>
             </div>
         </div>
     </div>
