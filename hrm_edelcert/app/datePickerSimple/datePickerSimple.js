@@ -19,12 +19,7 @@ angular.module('myApp.datePickerSimple', ['ngRoute'])
         };
 
         $scope.dateOptions = {
-            /*
-             dateDisabled: disabled,
-             */
             formatYear: 'yy',
-            maxDate: new Date(2020, 5, 22),
-            minDate: new Date(),
             startingDay: 1
         };
 

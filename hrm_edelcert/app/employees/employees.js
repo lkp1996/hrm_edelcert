@@ -17,11 +17,17 @@ angular.module('myApp.employees', ['ngRoute'])
 
         }
         $scope.employees = [];
+        $scope.employeesEmailString = "";
 
         $scope.getEmployees = function () {
             $http.get(Constant.url + "?employees_list=" + $rootScope.connectedUser.id).then(
                 function (data) {
                     $scope.employees = data.data;
+                    var emailsString = "";
+                    for (var i = 0; i < $scope.employees.length; i++) {
+                        emailsString += $scope.employees[i].email + ",";
+                    }
+                    $scope.employeesEmailString = emailsString;
                 }
             );
         };

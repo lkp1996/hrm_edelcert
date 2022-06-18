@@ -1,5 +1,12 @@
 <div class="divfull">
-<h1 class="page-header">Liste des employés</h1>
+<div class="row page-header">
+    <div class="col-sm-8">
+        <h1>Liste des employés</h1>
+    </div>
+    <div class="col-sm-4">
+        <a id="sendEmailBtn" class="btn btn-default" href="mailto:{{employeesEmailString}}">Envoyer email à tous</a>
+    </div>
+</div>
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
@@ -21,7 +28,7 @@
             <td>{{employee.lastName}}</td>
             <td>{{employee.firstName}}</td>
             <td class="hidden-sm hidden-xs">{{employee.phone}}</td>
-            <td class="hidden-sm hidden-xs">{{employee.email}}</td>
+            <td class="hidden-sm hidden-xs"><a href="mailto:{{employee.email}}">{{employee.email}}</a></td>
             <td class="hidden-sm hidden-xs">{{employee.currentTitle}}</td>
             <td style="width: 10px;" ng-hide="connectedUser.employeeType=='Administrateur lecture seule'">
                 <a ng-click="delEmployee(employee.pk_employee)"><span class="glyphicon glyphicon-remove a-remove" aria-hidden="true"></span></a>
